@@ -5,11 +5,16 @@ import NavbarShape from "../../assets/svg/NavbarShape.svg";
 export const MainHeader = () => {
   return (
     <div>
-      <img src={NavbarShape} className="z-0 h-auto" alt="NavbarShape" />
       <Navbar
         fluid={true}
         sticky="top"
-        style={{ backgroundColor: "#425141", zIndex: "10" }}
+        style={{
+          backgroundColor: "#425141",
+          zIndex: "10",
+          backgroundImage: `url("${NavbarShape}")`,
+          backgroundSize: "cover",
+          backgroundPositionY: "70%",
+        }}
         className="top-0 shadow-lg"
       >
         <Navbar.Brand href="/">
