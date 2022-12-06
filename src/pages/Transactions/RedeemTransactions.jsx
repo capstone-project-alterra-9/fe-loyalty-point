@@ -2,18 +2,18 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdFilterAlt } from "react-icons/md";
 import "../../assets/styles/Transactions.css";
-import AddTransaction from "./AddTransaction";
-import EditTransaction from "./EditTransaction";
+import AddRedeemTransaction from "./AddRedeemTransaction";
+import EditRedeemTransaction from "./EditRedeemTransaction";
 
 
 import {MdDelete} from "react-icons/md"
-function Transactions() {
+function RedeemTransactions() {
 
   return (
     <>
       {/* <div className="col main pt-5 mt-3"> */}
         <div className="col main mt-3 pt-5">
-        Transactions
+          Redeem Transactions
         <br />
         <div className="row">
           <div className="col-9">
@@ -26,7 +26,7 @@ function Transactions() {
           </div>
 
           <div className="col-3">
-            <AddTransaction />
+            <AddRedeemTransaction />
             <button
               className="btn btn-color dropdown-toggle btn-space"
               type="button"
@@ -43,9 +43,10 @@ function Transactions() {
             <tr>
               <th>Date</th>
               <th>Order ID</th>
+              <th>Serial Number</th>
               <th>Category</th>
               <th>Product Name</th>
-              <th>Price (IDR)</th>
+              <th>Point(s)</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -54,12 +55,13 @@ function Transactions() {
             <tr>
               <td>28 November 2022</td>
               <td>ID012</td>
+              <td>P001</td>
               <td>Paket Data</td>
               <td>Paket 5GB</td>
-              <td>30000</td>
+              <td>350</td>
               <td>Success</td>
               <td>
-                <EditTransaction/>
+                <EditRedeemTransaction />
                 <MdDelete/>
               </td>
             </tr>
@@ -71,4 +73,4 @@ function Transactions() {
   );
 }
 
-export default Transactions;
+export default RedeemTransactions;

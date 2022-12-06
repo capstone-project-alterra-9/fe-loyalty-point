@@ -1,6 +1,8 @@
 import React, { useState} from "react";
+import "../../assets/styles/Users.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import {BsFillPlusCircleFill} from "react-icons/bs"
 
 function AddUser() {
   const [show, setShow] = useState(false);
@@ -8,8 +10,9 @@ function AddUser() {
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button variant="dark" onClick={handleShow}>
-        Add
+      <Button className="btn-color" onClick={handleShow}>
+        <BsFillPlusCircleFill/>
+        <span> Add </span>
       </Button>
 
       <Modal
@@ -37,12 +40,30 @@ function AddUser() {
                       ></input>
                     </div>
                     <div className="form-group">
+                      <label>Email : </label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="email"
+                        name="email"
+                      ></input>
+                    </div>
+                    <div className="form-group">
                       <label>Password </label>
                       <span></span>
                       <input
                         className="form-control"
                         type="text"
                         name="password"
+                      ></input>
+                    </div>
+                    <div className="form-group">
+                      <label>Points </label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="number"
+                        name="points"
                       ></input>
                     </div>
 

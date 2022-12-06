@@ -1,17 +1,18 @@
 import React, { useState} from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import {BsFillPlusCircleFill} from "react-icons/bs"
 
-import {MdEdit} from "react-icons/md"
-function EditTransaction() {
+function AddRedeemTransaction() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
     <>
-      <MdEdit variant="secondary" onClick={handleShow}>
-        Edit
-      </MdEdit>
+      <Button className="btn-color" onClick={handleShow}>
+        <BsFillPlusCircleFill/>
+        <span> Add </span>
+      </Button>
 
       <Modal
         show={show}
@@ -20,10 +21,10 @@ function EditTransaction() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title> Edit Transaction</Modal.Title>
+          <Modal.Title> Add Redeem Transaction</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <div className="row">
+          <div className="row">
             <div className="col-md-12 m-3">
               <div className="row">
                 <div className="mx-auto col-md-6">
@@ -73,19 +74,19 @@ function EditTransaction() {
                       ></input>
                     </div>
                     <div className="form-group">
-                      <label>Price</label>
+                      <label>Points</label>
                       <span></span>
                       <input
                         className="form-control"
                         type="number"
-                        name="price"
+                        name="points"
                       ></input>
                     </div>
 
                     <br />
                     <div className="mb-3">
-                      <button type="submit" className="btn btn-info">
-                        Update
+                      <button type="submit" className="btn btn-success">
+                        Submit
                       </button>
                     </div>
                   </form>
@@ -104,4 +105,4 @@ function EditTransaction() {
   );
 }
 
-export default EditTransaction;
+export default AddRedeemTransaction;

@@ -1,9 +1,7 @@
 import React, { useState} from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-
-
-
+import {BsFillPlusCircleFill} from "react-icons/bs"
 
 
 
@@ -12,10 +10,15 @@ function AddProduct() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+
+
+
   return (
     <>
-      <Button variant="dark" onClick={handleShow}>
-        Add
+       <Button className="btn-color" onClick={handleShow}>
+        <BsFillPlusCircleFill/>
+        <span> Add </span>
       </Button>
 
       <Modal
@@ -28,48 +31,61 @@ function AddProduct() {
           <Modal.Title> Add Transaction</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="row">
+        <div className="row">
             <div className="col-md-12 m-3">
               <div className="row">
                 <div className="mx-auto col-md-6">
-                  <form >
-                    <div className="form-group">
-                      <label>Serial Number</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="serial_number"
-
-                      ></input>
-                    </div>
-                    <div className="form-group">
-                      <label>Nama Item</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="nama_item"
-
-                      ></input>
-                    </div>
-                    <div className="form-group">
-                      <label>Kategori : </label>
-                      <select className="form-select" name="kategori"
-                       >
+                  <form>
+                  <div className="form-group">
+                      <label>Category : </label>
+                      <select className="form-select" name="kategori">
                         <option value="">--Select Category--</option>
                         <option value="Pulsa">Pulsa</option>
                         <option value="Paket Data">Paket Data</option>
                       </select>
                     </div>
                     <div className="form-group">
-                      <label>Point</label>
+                      <label>Serial Number</label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="number"
+                        name="serialNumber"
+                      ></input>
+                    </div>
+                    <div className="form-group">
+                      <label>Product Name</label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="name"
+                      ></input>
+                    </div>
+                    <div className="form-group">
+                    <label>Description : </label>
+                    <textarea
+                      className="form-control"
+                      name="description"
+                      rows="5"
+                    ></textarea>
+                    </div>
+                    <div className="form-group">
+                      <label>Price</label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="number"
+                        name="price"
+                      ></input>
+                    </div>
+                    <div className="form-group">
+                      <label>Points</label>
                       <span></span>
                       <input
                         className="form-control"
                         type="number"
                         name="point"
-
                       ></input>
                     </div>
                     <div className="form-group">
@@ -79,7 +95,15 @@ function AddProduct() {
                         className="form-control"
                         type="number"
                         name="stock"
-
+                      ></input>
+                    </div>
+                    <div className="form-group">
+                      <label>Image</label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="image"
                       ></input>
                     </div>
 

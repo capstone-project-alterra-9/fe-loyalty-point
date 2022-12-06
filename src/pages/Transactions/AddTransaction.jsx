@@ -1,15 +1,17 @@
 import React, { useState} from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import {BsFillPlusCircleFill} from "react-icons/bs"
 
-function AddUser() {
+function AddTransaction() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button variant="dark" onClick={handleShow}>
-        Add
+      <Button className="btn-color" onClick={handleShow}>
+        <BsFillPlusCircleFill/>
+        <span> Add </span>
       </Button>
 
       <Modal
@@ -22,62 +24,62 @@ function AddUser() {
           <Modal.Title> Add Transaction</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="row">
+        <div className="row">
             <div className="col-md-12 m-3">
               <div className="row">
                 <div className="mx-auto col-md-6">
                   <form>
-                    <div className="form-group">
-                      <label>Order ID </label>
+                    {/* <div className="form-group">
+                      <label>Payment Method</label>
                       <span></span>
                       <input
                         className="form-control"
                         type="text"
-                        name="order_id"
+                        name="paymentMethod"
                       ></input>
-                    </div>
+                    </div> */}
                     <div className="form-group">
-                      <label>Tanggal</label>
+                      <label>Date</label>
                       <span></span>
                       <input
                         className="form-control"
                         type="date"
-                        name="tanggal"
+                        name="date"
                       ></input>
                     </div>
                     <div className="form-group">
-                      <label>Serial Number</label>
+                      <label>Order ID</label>
                       <span></span>
                       <input
                         className="form-control"
                         type="text"
-                        name="serial_number"
+                        name="orderId"
                       ></input>
                     </div>
                     <div className="form-group">
-                      <label>Nama Item</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="nama_item"
-                      ></input>
-                    </div>
-                    <div className="form-group">
-                      <label>Kategori : </label>
-                      <select className="form-select" name="kategori">
+                      <label>Category </label>
+                      <select className="form-select" name="category">
                         <option value="">--Select Category--</option>
                         <option value="Pulsa">Pulsa</option>
                         <option value="Paket Data">Paket Data</option>
                       </select>
                     </div>
                     <div className="form-group">
-                      <label>Point</label>
+                      <label>Product Name</label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="productName"
+                      ></input>
+                    </div>
+                    <div className="form-group">
+                      <label>Price</label>
                       <span></span>
                       <input
                         className="form-control"
                         type="number"
-                        name="point"
+                        name="price"
                       ></input>
                     </div>
 
@@ -103,4 +105,4 @@ function AddUser() {
   );
 }
 
-export default AddUser;
+export default AddTransaction;

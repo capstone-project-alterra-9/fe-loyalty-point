@@ -1,27 +1,16 @@
 import React, { useState} from "react";
-import {MdEdit} from "react-icons/md"
-// import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-
-function EditProduct() {
+import {MdEdit} from "react-icons/md"
+function EditRedeemTransaction() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-
-
-
   return (
     <>
-       {/* <Link
-                      // to={${locate.pathname}/detail/${id}}
-                      to={`editproduct/${id}`}
-                      // className="btn btn-sm btn-info"
-                    >
-              </Link> */}
-      <MdEdit variant="secondary" onClick={handleShow}>Edit
+      <MdEdit variant="secondary" onClick={handleShow}>
+        Edit
       </MdEdit>
 
       <Modal
@@ -31,7 +20,7 @@ function EditProduct() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title> Edit Product</Modal.Title>
+          <Modal.Title> Edit Redeem Transaction</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <div className="row">
@@ -39,22 +28,40 @@ function EditProduct() {
               <div className="row">
                 <div className="mx-auto col-md-6">
                   <form>
-                  <div className="form-group">
-                      <label>Category : </label>
-                      <select className="form-select" name="kategori">
+                    {/* <div className="form-group">
+                      <label>Payment Method</label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="paymentMethod"
+                      ></input>
+                    </div> */}
+                    <div className="form-group">
+                      <label>Date</label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="date"
+                        name="date"
+                      ></input>
+                    </div>
+                    <div className="form-group">
+                      <label>Order ID</label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="orderId"
+                      ></input>
+                    </div>
+                    <div className="form-group">
+                      <label>Category </label>
+                      <select className="form-select" name="category">
                         <option value="">--Select Category--</option>
                         <option value="Pulsa">Pulsa</option>
                         <option value="Paket Data">Paket Data</option>
                       </select>
-                    </div>
-                    <div className="form-group">
-                      <label>Serial Number</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="serialNumber"
-                      ></input>
                     </div>
                     <div className="form-group">
                       <label>Product Name</label>
@@ -62,24 +69,7 @@ function EditProduct() {
                       <input
                         className="form-control"
                         type="text"
-                        name="name"
-                      ></input>
-                    </div>
-                    <div className="form-group">
-                    <label>Description : </label>
-                    <textarea
-                      className="form-control"
-                      name="description"
-                      rows="5"
-                    ></textarea>
-                    </div>
-                    <div className="form-group">
-                      <label>Price</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="price"
+                        name="productName"
                       ></input>
                     </div>
                     <div className="form-group">
@@ -88,25 +78,7 @@ function EditProduct() {
                       <input
                         className="form-control"
                         type="number"
-                        name="point"
-                      ></input>
-                    </div>
-                    <div className="form-group">
-                      <label>Stock</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="stock"
-                      ></input>
-                    </div>
-                    <div className="form-group">
-                      <label>Image</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="image"
+                        name="points"
                       ></input>
                     </div>
 
@@ -132,4 +104,4 @@ function EditProduct() {
   );
 }
 
-export default EditProduct;
+export default EditRedeemTransaction;

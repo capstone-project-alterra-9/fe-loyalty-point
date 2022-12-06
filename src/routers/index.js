@@ -1,6 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Sidebar } from "../components";
-import { Dashboard, Products, Transactions, Users } from "../pages";
+import {
+  Dashboard,
+  Products,
+  Transactions,
+  RedeemTransactions,
+  Users,
+} from "../pages";
 const WebRoutes = () => {
   return (
     <BrowserRouter>
@@ -10,13 +16,20 @@ const WebRoutes = () => {
             <Sidebar />
 
             <Routes>
-              <Route path="/" element={<Dashboard></Dashboard>}></Route>
-              <Route path="/users" element={<Users></Users>}></Route>
+              <Route path="/admin" element={<Dashboard></Dashboard>}></Route>
+              <Route path="/admin/users" element={<Users></Users>}></Route>
               <Route
-                path="/transactions"
+                path="/admin/transactions"
                 element={<Transactions></Transactions>}
               ></Route>
-              <Route path="/products" element={<Products></Products>}></Route>
+              <Route
+                path="/admin/redeemtransactions"
+                element={<RedeemTransactions></RedeemTransactions>}
+              ></Route>
+              <Route
+                path="/admin/products"
+                element={<Products></Products>}
+              ></Route>
             </Routes>
           </div>
         </div>

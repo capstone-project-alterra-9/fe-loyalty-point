@@ -1,8 +1,8 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import {MdEdit} from "react-icons/md"
+import { MdEdit } from "react-icons/md"
 function EditUser() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -38,6 +38,15 @@ function EditUser() {
                       ></input>
                     </div>
                     <div className="form-group">
+                      <label>Email : </label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="email"
+                        name="email"
+                      ></input>
+                    </div>
+                    <div className="form-group">
                       <label>Password </label>
                       <span></span>
                       <input
@@ -46,7 +55,15 @@ function EditUser() {
                         name="password"
                       ></input>
                     </div>
-
+                    <div className="form-group">
+                      <label>Points </label>
+                      <span></span>
+                      <input
+                        className="form-control"
+                        type="number"
+                        name="points"
+                      ></input>
+                    </div>
                     <br />
                     <div className="mb-3">
                       <button type="submit" className="btn btn-info">
