@@ -1,8 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Layout } from "../components/Layout";
+import Layout from "../components/Layout";
+import { AdminDashboard } from "../pages/Dashboard";
 import { LandingPage } from "../pages/Landing";
 import { LoginPage } from "../pages/Login";
 import { NotFound } from "../pages/NotFound";
+import PrivateRoute from "./privateRoute";
+import ProtectedRoute from "./protectedRoute";
 
 export const SetupRoutes = () => {
   return (
@@ -13,10 +16,14 @@ export const SetupRoutes = () => {
           <Route index element={<LandingPage />} />
         </Route>
         {/* Login Route */}
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
         {/* Admin Route */}
-        <Route>
-          <Route path="/admin" />
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="/admin" element={<AdminDashboard />}>
+            <Route path="/admin/users" />
+          </Route>
         </Route>
         {/* Not Found page */}
         <Route path="*" element={<NotFound />} />
