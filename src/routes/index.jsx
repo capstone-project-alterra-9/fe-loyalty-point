@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../components/Layout";
+import { AdminDashboard } from "../pages/Dashboard";
 import { LandingPage } from "../pages/Landing";
 import { LoginPage } from "../pages/Login";
 import { NotFound } from "../pages/NotFound";
@@ -20,7 +21,7 @@ export const SetupRoutes = () => {
         </Route>
         {/* Admin Route */}
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin" element>
+          <Route path="/admin" element={<AdminDashboard />}>
             <Route path="/admin/users" />
           </Route>
         </Route>
