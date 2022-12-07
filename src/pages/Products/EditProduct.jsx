@@ -1,9 +1,13 @@
-import React, { useState} from "react";
-import {MdEdit} from "react-icons/md"
-// import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts, editProduct, productSelectors } from "../../store/features/productSlice";
+import { useParams, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
+import {MdEdit} from "react-icons/md"
 
 function EditProduct() {
   const [show, setShow] = useState(false);
@@ -11,16 +15,50 @@ function EditProduct() {
   const handleShow = () => setShow(true);
 
 
+  const [category, setCategory] = useState("")
+  const [name, setName] = useState("")
+  const [description, setDescription] = useState("")
+  const [price, setPrice] = useState("")
+  const [stock, setStock] = useState("")
+  const [image, setImage] = useState("")
+
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+
+  const product = useSelector((state) => productSelectors.selectById(state, id));
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (product) {
+      setCategory(product.category);
+      setName(product.name);
+      setDescription(product.description);
+      setPrice(product.price);
+      setStock(product.stock);
+      setImage(product.image);
+    }
+  }, [product]);
+
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    await dispatch(editProduct({ id, category, name, description, price, stock, image  }));
+    Swal.fire("Success Edit Your Product");
+    navigate("/admin/products");
+  };
+
+
+
 
 
   return (
     <>
-       {/* <Link
-                      // to={${locate.pathname}/detail/${id}}
-                      to={`editproduct/${id}`}
-                      // className="btn btn-sm btn-info"
-                    >
-              </Link> */}
       <MdEdit variant="secondary" onClick={handleShow}>Edit
       </MdEdit>
 
@@ -31,30 +69,23 @@ function EditProduct() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title> Edit Product</Modal.Title>
+          <Modal.Title> Edit Transaction</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <div className="row">
             <div className="col-md-12 m-3">
               <div className="row">
                 <div className="mx-auto col-md-6">
-                  <form>
+                  <form onSubmit={handleUpdate}>
                   <div className="form-group">
                       <label>Category : </label>
-                      <select className="form-select" name="kategori">
+                      <select className="form-select" name="kategori"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}>
                         <option value="">--Select Category--</option>
                         <option value="Pulsa">Pulsa</option>
                         <option value="Paket Data">Paket Data</option>
                       </select>
-                    </div>
-                    <div className="form-group">
-                      <label>Serial Number</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="serialNumber"
-                      ></input>
                     </div>
                     <div className="form-group">
                       <label>Product Name</label>
@@ -63,6 +94,8 @@ function EditProduct() {
                         className="form-control"
                         type="text"
                         name="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                       ></input>
                     </div>
                     <div className="form-group">
@@ -71,6 +104,8 @@ function EditProduct() {
                       className="form-control"
                       name="description"
                       rows="5"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
                     </div>
                     <div className="form-group">
@@ -80,15 +115,8 @@ function EditProduct() {
                         className="form-control"
                         type="number"
                         name="price"
-                      ></input>
-                    </div>
-                    <div className="form-group">
-                      <label>Points</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="point"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
                       ></input>
                     </div>
                     <div className="form-group">
@@ -98,6 +126,8 @@ function EditProduct() {
                         className="form-control"
                         type="number"
                         name="stock"
+                        value={stock}
+                        onChange={(e) => setStock(e.target.value)}
                       ></input>
                     </div>
                     <div className="form-group">
@@ -107,6 +137,8 @@ function EditProduct() {
                         className="form-control"
                         type="text"
                         name="image"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
                       ></input>
                     </div>
 

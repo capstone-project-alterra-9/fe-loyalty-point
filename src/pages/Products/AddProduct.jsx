@@ -4,15 +4,33 @@ import Modal from "react-bootstrap/Modal";
 import {BsFillPlusCircleFill} from "react-icons/bs"
 
 
+import { useDispatch } from "react-redux";
+import { inputProduct } from "../../store/features/productSlice";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function AddProduct() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [category, setCategory] = useState("")
+  const [name, setName] = useState("")
+  const [description, setDescription] = useState("")
+  const [price, setPrice] = useState("")
+  const [stock, setStock] = useState("")
+  const [image, setImage] = useState("")
 
 
+const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const createProduct = async (e) => {
+    e.preventDefault();
+    await dispatch(inputProduct({ category, name, description, price, stock, image }));
+    Swal.fire("Success Save Your Products");
+    navigate("/admin/products");
+  };
 
   return (
     <>
@@ -35,23 +53,16 @@ function AddProduct() {
             <div className="col-md-12 m-3">
               <div className="row">
                 <div className="mx-auto col-md-6">
-                  <form>
+                  <form onSubmit={createProduct}>
                   <div className="form-group">
                       <label>Category : </label>
-                      <select className="form-select" name="kategori">
+                      <select className="form-select" name="kategori"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}>
                         <option value="">--Select Category--</option>
                         <option value="Pulsa">Pulsa</option>
                         <option value="Paket Data">Paket Data</option>
                       </select>
-                    </div>
-                    <div className="form-group">
-                      <label>Serial Number</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="serialNumber"
-                      ></input>
                     </div>
                     <div className="form-group">
                       <label>Product Name</label>
@@ -60,6 +71,8 @@ function AddProduct() {
                         className="form-control"
                         type="text"
                         name="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                       ></input>
                     </div>
                     <div className="form-group">
@@ -68,6 +81,8 @@ function AddProduct() {
                       className="form-control"
                       name="description"
                       rows="5"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
                     </div>
                     <div className="form-group">
@@ -77,15 +92,8 @@ function AddProduct() {
                         className="form-control"
                         type="number"
                         name="price"
-                      ></input>
-                    </div>
-                    <div className="form-group">
-                      <label>Points</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="point"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
                       ></input>
                     </div>
                     <div className="form-group">
@@ -95,6 +103,8 @@ function AddProduct() {
                         className="form-control"
                         type="number"
                         name="stock"
+                        value={stock}
+                        onChange={(e) => setStock(e.target.value)}
                       ></input>
                     </div>
                     <div className="form-group">
@@ -104,6 +114,8 @@ function AddProduct() {
                         className="form-control"
                         type="text"
                         name="image"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
                       ></input>
                     </div>
 

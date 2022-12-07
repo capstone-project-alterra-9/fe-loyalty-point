@@ -1,13 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdFilterAlt } from "react-icons/md";
 import "../../assets/styles/Products.css";
 import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
 
+import { useSelector, useDispatch } from "react-redux";
+import { getProducts, productSelectors, deleteProduct } from "../../store/features/productSlice";
 
 import {MdDelete} from "react-icons/md"
 function Products() {
+  const dispatch = useDispatch();
+  const products = useSelector(productSelectors.selectAll);
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
   return (
     <>
@@ -34,15 +42,13 @@ function Products() {
           </div>
         </div>
         <br />
-        <table className="table table-bordered border-secondary table-responsive">
+        <table className="table table-bordered table-responsive">
           <thead className="th-color">
             <tr>
               <th>Category</th>
-              <th>Serial Number</th>
               <th>Product Name</th>
               <th>Description</th>
               <th>Price</th>
-              <th>Points</th>
               <th>Stock</th>
               <th>Image</th>
               <th>Actions</th>
@@ -50,24 +56,22 @@ function Products() {
           </thead>
           <tbody>
 
-
-             <tr>
-              <td>Paket Data</td>
-              <td>P001</td>
-              <td>Paket 5GB</td>
-              <td>Paket 5GB Untuk 15 Hari</td>
-              <td>30000</td>
-              <td>250</td>
-              <td>100</td>
-              <td>Image</td>
+          {/* {product.map((products, index) => ( */}
+          {products.map((product) => (
+             <tr key={product.id}>
+              {/* <td>{index + 1}</td> */}
+              <td>{product.category}</td>
+              <td>{product.name}</td>
+              <td>{product.description}</td>
+              <td>{product.price}</td>
+              <td>{product.stock}</td>
+              <td>{product.image}</td>
               <td>
-                <EditProduct
-                 />
-
-                <MdDelete />
+                <EditProduct />
+                <MdDelete  onClick={() => dispatch(deleteProduct(product.id))}/>
               </td>
             </tr>
-
+           ))}
           </tbody>
         </table>
       </div>
