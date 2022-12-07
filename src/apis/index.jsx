@@ -10,7 +10,7 @@ const APIAuth = {
         password,
       });
       Auth.store(response.data);
-      console.log("response", response.data.data);
+      console.log("response", response.data);
       return response;
     } catch (err) {
       const { message } = err.response.data;
