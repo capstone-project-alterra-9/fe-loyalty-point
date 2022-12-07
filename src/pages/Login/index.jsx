@@ -1,8 +1,31 @@
 import { Button, Label } from "flowbite-react";
 import LoginIcon from "../../assets/svg/logo.svg";
 import BGLogin from "../../assets/img/Login.png";
+import APIAuth from "../../apis/index";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    await APIAuth.signin({
+      email,
+      password,
+    })
+      .then(() => {
+        navigate("/admin");
+      })
+      .catch((error) => {
+        console.log("error", error);
+        Swal.fire("Username or Password is Incorrect", "", "error");
+      });
+  };
+
   return (
     <>
       <div
@@ -24,7 +47,7 @@ export const LoginPage = () => {
                   <h2 className="text-2xl font-bold text-gray-800 text-center">
                     Login
                   </h2>
-                  <form action className="w-full">
+                  <form action className="w-full" onSubmit={handleSubmit}>
                     <div id="input" className="flex flex-col w-full my-3">
                       <Label
                         htmlFor="email"
