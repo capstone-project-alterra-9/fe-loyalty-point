@@ -12,7 +12,7 @@ export const MainFooter = () => {
     <>
       <footer className="relative bg-[#425141] pt-8 pb-6 text-white">
         <div className=" mx-auto px-4">
-          <div className=" flex flex-wrap text-left lg:text-left justify-between">
+          <div className="  flex flex-wrap text-left lg:text-left justify-between pl-8">
             <div className="lg:w-6/12">
               <h4 className="text-3xl fonat-semibold  mb-3 font-semibold">
                 Alamat
@@ -51,37 +51,27 @@ export const MainFooter = () => {
                 <Link to="/login">Admin Page</Link>
               </div>
             </div>
-            <div className=" px-4 flex flex-wrap justify-end w-6/12 sm:invisible md:invisible lg:visible">
+            <div className=" pl-12 pr-8 flex flex-wrap justify-end w-6/12 sm:invisible invisible xl:visible">
               <div className="mapouter">
-                <div className="gmap_canvas rounded">
+                <div className="gmap_canvas rounded ">
                   <iframe
-                    width={500}
-                    height={220}
-                    id="gmap_canvas"
-                    src="https://maps.google.com/maps?q=Sd%20Lokasari%20Cianjur&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    className="gmap_iframe"
+                    width="100%"
                     frameBorder={0}
                     scrolling="no"
                     marginHeight={0}
                     marginWidth={0}
-                    title="SD Lokasari"
+                    src="https://maps.google.com/maps?width=500&height=220&hl=en&q=Joko mart&t=&z=17&ie=UTF8&iwloc=B&output=embed"
+                    title="Joko Mart"
                   />
-                  <br />
-                  <style
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        ".mapouter{position:relative;text-align:right;height:220px;width:500px;}",
-                    }}
-                  />
-                  <a href="https://www.embedgooglemap.net">
-                    google maps embedded map
-                  </a>
-                  <style
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        ".gmap_canvas {overflow:hidden;background:none!important;height:220px;width:500px;}",
-                    }}
-                  />
+                  <a href="https://formatjson.org/word-counter">Word Counter</a>
                 </div>
+                <style
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      ".mapouter{position:relative;text-align:right;width:100%;height:220px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:220px;}.gmap_iframe {height:220px!important;}",
+                  }}
+                />
               </div>
             </div>
           </div>
