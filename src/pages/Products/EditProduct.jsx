@@ -3,32 +3,33 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, editProduct, productSelectors } from "../../store/features/productSlice";
+import {
+  getProducts,
+  editProduct,
+  productSelectors,
+} from "../../store/features/productSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-import {MdEdit} from "react-icons/md"
+import { MdEdit } from "react-icons/md";
 
 function EditProduct() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
-  const [category, setCategory] = useState("")
-  const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
-  const [price, setPrice] = useState("")
-  const [stock, setStock] = useState("")
-  const [image, setImage] = useState("")
-
+  const [category, setCategory] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
+  const [image, setImage] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
 
-
-  const product = useSelector((state) => productSelectors.selectById(state, id));
+  const product = useSelector((state) => state.product.data);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -45,21 +46,19 @@ function EditProduct() {
     }
   }, [product]);
 
-
   const handleUpdate = async (e) => {
     e.preventDefault();
-    await dispatch(editProduct({ id, category, name, description, price, stock, image  }));
+    await dispatch(
+      editProduct({ id, category, name, description, price, stock, image })
+    );
     Swal.fire("Success Edit Your Product");
     navigate("/admin/products");
   };
 
-
-
-
-
   return (
     <>
-      <MdEdit variant="secondary" onClick={handleShow}>Edit
+      <MdEdit variant="secondary" onClick={handleShow}>
+        Edit
       </MdEdit>
 
       <Modal
@@ -72,16 +71,19 @@ function EditProduct() {
           <Modal.Title> Edit Transaction</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <div className="row">
+          <div className="row">
             <div className="col-md-12 m-3">
               <div className="row">
                 <div className="mx-auto col-md-6">
                   <form onSubmit={handleUpdate}>
-                  <div className="form-group">
+                    <div className="form-group">
                       <label>Category : </label>
-                      <select className="form-select" name="kategori"
+                      <select
+                        className="form-select"
+                        name="kategori"
                         value={category}
-                        onChange={(e) => setCategory(e.target.value)}>
+                        onChange={(e) => setCategory(e.target.value)}
+                      >
                         <option value="">--Select Category--</option>
                         <option value="Pulsa">Pulsa</option>
                         <option value="Paket Data">Paket Data</option>
@@ -99,14 +101,14 @@ function EditProduct() {
                       ></input>
                     </div>
                     <div className="form-group">
-                    <label>Description : </label>
-                    <textarea
-                      className="form-control"
-                      name="description"
-                      rows="5"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                    ></textarea>
+                      <label>Description : </label>
+                      <textarea
+                        className="form-control"
+                        name="description"
+                        rows="5"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                      ></textarea>
                     </div>
                     <div className="form-group">
                       <label>Price</label>

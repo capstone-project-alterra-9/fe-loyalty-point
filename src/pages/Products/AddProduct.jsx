@@ -1,9 +1,7 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import {BsFillPlusCircleFill} from "react-icons/bs"
-
-
+import { BsFillPlusCircleFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { inputProduct } from "../../store/features/productSlice";
 import { useNavigate } from "react-router-dom";
@@ -14,28 +12,29 @@ function AddProduct() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [category, setCategory] = useState("")
-  const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
-  const [price, setPrice] = useState("")
-  const [stock, setStock] = useState("")
-  const [image, setImage] = useState("")
+  const [category, setCategory] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
+  const [image, setImage] = useState("");
 
-
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const createProduct = async (e) => {
     e.preventDefault();
-    await dispatch(inputProduct({ category, name, description, price, stock, image }));
+    await dispatch(
+      inputProduct({ category, name, description, price, stock, image })
+    );
     Swal.fire("Success Save Your Products");
     navigate("/admin/products");
   };
 
   return (
     <>
-       <Button className="btn-color" onClick={handleShow}>
-        <BsFillPlusCircleFill/>
+      <Button className="btn-color" onClick={handleShow}>
+        <BsFillPlusCircleFill />
         <span> Add </span>
       </Button>
 
@@ -49,16 +48,19 @@ const dispatch = useDispatch();
           <Modal.Title> Add Transaction</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <div className="row">
+          <div className="row">
             <div className="col-md-12 m-3">
               <div className="row">
                 <div className="mx-auto col-md-6">
                   <form onSubmit={createProduct}>
-                  <div className="form-group">
+                    <div className="form-group">
                       <label>Category : </label>
-                      <select className="form-select" name="kategori"
+                      <select
+                        className="form-select"
+                        name="kategori"
                         value={category}
-                        onChange={(e) => setCategory(e.target.value)}>
+                        onChange={(e) => setCategory(e.target.value)}
+                      >
                         <option value="">--Select Category--</option>
                         <option value="Pulsa">Pulsa</option>
                         <option value="Paket Data">Paket Data</option>
@@ -76,14 +78,14 @@ const dispatch = useDispatch();
                       ></input>
                     </div>
                     <div className="form-group">
-                    <label>Description : </label>
-                    <textarea
-                      className="form-control"
-                      name="description"
-                      rows="5"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                    ></textarea>
+                      <label>Description : </label>
+                      <textarea
+                        className="form-control"
+                        name="description"
+                        rows="5"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                      ></textarea>
                     </div>
                     <div className="form-group">
                       <label>Price</label>
@@ -118,7 +120,6 @@ const dispatch = useDispatch();
                         onChange={(e) => setImage(e.target.value)}
                       ></input>
                     </div>
-
                     <br />
                     <div className="mb-3">
                       <button type="submit" className="btn btn-success">

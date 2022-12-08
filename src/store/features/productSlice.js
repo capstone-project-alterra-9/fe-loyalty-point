@@ -4,38 +4,34 @@ import {
   createEntityAdapter,
 } from "@reduxjs/toolkit";
 import axios from "axios";
+import Products from "../../apis/produts.api";
 
 export const getProducts = createAsyncThunk("product/getProducts", async () => {
-  const response = await axios.get(
-    "https://be-loyalty-point-production-d38a.up.railway.app/api/auth/products",
-    {
-      headers: {
-        authorization:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWlud2ViQGdtYWlsLmNvbSIsImV4cCI6MTY3MDQxMDExNCwidXNlcm5hbWUiOiJhZG1pbndlYiJ9.FaYFwtypwL27he5sNi6We2oaATdU41xZ5RmSTkIc-cQ",
-      },
-    }
-  );
-  // const response = await axios.get(
-  //   // "https://638087368efcfcedac0756ff.mockapi.io/products"
-  //   // "localhost:8000/api/auth/products"
-  //   "https://be-loyalty-point-production-d38a.up.railway.app/api/auth/products"
-  // );
-  return response.data;
+  const response = await Products.getAllProducts();
+  return response.data.data;
 });
 
 export const inputProduct = createAsyncThunk(
   "product/inputProduct",
   async ({ category, name, description, price, stock, image }) => {
-    const response = await axios.post(
-      "https://be-loyalty-point-production-d38a.up.railway.app/api/auth/products",
-      {
-        headers: {
-          authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWlud2ViQGdtYWlsLmNvbSIsImV4cCI6MTY3MDQxMDExNCwidXNlcm5hbWUiOiJhZG1pbndlYiJ9.FaYFwtypwL27he5sNi6We2oaATdU41xZ5RmSTkIc-cQ",
-        },
-      },
-      { category, name, description, price, stock, image }
-    );
+    const response = Products.saveProduct({
+      category,
+      name,
+      description,
+      price,
+      stock,
+      image,
+    });
+    // const response = await axios.post(
+    //   "https://be-loyalty-point-production-d38a.up.railway.app/api/auth/products",
+    //   {
+    //     headers: {
+    //       authorization:
+    //         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWlud2ViQGdtYWlsLmNvbSIsImV4cCI6MTY3MDUyODc4NywidXNlcm5hbWUiOiJhZG1pbndlYiJ9.PZJiV5X9SXhxWQ-Fp8x0DRerDlvB7p0L5Acwd83toRQ",
+    //     },
+    //   },
+    //   { category, name, description, price, stock, image }
+    // );
     // const response = await axios.post(
     //   // "https://638087368efcfcedac0756ff.mockapi.io/products",
     //   // "localhost:8000/api/auth/products",
@@ -43,7 +39,7 @@ export const inputProduct = createAsyncThunk(
 
     //   { category, name, description, price, stock, image }
     // );
-    return response.data;
+    return response.data.data;
   }
 );
 
@@ -89,7 +85,7 @@ export const editProduct = createAsyncThunk(
   }
 );
 const productEntity = createEntityAdapter({
-  selectId: (product) => product.id,
+  selectId: (product) => product.ID,
 });
 
 const productReducer = createSlice({
@@ -97,6 +93,7 @@ const productReducer = createSlice({
   initialState: productEntity.getInitialState(),
   extraReducers: {
     [getProducts.fulfilled]: (state, action) => {
+      // state.data = action.payload;
       productEntity.setAll(state, action.payload);
     },
     [inputProduct.fulfilled]: (state, action) => {
@@ -117,4 +114,5 @@ const productReducer = createSlice({
 export const productSelectors = productEntity.getSelectors(
   (state) => state.product
 );
+
 export default productReducer.reducer;

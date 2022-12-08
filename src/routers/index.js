@@ -14,22 +14,15 @@ const WebRoutes = () => {
         <div className="container-fluid" id="main">
           <div className="row row-offcanvas row-offcanvas-left">
             <Sidebar />
-
             <Routes>
-              <Route path="/admin" element={<Dashboard></Dashboard>}></Route>
-              <Route path="/admin/users" element={<Users></Users>}></Route>
-              <Route
-                path="/admin/transactions"
-                element={<Transactions></Transactions>}
-              ></Route>
+              <Route path="/admin" element={<Dashboard />} />
+              <Route path="/admin/users" element={<Users />} />
+              <Route path="/admin/transactions" element={<Transactions />} />
               <Route
                 path="/admin/redeemtransactions"
-                element={<RedeemTransactions></RedeemTransactions>}
-              ></Route>
-              <Route
-                path="/admin/products"
-                element={<Products></Products>}
-              ></Route>
+                element={<RedeemTransactions />}
+              />
+              <Route path="/admin/products" element={<Products />} />
             </Routes>
           </div>
         </div>
