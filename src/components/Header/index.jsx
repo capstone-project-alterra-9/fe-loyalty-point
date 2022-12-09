@@ -30,7 +30,7 @@ export const MainHeader = () => {
             <li>
               <a
                 href="/"
-                class="block py-3 pl-3 pr-4 text-white hover:text-slate-400 md:bg-transparent md:p-0 "
+                class="block py-3 pl-3 pr-4 text-white hover:text-[#9CC29B] md:bg-transparent md:p-0 "
                 aria-current="page"
               >
                 Home
@@ -39,7 +39,7 @@ export const MainHeader = () => {
             <li>
               <a
                 href="/"
-                class="block py-3 pl-3 pr-4 text-white hover:text-slate-400 md:hover:bg-transparent md:p-0 "
+                class="block py-3 pl-3 pr-4 text-white hover:text-[#9CC29B] md:hover:bg-transparent md:p-0 "
               >
                 Features
               </a>
@@ -47,7 +47,7 @@ export const MainHeader = () => {
             <li>
               <a
                 href="/"
-                class="block py-3 pl-3 pr-4 text-white hover:text-slate-400 md:hover:bg-transparent md:p-0 "
+                class="block py-3 pl-3 pr-4 text-white hover:text-[#9CC29B] md:hover:bg-transparent md:p-0 "
               >
                 Testimonial
               </a>
@@ -55,7 +55,7 @@ export const MainHeader = () => {
             <li>
               <a
                 href="/"
-                class="block py-3 pl-3 pr-4 text-white hover:text-slate-400 md:bg-transparent md:p-0 "
+                class="block py-3 pl-3 pr-4 text-white hover:text-[#9CC29B] md:bg-transparent md:p-0 "
               >
                 Contact
               </a>

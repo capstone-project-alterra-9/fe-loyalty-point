@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faEnvelope,
-  faLocationDot,
-  faPhone,
-} from "@fortawesome/free-solid-svg-icons";
-import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+  faFacebook,
+  faInstagram,
+  faTwitter,
+  faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons";
 
 export const MainFooter = () => {
   return (
@@ -13,46 +13,60 @@ export const MainFooter = () => {
       <footer className="relative bg-[#425141] pt-8 pb-6 text-white">
         <div className=" mx-auto px-4">
           <div className="  flex flex-wrap text-left lg:text-left justify-between pl-8">
-            <div className="lg:w-6/12">
-              <h4 className="text-3xl fonat-semibold  mb-3 font-semibold">
-                Alamat
-              </h4>
-              <h5 className="text-lg mt-0 mb-2 ">
+            <div className="lg:w-4/12">
+              <p className="text-xl fonat-semibold  mb-3 font-semibold">
+                Contact Us
+              </p>
+              <p className="text-lg mt-0 mb-2 ">
                 Jln. Sukarno Hatta Kec. Kotabumi Selatan Kab. Lampung Utara
                 Prov. Lampung Indonesia 34517
-              </h5>
+              </p>
               <div className="mt-6 lg:mb-0 mb-6">
                 <button
-                  className="bg-[#425141] text-lightBlue-400 hover:bg-slate-500 shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <FontAwesomeIcon icon={faEnvelope} size="lg" />
+                  <FontAwesomeIcon icon={faInstagram} size="lg" color="black" />
                 </button>
                 <button
-                  className="bg-[#425141] text-lightBlue-400 hover:bg-slate-500 shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <FontAwesomeIcon icon={faPhone} size="1x" />
+                  <FontAwesomeIcon icon={faWhatsapp} size="1x" color="black" />
                 </button>
                 <button
-                  className="bg-[#425141] text-lightBlue-400 hover:bg-slate-500 shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <FontAwesomeIcon icon={faWhatsapp} size="lg" />
+                  <FontAwesomeIcon icon={faFacebook} size="lg" color="black" />
                 </button>
                 <button
-                  className="bg-[#425141] text-lightBlue-400 hover:bg-slate-500 shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <FontAwesomeIcon icon={faLocationDot} size="lg" />
+                  <FontAwesomeIcon icon={faTwitter} size="lg" color="black" />
                 </button>
               </div>
-              <div className="pt-6 px-auto underline hover:text-[#D1BEBE]">
+              <div className="pt-6 px-auto underline hover:text-[#9CC29B]">
                 <Link to="/login">Admin Page</Link>
               </div>
             </div>
-            <div className=" pl-12 pr-8 flex flex-wrap justify-end w-6/12 sm:invisible invisible xl:visible">
-              <div className="mapouter">
+            <div className="lg:w-4/12">
+              <p className="text-xl fonat-semibold  mb-3 font-semibold">
+                Information
+              </p>
+              <ul class="list-none">
+                <li>Home</li>
+                <li>Feature</li>
+                <li>Testimonial</li>
+                <li>Contact</li>
+              </ul>
+            </div>
+            <div className="pr-8 justify-end w-4/12 ">
+              <p className="text-xl fonat-semibold mb-3 font-semibold">
+                Location
+              </p>
+              <div className="mapouter sm:invisible invisible xl:visible">
                 <div className="gmap_canvas rounded ">
                   <iframe
                     className="gmap_iframe"
@@ -82,7 +96,7 @@ export const MainFooter = () => {
                 Copyright © <span id="get-current-year">2022</span>
                 <a
                   href="/"
-                  className="text-white hover:text-slate-400"
+                  className="text-white hover:text-[#9CC29B]"
                   target="_blank"
                   rel="noreferrer"
                 >
