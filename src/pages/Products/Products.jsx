@@ -16,8 +16,6 @@ import { MdDelete } from "react-icons/md";
 function Products() {
   const dispatch = useDispatch();
   const products = useSelector(productSelectors.selectAll);
-
-  console.log("products", products);
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);

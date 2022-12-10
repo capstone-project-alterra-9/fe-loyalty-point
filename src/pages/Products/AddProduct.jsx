@@ -24,10 +24,14 @@ function AddProduct() {
 
   const createProduct = async (e) => {
     e.preventDefault();
-    await dispatch(
-      inputProduct({ category, name, description, price, stock, image })
-    );
-    Swal.fire("Success Save Your Products");
+    try {
+      dispatch(
+        inputProduct({ category, name, description, price, stock, image })
+      );
+      Swal.fire("Success Save Your Products");
+    } catch (error) {
+      console.log("error", error);
+    }
     navigate("/admin/products");
   };
 
@@ -57,13 +61,15 @@ function AddProduct() {
                       <label>Category : </label>
                       <select
                         className="form-select"
-                        name="kategori"
+                        name="category"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                       >
                         <option value="">--Select Category--</option>
-                        <option value="Pulsa">Pulsa</option>
-                        <option value="Paket Data">Paket Data</option>
+                        <option value="credits">Pulsa</option>
+                        <option value="data-quota">Paket Data</option>
+                        <option value="e-money">E-Money</option>
+                        <option value="cashout">Cashout</option>
                       </select>
                     </div>
                     <div className="form-group">

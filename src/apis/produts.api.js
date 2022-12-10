@@ -3,12 +3,15 @@ import axiosInstance from "../configs/axiosInstance";
 
 const token = Cookies.get("token");
 
+const tokenpostman =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWlud2ViQGdtYWlsLmNvbSIsImV4cCI6MTY3MDY5MjYyNiwidXNlcm5hbWUiOiJhZG1pbndlYiJ9.M6HXFSosw3vmmdOmMHl4Mc2ARppykESUGupiadthBss";
+
 const Products = {
   async getAllProducts() {
     try {
       const response = await axiosInstance.get("/auth/products", {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWlud2ViQGdtYWlsLmNvbSIsImV4cCI6MTY3MDUzMzcwMywidXNlcm5hbWUiOiJhZG1pbndlYiJ9.uiyC3vwaOLm5nuFlScznuDx7M0skzxEUsdwPFGo2DA4`,
+          Authorization: `Bearer ${tokenpostman}`,
           // Authorization: `Bearer ${token}`,
         },
       });
@@ -24,7 +27,7 @@ const Products = {
         { category, name, description, price, stock, image },
         {
           headers: {
-            // Authorization: `Bearer {token}`,
+            Authorization: `Bearer ${tokenpostman}`,
           },
         }
       );

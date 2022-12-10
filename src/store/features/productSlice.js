@@ -5,6 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 import Products from "../../apis/produts.api";
+import axiosInstance from "../../configs/axiosInstance";
 
 export const getProducts = createAsyncThunk("product/getProducts", async () => {
   const response = await Products.getAllProducts();
@@ -14,32 +15,19 @@ export const getProducts = createAsyncThunk("product/getProducts", async () => {
 export const inputProduct = createAsyncThunk(
   "product/inputProduct",
   async ({ category, name, description, price, stock, image }) => {
-    const response = Products.saveProduct({
-      category,
-      name,
-      description,
-      price,
-      stock,
-      image,
-    });
-    // const response = await axios.post(
-    //   "https://be-loyalty-point-production-d38a.up.railway.app/api/auth/products",
-    //   {
-    //     headers: {
-    //       authorization:
-    //         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWlud2ViQGdtYWlsLmNvbSIsImV4cCI6MTY3MDUyODc4NywidXNlcm5hbWUiOiJhZG1pbndlYiJ9.PZJiV5X9SXhxWQ-Fp8x0DRerDlvB7p0L5Acwd83toRQ",
-    //     },
-    //   },
-    //   { category, name, description, price, stock, image }
-    // );
-    // const response = await axios.post(
-    //   // "https://638087368efcfcedac0756ff.mockapi.io/products",
-    //   // "localhost:8000/api/auth/products",
-    //   "https://be-loyalty-point-production-d38a.up.railway.app/api/auth/products",
-
-    //   { category, name, description, price, stock, image }
-    // );
-    return response.data.data;
+    try {
+      const response = await Products.saveProduct({
+        category,
+        name,
+        description,
+        price,
+        stock,
+        image,
+      });
+      return response.data.data;
+    } catch (error) {
+      console.log("error", error);
+    }
   }
 );
 
