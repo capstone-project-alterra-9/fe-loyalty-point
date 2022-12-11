@@ -8,7 +8,7 @@ import { FiBox } from "react-icons/fi";
 // import logo from"../../assets/icons/logo.svg"
 import "../../assets/styles/Sidebar.css";
 
-const Sidebar = () => {
+const AdminSidebar = () => {
   return (
     <>
       <div className="col-auto bg-sbar vh-100">
@@ -124,4 +124,4 @@ const Sidebar = () => {
     </>
   );
 };
-export default Sidebar;
+export default AdminSidebar;

@@ -28,26 +28,22 @@ export const SetupRoutes = () => {
         </Route>
         {/* Admin Route */}
         <Route path="/" element={<PrivateRoute />}>
-          <div>
+          {/* <div>
             <div className="container-fluid" id="main">
-              <div className="row row-offcanvas row-offcanvas-left">
-                <AdminSidebar />
-                <Routes>
-                  <Route path="/admin" element={<Dashboard />} />
-                  <Route path="/admin/users" element={<Users />} />
-                  <Route
-                    path="/admin/transactions"
-                    element={<Transactions />}
-                  />
-                  <Route
-                    path="/admin/redeemtransactions"
-                    element={<RedeemTransactions />}
-                  />
-                  <Route path="/admin/products" element={<Products />} />
-                </Routes>
-              </div>
+              <div className="row row-offcanvas row-offcanvas-left"> */}
+          <Route element={<AdminSidebar />}>
+            <Route path="/admin" element={<Dashboard />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/transactions" element={<Transactions />} />
+            <Route
+              path="/admin/redeemtransactions"
+              element={<RedeemTransactions />}
+            />
+            <Route path="/admin/products" element={<Products />} />
+          </Route>
+          {/* </div>
             </div>
-          </div>
+          </div> */}
         </Route>
         {/* Not Found page */}
         <Route path="*" element={<NotFound />} />
