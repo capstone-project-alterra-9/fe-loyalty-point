@@ -15,8 +15,8 @@ function AddProduct() {
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [stock, setStock] = useState("");
+  const [price, setPrice] = useState();
+  const [stock, setStock] = useState();
   const [image, setImage] = useState("");
 
   const dispatch = useDispatch();

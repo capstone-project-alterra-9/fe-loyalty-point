@@ -5,7 +5,6 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 import Products from "../../apis/produts.api";
-import axiosInstance from "../../configs/axiosInstance";
 
 export const getProducts = createAsyncThunk("product/getProducts", async () => {
   const response = await Products.getAllProducts();
