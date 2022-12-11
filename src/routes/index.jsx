@@ -1,6 +1,6 @@
-import { Sidebar } from "flowbite-react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../components/Layout";
+import AdminSidebar from "../components/Sidebar/Sidebar";
 import {
   Dashboard,
   Products,
@@ -8,7 +8,6 @@ import {
   Transactions,
   Users,
 } from "../pages";
-import { AdminDashboard } from "../pages/Dashboard";
 import { LandingPage } from "../pages/Landing";
 import { LoginPage } from "../pages/Login";
 import { NotFound } from "../pages/NotFound";
@@ -29,14 +28,26 @@ export const SetupRoutes = () => {
         </Route>
         {/* Admin Route */}
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/users" element={<Users />} />
-          <Route path="/admin/transactions" element={<Transactions />} />
-          <Route
-            path="/admin/redeemtransactions"
-            element={<RedeemTransactions />}
-          />
-          <Route path="/admin/products" element={<Products />} />
+          <div>
+            <div className="container-fluid" id="main">
+              <div className="row row-offcanvas row-offcanvas-left">
+                <AdminSidebar />
+                <Routes>
+                  <Route path="/admin" element={<Dashboard />} />
+                  <Route path="/admin/users" element={<Users />} />
+                  <Route
+                    path="/admin/transactions"
+                    element={<Transactions />}
+                  />
+                  <Route
+                    path="/admin/redeemtransactions"
+                    element={<RedeemTransactions />}
+                  />
+                  <Route path="/admin/products" element={<Products />} />
+                </Routes>
+              </div>
+            </div>
+          </div>
         </Route>
         {/* Not Found page */}
         <Route path="*" element={<NotFound />} />
