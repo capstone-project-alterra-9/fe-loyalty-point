@@ -1,5 +1,13 @@
+import { Sidebar } from "flowbite-react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../components/Layout";
+import {
+  Dashboard,
+  Products,
+  RedeemTransactions,
+  Transactions,
+  Users,
+} from "../pages";
 import { AdminDashboard } from "../pages/Dashboard";
 import { LandingPage } from "../pages/Landing";
 import { LoginPage } from "../pages/Login";
@@ -21,9 +29,14 @@ export const SetupRoutes = () => {
         </Route>
         {/* Admin Route */}
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin" element={<AdminDashboard />}>
-            <Route path="/admin/users" />
-          </Route>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/users" element={<Users />} />
+          <Route path="/admin/transactions" element={<Transactions />} />
+          <Route
+            path="/admin/redeemtransactions"
+            element={<RedeemTransactions />}
+          />
+          <Route path="/admin/products" element={<Products />} />
         </Route>
         {/* Not Found page */}
         <Route path="*" element={<NotFound />} />
