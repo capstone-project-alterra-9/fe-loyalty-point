@@ -1,12 +1,12 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import WebRoutes from "./routers";
+import SetupRoutes from "./routes";
 
 function App() {
   return (
     <div>
-      <WebRoutes />
+      <SetupRoutes />
     </div>
   );
 }

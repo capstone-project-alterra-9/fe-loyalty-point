@@ -2,12 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Sidebar } from "../components";
 import {
   Dashboard,
-  Products,
   Transactions,
   RedeemTransactions,
   Users,
+  Products,
 } from "../pages";
-const WebRoutes = () => {
+const SetupRoutes = () => {
   return (
     <BrowserRouter>
       <div>
@@ -31,4 +31,4 @@ const WebRoutes = () => {
   );
 };
 
-export default WebRoutes;
+export default SetupRoutes;
