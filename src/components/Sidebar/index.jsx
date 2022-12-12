@@ -1,10 +1,15 @@
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { Outlet, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
-import { DashboaardSvg } from "../../assets";
+import {
+  DashboaardSvg,
+  ProductSvg,
+  TransationSvg,
+  UsersSvg,
+} from "../../assets";
 import JokoMartLogo from "../../assets/svg/logo.svg";
 import Auth from "../../utils/auth";
 
@@ -64,37 +69,41 @@ export const AdminSidebar = () => {
             J
           </p>
           <ul className="pt-5">
-            <li
-              className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
+            <NavLink to="/admin">
+              <li
+                className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
                `}
-            >
-              <img src={DashboaardSvg} alt="Dashboard" />
-              <span
-                className={`${
-                  !open && "hidden"
-                } origin-left duration-200 font-bold text-md`}
               >
-                Dashboard
-              </span>
-            </li>
-            <li
-              className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
+                <img src={DashboaardSvg} alt="Dashboard" />
+                <span
+                  className={`${
+                    !open && "hidden"
+                  } origin-left duration-200 font-bold text-md`}
+                >
+                  Dashboard
+                </span>
+              </li>
+            </NavLink>
+            <NavLink to="/admin/users">
+              <li
+                className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
                `}
-            >
-              <img src={DashboaardSvg} alt="Dashboard" />
-              <span
-                className={`${
-                  !open && "hidden"
-                } origin-left duration-200 font-bold text-md`}
               >
-                Users
-              </span>
-            </li>
+                <img src={UsersSvg} alt="Dashboard" />
+                <span
+                  className={`${
+                    !open && "hidden"
+                  } origin-left duration-200 font-bold text-md`}
+                >
+                  Users
+                </span>
+              </li>
+            </NavLink>
             <li
               className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
                `}
             >
-              <img src={DashboaardSvg} alt="Dashboard" />
+              <img src={TransationSvg} alt="Dashboard" />
               <span
                 className={`${
                   !open && "hidden"
@@ -103,12 +112,13 @@ export const AdminSidebar = () => {
                 Transactions
               </span>
             </li>
-            <li
-              className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
+            <NavLink to="/admin/products">
+              <li
+                className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
                `}
-            >
-              <img src={DashboaardSvg} alt="Dashboard" />
-              <NavLink to="/admin/products">
+              >
+                <img src={ProductSvg} alt="Dashboard" />
+
                 <span
                   className={`${
                     !open && "hidden"
@@ -116,8 +126,8 @@ export const AdminSidebar = () => {
                 >
                   Product
                 </span>
-              </NavLink>
-            </li>
+              </li>
+            </NavLink>
             <li
               className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
                `}
