@@ -8,6 +8,7 @@ import Products from "../../apis/produts.api";
 
 export const getProducts = createAsyncThunk("product/getProducts", async () => {
   const response = await Products.getAllProducts();
+  console.log("response", response.data.data);
   return response.data.data;
 });
 
@@ -23,7 +24,7 @@ export const inputProduct = createAsyncThunk(
         stock,
         image,
       });
-      return response.data.data;
+      return response.data;
     } catch (error) {
       console.log("error", error);
     }

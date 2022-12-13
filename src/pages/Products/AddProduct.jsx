@@ -49,7 +49,7 @@ function AddProduct() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title> Add Transaction</Modal.Title>
+          <Modal.Title> Add Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="row">
