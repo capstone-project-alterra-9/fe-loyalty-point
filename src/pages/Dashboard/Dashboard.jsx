@@ -10,11 +10,11 @@ import {
 } from "react-icons/ai";
 const Dashboard = () => {
   return (
-    <div className="col main pt-5 mt-3">
+    <div className="main pt-5 mt-3">
       <p className="lead d-none d-sm-block fw-bold">
         Selamat Datang Di JokoMart Management System
       </p>
-      <div className="row mb-3">
+      <div className="mb-3">
         <div className="col-xl-4 col-sm-6 py-2">
           <div className="card bg-color text-white h-100">
             <div className="card-body bg-color">

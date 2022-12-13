@@ -4,8 +4,10 @@ import { AdminSidebar } from "../Sidebar";
 export const DashboardLayout = () => {
   return (
     <>
-      <AdminSidebar />
-      <Outlet />
+      <div className="flex row">
+        <AdminSidebar />
+        <Outlet />
+      </div>
     </>
   );
 };

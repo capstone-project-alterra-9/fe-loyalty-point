@@ -13,6 +13,7 @@ import {
 } from "../../store/features/productSlice";
 
 import { MdDelete } from "react-icons/md";
+import { Table } from "flowbite-react";
 function Products() {
   const dispatch = useDispatch();
   const products = useSelector(productSelectors.selectAll);
@@ -45,7 +46,7 @@ function Products() {
           </div>
         </div>
         <br />
-        <table className="table table-bordered table-responsive">
+        {/* <table className="table table-bordered table-responsive">
           <thead className="th-color">
             <tr>
               <th>Category</th>
@@ -75,7 +76,53 @@ function Products() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
+        <Table hoverable={true}>
+          <Table.Head>
+            <Table.HeadCell>Category</Table.HeadCell>
+            <Table.HeadCell>Product Name</Table.HeadCell>
+            <Table.HeadCell>Description</Table.HeadCell>
+            <Table.HeadCell>Price</Table.HeadCell>
+            <Table.HeadCell>Stock</Table.HeadCell>
+            <Table.HeadCell>Image</Table.HeadCell>
+            <Table.HeadCell>Actions</Table.HeadCell>
+          </Table.Head>
+          <Table.Body className="divide-y">
+            {products?.map((product) => (
+              <Table.Row
+                className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                key={product.ID}
+              >
+                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  {product.category}
+                </Table.Cell>
+                <Table.Cell>{product.name}</Table.Cell>
+                <Table.Cell>{product.description}</Table.Cell>
+                <Table.Cell>{product.price}</Table.Cell>
+                <Table.Cell>{product.stock}</Table.Cell>
+                <Table.Cell>{product.image}</Table.Cell>
+                <Table.Cell>
+                  <div className="flex gap-3">
+                    <a
+                      href="/tables"
+                      className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                    >
+                      Edit
+                    </a>
+                    <a
+                      href="/tables"
+                      className="font-medium text-red-600 hover:underline dark:text-blue-500"
+                    >
+                      Delete
+                    </a>
+                  </div>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+        {/* Modal */}
+        <div></div>
       </div>
     </>
   );
