@@ -5,9 +5,11 @@ import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 import {
+  BuySvg,
   DashboaardSvg,
   LogoutSvg,
   ProductSvg,
+  RedeemSvg,
   TransationSvg,
   UsersSvg,
 } from "../../assets";
@@ -44,7 +46,7 @@ export const AdminSidebar = () => {
       <div
         className={`${
           open ? "w-72" : "w-20"
-        } duration-200 h-screen bg-[#566B55] relative shadow-inner`}
+        } duration-200 h-auto bg-[#566B55] relative shadow-inner`}
       >
         <FontAwesomeIcon
           icon={faAngleLeft}
@@ -115,8 +117,7 @@ export const AdminSidebar = () => {
               Transactions
             </span>
           </li>
-
-          <NavLink to="/admin/products">
+          <NavLink to="/admin/transactions">
             <li
               className={`${
                 Dropdown && "hidden"
@@ -124,7 +125,7 @@ export const AdminSidebar = () => {
                `}
             >
               <span></span>
-              <img src={ProductSvg} alt="Dashboard" />
+              <img src={BuySvg} alt="Dashboard" />
               <span
                 className={`${
                   !open && "hidden"
@@ -135,7 +136,7 @@ export const AdminSidebar = () => {
             </li>
           </NavLink>
 
-          <NavLink to="/admin/products">
+          <NavLink to="/admin/redeemtransactions">
             <li
               className={`${
                 Dropdown && "hidden"
@@ -143,7 +144,7 @@ export const AdminSidebar = () => {
                `}
             >
               <span></span>
-              <img src={ProductSvg} alt="Dashboard" />
+              <img src={RedeemSvg} alt="Dashboard" />
               <span
                 className={`${
                   !open && "hidden"

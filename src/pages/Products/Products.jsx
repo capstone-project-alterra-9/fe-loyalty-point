@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdFilterAlt } from "react-icons/md";
 import "../../assets/styles/Products.css";
@@ -14,6 +14,7 @@ import {
 
 import { MdDelete } from "react-icons/md";
 import { Table } from "flowbite-react";
+import { DeleteSvg, EditSvg } from "../../assets";
 function Products() {
   const dispatch = useDispatch();
   const products = useSelector(productSelectors.selectAll);
@@ -23,26 +24,47 @@ function Products() {
 
   return (
     <>
-      <div className="col main pt-5 mt-3">
-        Products
-        <div className="row">
-          <div className="col-sm-9">
-            <input type="search" placeholder="Search" />
-            <button className="btn">
-              <FaSearch />
-            </button>
+      <div className="mx-auto pt-5 mt-3">
+        <p className="text-3xl font-bold mb-5">Product Stock</p>
+        <div className="flex flex-row justify-between">
+          <div className="">
+            <form className="flex items-center">
+              <label htmlFor="simple-search" className="sr-only">
+                Search
+              </label>
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  id="simple-search"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#6F8A6E] focus:border-[#6F8A6E] block w-full pl-10 p-2.5  "
+                  placeholder="Search"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="p-2.5 ml-2 text-sm font-medium text-white bg-[#566B55] rounded-lg border border-[#566B55] hover:bg-[#6F8A6E] focus:ring-4 focus:outline-none focus:ring-[#6F8A6E] "
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+                <span className="sr-only">Search</span>
+              </button>
+            </form>
           </div>
-
-          <div className="col-sm-3 justify-content-end">
+          <div className="">
             <AddProduct />
-            <button
-              className="btn btn-color dropdown-toggle btn-space"
-              type="button"
-              data-toggle="dropdown"
-            >
-              <MdFilterAlt />
-              <span>Filter By</span>
-            </button>
           </div>
         </div>
         <br />
@@ -78,7 +100,7 @@ function Products() {
           </tbody>
         </table> */}
         <Table hoverable={true}>
-          <Table.Head>
+          <Table.Head style={{ backgroundColor: "#566B55", color: "white" }}>
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Product Name</Table.HeadCell>
             <Table.HeadCell>Description</Table.HeadCell>
@@ -107,13 +129,13 @@ function Products() {
                       href="/tables"
                       className="font-medium text-blue-600 hover:underline dark:text-blue-500"
                     >
-                      Edit
+                      <img src={EditSvg} alt="" className="w-6" />
                     </a>
                     <a
                       href="/tables"
                       className="font-medium text-red-600 hover:underline dark:text-blue-500"
                     >
-                      Delete
+                      <img src={DeleteSvg} alt="" className="w-6" />
                     </a>
                   </div>
                 </Table.Cell>
