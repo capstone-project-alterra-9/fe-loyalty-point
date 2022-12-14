@@ -9,17 +9,16 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getProducts,
   deleteProduct,
-  productSelectors,
 } from "../../store/features/productSlice";
 
 import { MdDelete } from "react-icons/md";
 function Products() {
   const dispatch = useDispatch();
-  const products = useSelector(productSelectors.selectAll);
+  const products = useSelector((state) => state.products);
+  // const products = useSelector();
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
-
+		dispatch(getProducts());
+	}, [dispatch]);
   return (
     <>
       <div className="col main pt-5 mt-3">
@@ -59,7 +58,7 @@ function Products() {
           </thead>
           <tbody>
             {products?.map((product) => (
-              <tr key={product.ID}>
+              <tr key={product.id}>
                 <td>{product.category}</td>
                 <td>{product.name}</td>
                 <td>{product.description}</td>

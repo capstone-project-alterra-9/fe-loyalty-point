@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getProducts,
   editProduct,
-  productSelectors,
 } from "../../store/features/productSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";

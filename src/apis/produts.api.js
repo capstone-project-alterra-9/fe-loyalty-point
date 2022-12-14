@@ -1,18 +1,18 @@
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import axiosInstance from "../configs/axiosInstance";
+// import { deleteProduct } from "../store/features/productSlice";
 
-const token = Cookies.get("token");
+// const token = Cookies.get("token");
 
 const tokenpostman =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWlud2ViQGdtYWlsLmNvbSIsImV4cCI6MTY3MDg1NDI2MywidXNlcm5hbWUiOiJhZG1pbndlYiJ9.twzYfenjMZnftWmh8465INwRe7xrc3THp0sgWdkE7gE";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWlud2ViQGdtYWlsLmNvbSIsImV4cCI6MTY3MTAxNDc1NywidXNlcm5hbWUiOiJhZG1pbndlYiJ9.ZnIdP-FfS1CSpeOOQQfXPlMA7VD0CSraMY5Oqm7ELSY";
 
-const Products = {
+const ProductsAPI = {
   async getAllProducts() {
     try {
       const response = await axiosInstance.get("/auth/products", {
         headers: {
           Authorization: `Bearer ${tokenpostman}`,
-          // Authorization: `Bearer ${token}`,
         },
       });
       return response;
@@ -20,17 +20,34 @@ const Products = {
       console.log(error.message);
     }
   },
-  async saveProduct({ category, name, description, price, stock, image }) {
+  async inputProduct(data) {
     try {
-      const response = await axiosInstance.post(
-        "/auth/products",
-        { category, name, description, price, stock, image },
-        {
-          headers: {
-            Authorization: `Bearer ${tokenpostman}`,
-          },
-        }
-      );
+      const response = await axiosInstance.post("/auth/products", data, {
+        headers: {
+          Authorization: `Bearer ${tokenpostman}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+  async editProduct(data) {
+    try {
+      const id = data.ID;
+      const response = await axiosInstance.patch(`auth/products/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${tokenpostman}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+  async deleteProduct(id) {
+    try {
+      const response = await axiosInstance.delete(`auth/products/${id}`);
       return response;
     } catch (error) {
       console.log(error.message);
@@ -38,4 +55,4 @@ const Products = {
   },
 };
 
-export default Products;
+export default ProductsAPI;
