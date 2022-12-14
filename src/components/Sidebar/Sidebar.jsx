@@ -11,7 +11,7 @@ import "../../assets/styles/Sidebar.css";
 const AdminSidebar = () => {
   return (
     <>
-      <div className="col-auto bg-sbar vh-100">
+      <div className="col-auto bg-sbar h-auto">
         <div>
           <ul className="nav flex-column mt-5 pt-5">
             <li>

@@ -27,14 +27,18 @@ export const AdminSidebar = () => {
       title: "Are you sure to Logout?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#566B55",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
+          toast: "true",
           icon: "success",
           title: "Logout Success",
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 1500,
         });
         Auth.signOut(navigate);
       }
@@ -45,8 +49,8 @@ export const AdminSidebar = () => {
     <>
       <div
         className={`${
-          open ? "w-72" : "w-20"
-        } duration-200 h-auto bg-[#566B55] relative shadow-inner`}
+          open ? "w-1/5" : "w-20"
+        } duration-200 bg-[#566B55] relative shadow-lg`}
       >
         <FontAwesomeIcon
           icon={faAngleLeft}

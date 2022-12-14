@@ -15,12 +15,30 @@ import {
 import { MdDelete } from "react-icons/md";
 import { Table } from "flowbite-react";
 import { DeleteSvg, EditSvg } from "../../assets";
+import Swal from "sweetalert2";
+
 function Products() {
   const dispatch = useDispatch();
   const products = useSelector(productSelectors.selectAll);
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "error",
+      showCancelButton: true,
+      confirmButtonColor: "#566B55",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  };
 
   return (
     <>
@@ -125,18 +143,14 @@ function Products() {
                 <Table.Cell>{product.image}</Table.Cell>
                 <Table.Cell>
                   <div className="flex gap-3">
-                    <a
-                      href="/tables"
-                      className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                    >
-                      <img src={EditSvg} alt="" className="w-6" />
-                    </a>
-                    <a
-                      href="/tables"
-                      className="font-medium text-red-600 hover:underline dark:text-blue-500"
-                    >
-                      <img src={DeleteSvg} alt="" className="w-6" />
-                    </a>
+                    <EditProduct />
+
+                    <img
+                      src={DeleteSvg}
+                      alt=""
+                      className="w-6"
+                      onClick={handleDelete}
+                    />
                   </div>
                 </Table.Cell>
               </Table.Row>
