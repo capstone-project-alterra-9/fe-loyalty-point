@@ -1,24 +1,19 @@
 import React, { useEffect } from "react";
-import { FaSearch } from "react-icons/fa";
-import { MdFilterAlt } from "react-icons/md";
+
 import "../../assets/styles/Users.css";
 import AddUser from "./AddUser";
 import EditUser from "./EditUser";
-import { MdDelete } from "react-icons/md";
+
 import { Table } from "flowbite-react";
 import { DeleteSvg } from "../../assets";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getProducts,
-  productSelectors,
-} from "../../store/features/productSlice";
+
 import Swal from "sweetalert2";
 import { getUsers } from "../../store/features/userSlice";
 
 function Users() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.data);
-  console.log("users", users);
 
   useEffect(() => {
     dispatch(getUsers());
@@ -169,32 +164,34 @@ function Users() {
         </table> */}
         <Table hoverable={true}>
           <Table.Head style={{ backgroundColor: "#566B55", color: "white" }}>
+            <Table.HeadCell>No</Table.HeadCell>
             <Table.HeadCell>Email</Table.HeadCell>
             <Table.HeadCell>Username</Table.HeadCell>
             <Table.HeadCell>Password</Table.HeadCell>
-            {/* <Table.HeadCell>Current Point(s)</Table.HeadCell>
-            <Table.HeadCell>Cost Point</Table.HeadCell> */}
+            <Table.HeadCell>Current Point(s)</Table.HeadCell>
+            <Table.HeadCell>Cost Point</Table.HeadCell>
             <Table.HeadCell>Actions</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {users?.map((user) => (
+            {users?.map((user, userIndex) => (
               <Table.Row
-                className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                className="bg-white text-gray-900 font-medium"
                 key={user.ID}
               >
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                  {user.email}
+                <Table.Cell className="whitespace-nowrap text-center">
+                  {userIndex + 1}
                 </Table.Cell>
+                <Table.Cell>{user.email}</Table.Cell>
                 <Table.Cell>{user.username}</Table.Cell>
                 <Table.Cell>
                   <p className="truncate">
-                    {user.password.length > 30
-                      ? `${user.password.substring(0, 30)}...`
+                    {user.password.length > 20
+                      ? `${user.password.substring(0, 20)}...`
                       : user.password}
                   </p>
                 </Table.Cell>
-                {/* <Table.Cell>{user.price}</Table.Cell>
-                <Table.Cell>{user.stock}</Table.Cell> */}
+                <Table.Cell></Table.Cell>
+                <Table.Cell></Table.Cell>
                 <Table.Cell>
                   <div className="flex gap-3">
                     <EditUser />
