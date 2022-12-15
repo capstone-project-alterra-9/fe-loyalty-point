@@ -169,7 +169,7 @@ function Users() {
             <Table.HeadCell>Username</Table.HeadCell>
             <Table.HeadCell>Password</Table.HeadCell>
             <Table.HeadCell>Current Point(s)</Table.HeadCell>
-            <Table.HeadCell>Cost Point</Table.HeadCell>
+            <Table.HeadCell>Total Point(s)</Table.HeadCell>
             <Table.HeadCell>Actions</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
@@ -190,8 +190,8 @@ function Users() {
                       : user.password}
                   </p>
                 </Table.Cell>
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
+                <Table.Cell>{user.points}</Table.Cell>
+                <Table.Cell>{user.costPoints}</Table.Cell>
                 <Table.Cell>
                   <div className="flex gap-3">
                     <EditUser />
