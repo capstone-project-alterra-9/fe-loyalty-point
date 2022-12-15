@@ -6,11 +6,12 @@ import {
   faTwitter,
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
+import { AppStore, GooglePlay } from "../../assets";
 
 export const MainFooter = () => {
   return (
     <>
-      <footer className="relative bg-[#425141] pt-8 pb-6 text-white">
+      <footer className="relative bg-[#425141] pt-8 pb-6 text-white container">
         <div className=" mx-auto px-4">
           <div className="  flex flex-wrap text-left lg:text-left justify-between pl-8">
             <div className="lg:w-4/12">
@@ -52,10 +53,8 @@ export const MainFooter = () => {
               </div>
             </div>
             <div className="lg:w-4/12">
-              <p className="text-xl fonat-semibold  mb-3 font-semibold">
-                Information
-              </p>
-              <ul class="list-none">
+              <p className="text-xl  mb-3 font-semibold">Information</p>
+              <ul class="list-none font-medium flex flex-col gap-2">
                 <li>Home</li>
                 <li>Feature</li>
                 <li>Testimonial</li>
@@ -64,28 +63,11 @@ export const MainFooter = () => {
             </div>
             <div className="pr-8 justify-end w-4/12 ">
               <p className="text-xl fonat-semibold mb-3 font-semibold">
-                Location
+                Download App Now
               </p>
-              <div className="mapouter sm:invisible invisible xl:visible">
-                <div className="gmap_canvas rounded ">
-                  <iframe
-                    className="gmap_iframe"
-                    width="100%"
-                    frameBorder={0}
-                    scrolling="no"
-                    marginHeight={0}
-                    marginWidth={0}
-                    src="https://maps.google.com/maps?width=500&height=220&hl=en&q=Joko mart&t=&z=17&ie=UTF8&iwloc=B&output=embed"
-                    title="Joko Mart"
-                  />
-                  <a href="https://formatjson.org/word-counter">Word Counter</a>
-                </div>
-                <style
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      ".mapouter{position:relative;text-align:right;width:100%;height:220px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:220px;}.gmap_iframe {height:220px!important;}",
-                  }}
-                />
+              <div className="flex w-40 gap-3 pt-5">
+                <img src={GooglePlay} alt="" />
+                <img src={AppStore} alt="" />
               </div>
             </div>
           </div>
