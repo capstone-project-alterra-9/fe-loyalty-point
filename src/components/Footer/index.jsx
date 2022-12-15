@@ -55,10 +55,18 @@ export const MainFooter = () => {
             <div className="lg:w-4/12">
               <p className="text-xl  mb-3 font-semibold">Information</p>
               <ul class="list-none font-medium flex flex-col gap-2">
-                <li>Home</li>
-                <li>Feature</li>
-                <li>Testimonial</li>
-                <li>Contact</li>
+                <li>
+                  <a href="#home">Home</a>
+                </li>
+                <li>
+                  <a href="#features">Feature</a>
+                </li>
+                <li>
+                  <a href="#testi">Testimonial</a>
+                </li>
+                <li>
+                  <a href="#contact">Contact</a>
+                </li>
               </ul>
             </div>
             <div className="pr-8 justify-end w-4/12 ">

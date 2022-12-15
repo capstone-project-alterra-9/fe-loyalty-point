@@ -20,7 +20,10 @@ export const LandingPage = () => {
       <Helmet>
         <title>JokoMart | Loyalty Point App</title>
       </Helmet>
-      <section className="bg-gradient-to-r from-[#F5F9F5] via-[#BDD6BC] to-[#6F8A6E] container">
+      <section
+        id="home"
+        className="bg-gradient-to-r from-[#F5F9F5] via-[#BDD6BC] to-[#6F8A6E] container"
+      >
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-col md:flex-row gap-24">
             <h2 className="text-3xl font-bold w-6/12 m-auto p-20">
@@ -64,7 +67,7 @@ export const LandingPage = () => {
           </div>
         </div>
       </section>
-      <section className="bg-white container px-32 ">
+      <section id="features" className="bg-white container px-32 ">
         <h1 className="text-center text-5xl font-bold py-16">Our Features</h1>
         <div className="flex justify-between items-center gap-44">
           <img src={feature1} alt="feature1" className="px-10" />
@@ -97,7 +100,7 @@ export const LandingPage = () => {
           </h1>
         </div>
       </section>
-      <section className="container">
+      <section id="testi" className="container">
         <h1 className="text-center text-5xl font-bold pt-20 pb-16">
           What do they say about our app?
         </h1>
@@ -127,7 +130,7 @@ export const LandingPage = () => {
           </figure>
         </div>
       </section>
-      <section className="bg-white container px-32 pb-20">
+      <section id="contact" className="bg-white container px-32 pb-20">
         <div className="flex justify-between items-center gap-44 pt-20">
           <h1 className="font-bold text-4xl p-10">
             More profit with JokoMart

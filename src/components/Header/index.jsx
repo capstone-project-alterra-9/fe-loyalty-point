@@ -21,8 +21,8 @@ export const MainHeader = () => {
           <ul class="flex flex-col p-3 md:flex-row md:space-x-14 md:mt-0 md:text-lg md:font-medium sm:gap-2 gap-0 px-28">
             <li>
               <a
-                href="/"
-                class="block py-3 pl-3 pr-4 text-black hover:text-[#9CC29B] md:bg-transparent md:p-0 "
+                href="#home"
+                class="block py-3 pl-3 pr-4 text-black hover:text-[#566B55] md:bg-transparent md:p-0 "
                 aria-current="page"
               >
                 Home
@@ -30,24 +30,24 @@ export const MainHeader = () => {
             </li>
             <li>
               <a
-                href="/"
-                class="block py-3 pl-3 pr-4 text-black hover:text-[#9CC29B] md:hover:bg-transparent md:p-0 "
+                href="#features"
+                class="block py-3 pl-3 pr-4 text-black hover:text-[#566B55] md:hover:bg-transparent md:p-0 "
               >
                 Features
               </a>
             </li>
             <li>
               <a
-                href="/"
-                class="block py-3 pl-3 pr-4 text-black hover:text-[#9CC29B] md:hover:bg-transparent md:p-0 "
+                href="#testi"
+                class="block py-3 pl-3 pr-4 text-black hover:text-[#566B55] md:hover:bg-transparent md:p-0 "
               >
                 Testimonial
               </a>
             </li>
             <li>
               <a
-                href="/"
-                class="block py-3 pl-3 pr-4 text-black hover:text-[#9CC29B] md:bg-transparent md:p-0 "
+                href="#contact"
+                class="block py-3 pl-3 pr-4 text-black hover:text-[#566B55] md:bg-transparent md:p-0 "
               >
                 Contact
               </a>
