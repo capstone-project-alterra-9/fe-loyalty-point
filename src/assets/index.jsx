@@ -9,6 +9,8 @@ import RedeemSvg from "../assets/svg/Redeem.svg";
 import PlusSvg from "../assets/svg/Plus.svg";
 import EditSvg from "../assets/svg/Edit.svg";
 import DeleteSvg from "../assets/svg/Delete.svg";
+import SuccessStatus from "../assets/svg/SuccessStatus.svg";
+import FailedStatus from "../assets/svg/FailedStatus.svg";
 
 export {
   imglanding1,
@@ -22,4 +24,6 @@ export {
   PlusSvg,
   EditSvg,
   DeleteSvg,
+  SuccessStatus,
+  FailedStatus,
 };
