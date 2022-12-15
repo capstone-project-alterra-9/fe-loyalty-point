@@ -49,7 +49,7 @@ export const AdminSidebar = () => {
     <>
       <div
         className={`${
-          open ? "w-1/5" : "w-20"
+          open ? "w-1/5" : "w-20 h-screen"
         } duration-200 bg-[#566B55] relative shadow-lg`}
       >
         <FontAwesomeIcon
