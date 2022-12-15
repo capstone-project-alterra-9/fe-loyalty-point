@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import { MdFilterAlt } from "react-icons/md";
 import "../../assets/styles/Products.css";
 import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
@@ -12,9 +10,8 @@ import {
   productSelectors,
 } from "../../store/features/productSlice";
 
-import { MdDelete } from "react-icons/md";
 import { Table } from "flowbite-react";
-import { DeleteSvg, EditSvg } from "../../assets";
+import { DeleteSvg } from "../../assets";
 import Swal from "sweetalert2";
 
 function Products() {
@@ -119,6 +116,7 @@ function Products() {
         </table> */}
         <Table hoverable={true}>
           <Table.Head style={{ backgroundColor: "#566B55", color: "white" }}>
+            <Table.HeadCell>No</Table.HeadCell>
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Product Name</Table.HeadCell>
             <Table.HeadCell>Description</Table.HeadCell>
@@ -128,14 +126,15 @@ function Products() {
             <Table.HeadCell>Actions</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {products?.map((product) => (
+            {products?.map((product, productIndex) => (
               <Table.Row
-                className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                className="bg-white text-gray-900 font-medium"
                 key={product.ID}
               >
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                  {product.category}
+                <Table.Cell className="whitespace-nowrap text-center">
+                  {productIndex + 1}
                 </Table.Cell>
+                <Table.Cell>{product.category}</Table.Cell>
                 <Table.Cell>{product.name}</Table.Cell>
                 <Table.Cell>{product.description}</Table.Cell>
                 <Table.Cell>{product.price}</Table.Cell>

@@ -162,7 +162,7 @@ function AddProduct() {
                     htmlFor="base-input"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                   >
-                    Image
+                    Image Title
                   </label>
                   <input
                     type="string"
@@ -173,7 +173,7 @@ function AddProduct() {
                 </div>
               </div>
               {/* Modal footer */}
-              <div className="flex justify-end p-4 pt-2 rounded-b-xl ">
+              <div className="flex justify-end p-4 pt-2 rounded-b-xl gap-2">
                 <button
                   type="submit"
                   onClick={handleModal}

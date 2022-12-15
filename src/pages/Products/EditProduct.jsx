@@ -184,7 +184,7 @@ function EditProduct() {
                 </div>
               </div>
               {/* Modal footer */}
-              <div className="flex justify-end p-4 pt-2 rounded-b-xl ">
+              <div className="flex justify-end p-4 pt-2 rounded-b-xl gap-2">
                 <button
                   type="submit"
                   onClick={handleModal}
