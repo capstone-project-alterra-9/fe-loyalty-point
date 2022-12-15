@@ -11,7 +11,7 @@ const APIUsers = {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("response", response);
+
       return response;
     } catch (error) {
       console.log(error.message);
