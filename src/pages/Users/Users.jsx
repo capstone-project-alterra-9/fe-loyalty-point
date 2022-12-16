@@ -37,56 +37,6 @@ function Users() {
 
   return (
     <>
-      {/* <div className="col main pt-5 mt-3">
-        Users
-        <div className="row">
-          <div className="col-9">
-            {" "}
-            <input type="search" placeholder="Search" />
-            <button className="btn">
-              <FaSearch />
-            </button>
-          </div>
-
-          <div className="col-3">
-            <AddUser />
-            <button
-              className="btn btn-color dropdown-toggle btn-space"
-              type="button"
-              data-toggle="dropdown"
-            >
-              <MdFilterAlt/>
-              <span>Filter By</span>
-            </button>
-          </div>
-        </div>
-        <br />
-        <table className="table table-bordered border-secondary table-responsive">
-          <thead className="th-color">
-            <tr>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Password</th>
-              <th>Point(s)</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>username1</td>
-              <td>email@mail.com</td>
-              <td>aaaaa</td>
-              <td>7000</td>
-              <td>
-                <EditUser />
-                <MdDelete/>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-
-      </div> */}
       <div className="mx-auto pt-5 mt-3">
         <p className="text-3xl font-bold mb-5">Users Account</p>
         <div className="flex flex-row justify-between">

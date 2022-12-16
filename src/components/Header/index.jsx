@@ -6,8 +6,7 @@ export const MainHeader = () => {
     <div>
       <Navbar
         fluid={true}
-        sticky="top"
-        className="top-0 bg-gradient-to-r from-[#F5F9F5] via-[#BDD6BC] to-[#6F8A6E] container"
+        className="top-0 bg-gradient-to-r from-[#F5F9F5] via-[#BDD6BC] to-[#6F8A6E] container shadow-md fixed"
       >
         <Navbar.Brand href="/">
           <img
