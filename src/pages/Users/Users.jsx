@@ -9,14 +9,14 @@ import { DeleteSvg } from "../../assets";
 import { useDispatch, useSelector } from "react-redux";
 
 import Swal from "sweetalert2";
-import { getUsers } from "../../store/features/userSlice";
+import { getAllUser } from "../../store/features/userSlice";
 
 function Users() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.data);
 
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getAllUser());
   }, [dispatch]);
 
   const handleDelete = () => {
@@ -81,37 +81,6 @@ function Users() {
           </div>
         </div>
         <br />
-        {/* <table className="table table-bordered table-responsive">
-          <thead className="th-color">
-            <tr>
-              <th>Category</th>
-              <th>Product Name</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Image</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products?.map((product) => (
-              <tr key={product.ID}>
-                <td>{product.category}</td>
-                <td>{product.name}</td>
-                <td>{product.description}</td>
-                <td>{product.price}</td>
-                <td>{product.stock}</td>
-                <td>{product.image}</td>
-                <td>
-                  <EditProduct />
-                  <MdDelete
-                    onClick={() => dispatch(deleteProduct(product.id))}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
         <Table hoverable={true}>
           <Table.Head style={{ backgroundColor: "#566B55", color: "white" }}>
             <Table.HeadCell>No</Table.HeadCell>

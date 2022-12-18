@@ -1,38 +1,40 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import APIUsers from "../../apis/users.api";
+import UserApi from "../../apis/users.api";
 
 const initialState = {
   data: [],
-  status: "idle",
+  status: "idie",
   error: null,
+  loading: false,
 };
 
-export const getUsers = createAsyncThunk("user/getUsers", async () => {
-  const response = await APIUsers.getAllUsers();
-  return response.data.data;
+export const getAllUser = createAsyncThunk("user/getAllUser", async () => {
+  try {
+    const response = await UserApi.getAllUser();
+    // console.log({ response });
+    return response.data.data;
+  } catch (error) {
+    throw Error(error);
+  }
 });
 
-const userReducer = createSlice({
-  name: "product",
+const userSlice = createSlice({
+  name: "user",
   initialState,
-  extraReducers: {
-    [getUsers.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      // productEntity.setAll(state, action.payload);
-      //   },
-      //   [inputProduct.fulfilled]: (state, action) => {
-      //     productEntity.addOne(state, action.payload);
-      //   },
-      //   [deleteProduct.fulfilled]: (state, action) => {
-      //     productEntity.removeOne(state, action.payload);
-      //   },
-      //   [editProduct.fulfilled]: (state, action) => {
-      //     productEntity.updateOne(state, {
-      //       id: action.payload.id,
-      //       updates: action.payload,
-      //     });
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAllUser.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllUser.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = action.payload;
+      })
+      .addCase(getAllUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 
-export default userReducer.reducer;
+export default userSlice.reducer;

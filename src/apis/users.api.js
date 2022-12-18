@@ -3,20 +3,20 @@ import axiosInstance from "../configs/axiosInstance";
 
 const token = Cookies.get("token");
 
-const APIUsers = {
-  async getAllUsers() {
+const UserApi = {
+  async getAllUser() {
     try {
       const response = await axiosInstance.get("/users", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
       return response;
     } catch (error) {
-      console.log(error.message);
+      const { message } = error.response.data;
+      throw new Error(message);
     }
   },
 };
 
-export default APIUsers;
+export default UserApi;
