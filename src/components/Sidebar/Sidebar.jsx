@@ -11,7 +11,7 @@ import "../../assets/styles/Sidebar.css";
 const AdminSidebar = () => {
   return (
     <>
-      <div className="col-auto bg-sbar h-auto">
+      <div className="col-auto bg-sbar vh-100">
         <div>
           <ul className="nav flex-column mt-5 pt-5">
             <li>
@@ -71,7 +71,7 @@ const AdminSidebar = () => {
                 <ul className="btn-toggle-nav list-unstyled fw-normal">
                   <li>
                     <NavLink
-                      className="link-dark rounded p-2"
+                      className="link-dark rounded "
                       to="/admin/transactions"
                     >
                       <BiDollarCircle className="txt-color" />
@@ -82,7 +82,7 @@ const AdminSidebar = () => {
                   </li>
                   <li>
                     <NavLink
-                      className="link-dark rounded p-2"
+                      className="link-dark rounded "
                       to="/admin/redeemtransactions"
                     >
                       <MdCardGiftcard className="txt-color" />
@@ -109,9 +109,9 @@ const AdminSidebar = () => {
               </NavLink>
             </li>
 
-            <li className="border-top my-3"></li>
+            {/* <li className="border-top my-2"></li> */}
             <li>
-              <Link className="nav-link" to="/login">
+              <Link className="nav-link py-24" to="/login">
                 <MdLogout className="txt-color" />
                 <span className="ms-1 d-none d-sm-inline txt-color">
                   LOG OUT

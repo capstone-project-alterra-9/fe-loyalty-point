@@ -76,7 +76,7 @@ export const AdminSidebar = () => {
           J
         </p>
         {/* Dashboard Item */}
-        <ul className="pt-5">
+        <ul className="pt-5 pb-24">
           <NavLink to="/admin">
             <li
               className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
@@ -177,8 +177,8 @@ export const AdminSidebar = () => {
           </NavLink>
           <li
             className={`${
-              Dropdown ? "mt-32" : "mt-16"
-            } flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
+              Dropdown ? "mt-28" : "mt-14"
+            } flex rounded-xl mx-6 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
                `}
             onClick={handleLogout}
           >

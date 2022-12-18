@@ -139,7 +139,13 @@ function Products() {
                 <Table.Cell>{product.description}</Table.Cell>
                 <Table.Cell>{product.price}</Table.Cell>
                 <Table.Cell>{product.stock}</Table.Cell>
-                <Table.Cell>{product.image}</Table.Cell>
+                <Table.Cell>
+                  <p className="truncate">
+                    {product.image.length > 15
+                      ? `${product.image.substring(0, 15)}...`
+                      : product.image}
+                  </p>
+                </Table.Cell>
                 <Table.Cell>
                   <div className="flex gap-3">
                     <EditProduct />
