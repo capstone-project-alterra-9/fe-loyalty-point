@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-// import { inputProduct } from "../../store/features/productSlice";
-import { useNavigate } from "react-router-dom";
+import { createProduct } from "../../store/features/productSlice";
+
 import Swal from "sweetalert2";
 import { PlusSvg } from "../../assets";
 
@@ -12,7 +12,44 @@ function AddProduct() {
     setModal(!modal);
   };
 
+  const dispatch = useDispatch();
 
+  const inputProduct = (e) => {
+    e.preventDefault();
+		const formData = new FormData(e.target);
+    const category = formData.get("category");
+    const name = formData.get("name");
+    const description = formData.get("description");
+    const price = Number(formData.get("price"));
+    const stock = Number(formData.get("stock"));
+    const image = formData.get("image-title");
+
+    try {
+      dispatch(
+        createProduct({category, name, description, price, stock, image})
+      ).then((res) => {
+        if(!res.error) {
+          Swal.fire({
+								icon: "success",
+								title: "Saved",
+								text: "Product data successfully saved",
+								showConfirmButton: false,
+								timer: 2000,
+								background: "#ffffff",
+							})
+              handleModal()
+        } else {
+          Swal.fire("Sorry", res.error.message.split(":")[1], "info");
+        }
+      })
+    } catch (error) {
+      // console.log("error", error);
+      Swal.fire({
+        title: error.message,
+        icon: "error",
+      });
+    }
+  };
 
   return (
     <>
@@ -37,7 +74,7 @@ function AddProduct() {
         >
           <div className="relative w-full max-w-lg h-full md:h-auto rounded-lg shadow-lg">
             {/* Modal content */}
-            <form action="#" className="relative bg-white rounded-lg ">
+            <form action="#" className="relative bg-white rounded-lg" onSubmit={inputProduct}>
               {/* Modal header */}
               <div className="flex p-4 rounded-t-lg border-b  bg-[#566B55] justify-center">
                 <h3 className="text-xl font-semibold text-white ">
@@ -46,7 +83,7 @@ function AddProduct() {
               </div>
               {/* Modal body */}
               <div className="p-6 pt-5 px-10">
-                <div className="mb-4">
+              <div className="mb-4">
                   <label
                     htmlFor="category"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
@@ -55,16 +92,24 @@ function AddProduct() {
                   </label>
                   <select
                     id="category"
+                    name="category"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   >
                     <option value="" selected hidden>
                       Nothing Selected
                     </option>
-                    <option>Credits</option>
-                    <option>E-Money</option>
-                    <option>Data</option>
-                    <option>Cashout</option>
+                    <option value="credits">Credits</option>
+                    <option value="data-quota">Data Quota</option>
+                    <option value="e-money">E-Money</option>
+                    <option value="cashout">Cashout</option>
                   </select>
+                  {/* <input
+                    type="text"
+                    id="category"
+                    name="category"
+                    placeholder="Product Category"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  /> */}
                 </div>
 
                 <div className="mb-4">
@@ -77,6 +122,7 @@ function AddProduct() {
                   <input
                     type="text"
                     id="base-input"
+                    name="name"
                     placeholder="contoh : Pulsa 10000"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
@@ -91,9 +137,10 @@ function AddProduct() {
                     </label>
                     <textarea
                       id="message"
+                      name="description"
                       rows={2}
                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#566B55] focus:border-[#6F8A6E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      // placeholder="Write your thoughts here..."
+                      placeholder="Deskripsi produk"
                       defaultValue={""}
                     />
                   </div>
@@ -108,6 +155,7 @@ function AddProduct() {
                   <input
                     type="number"
                     id="base-input"
+                    name="price"
                     placeholder="contoh : 10000"
                     min="0"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -124,6 +172,7 @@ function AddProduct() {
                   <input
                     type="number"
                     id="base-input"
+                    name="stock"
                     placeholder="contoh : 10"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
@@ -139,6 +188,7 @@ function AddProduct() {
                   <input
                     type="string"
                     id="base-input"
+                    name="image-title"
                     placeholder="contoh : 10 GB"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
