@@ -7,16 +7,16 @@ import Moment from "react-moment";
 import { DeleteSvg, FailedStatus, SuccessStatus } from "../../assets";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { getRedeem } from "../../store/features/redeemSlice";
+// import { getAllRedeem } from "../../store/features/redeemSlice";
 
 function Transactions() {
-  const dispatch = useDispatch();
-  const redeem = useSelector((state) => state.redeem.data);
-  console.log("redeem", redeem);
+  // const dispatch = useDispatch();
+  // const redeem = useSelector((state) => state.redeem.data);
+  // console.log("redeem", redeem);
 
-  useEffect(() => {
-    dispatch(getRedeem());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllRedeem());
+  // }, [dispatch]);
 
   const handleDelete = () => {
     Swal.fire({
@@ -38,7 +38,7 @@ function Transactions() {
     <>
       {/* <div className="col main pt-5 mt-3"> */}
       <div className="mx-auto pt-5 mt-3">
-        <p className="text-3xl font-bold mb-5">Redeem Transactions</p>
+        <p className="text-3xl font-bold mb-5">Buy Transactions</p>
         <div className="flex flex-row justify-between">
           <div className="">
             <form className="flex items-center">
@@ -92,7 +92,7 @@ function Transactions() {
             <Table.HeadCell>Status</Table.HeadCell>
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
-          <Table.Body className="divide-y">
+          {/* <Table.Body className="divide-y">
             {redeem?.map((redeem, redeemIndex) => (
               <Table.Row
                 className="bg-white text-gray-900 font-medium"
@@ -119,8 +119,6 @@ function Transactions() {
                     </>
                   )}
                 </Table.Cell>
-                {/* <Table.Cell>{user.price}</Table.Cell>
-                <Table.Cell>{user.stock}</Table.Cell> */}
                 <Table.Cell>
                   <div className="flex gap-3">
                     <EditTransaction />
@@ -135,7 +133,7 @@ function Transactions() {
                 </Table.Cell>
               </Table.Row>
             ))}
-          </Table.Body>
+          </Table.Body> */}
         </Table>
         {/* Modal */}
         <div></div>

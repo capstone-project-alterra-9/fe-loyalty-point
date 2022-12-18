@@ -1,38 +1,43 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import APIRedeem from "../../apis/redeem.api";
+import RedeemApi from "../../apis/redeem.api";
 
 const initialState = {
   data: [],
-  status: "idle",
+  status: "idie",
   error: null,
+  loading: false,
 };
 
-export const getRedeem = createAsyncThunk("redeem/getRedeem", async () => {
-  const response = await APIRedeem.getAllRedeem();
-  return response.data.data;
-});
+export const getAllRedeem = createAsyncThunk(
+  "redeem/getAllRedeem",
+  async () => {
+    try {
+      const response = await RedeemApi.getAllRedeem();
+      // console.log({ response });
+      return response.data.data;
+    } catch (error) {
+      throw Error(error);
+    }
+  }
+);
 
-const redeemReducer = createSlice({
+const redeemSlice = createSlice({
   name: "redeem",
   initialState,
-  extraReducers: {
-    [getRedeem.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      // productEntity.setAll(state, action.payload);
-      //   },
-      //   [inputProduct.fulfilled]: (state, action) => {
-      //     productEntity.addOne(state, action.payload);
-      //   },
-      //   [deleteProduct.fulfilled]: (state, action) => {
-      //     productEntity.removeOne(state, action.payload);
-      //   },
-      //   [editProduct.fulfilled]: (state, action) => {
-      //     productEntity.updateOne(state, {
-      //       id: action.payload.id,
-      //       updates: action.payload,
-      //     });
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAllRedeem.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllRedeem.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = action.payload;
+      })
+      .addCase(getAllRedeem.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 
-export default redeemReducer.reducer;
+export default redeemSlice.reducer;

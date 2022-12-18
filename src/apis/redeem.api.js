@@ -3,23 +3,23 @@ import axiosInstance from "../configs/axiosInstance";
 
 const token = Cookies.get("token");
 
-const APIRedeem = {
+const RedeemApi = {
   async getAllRedeem() {
     try {
       const response = await axiosInstance.get(
-        "/auth/transactions/method/redeem",
+        "auth/transactions/method/redeem",
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            // Authorization: `Bearer ${token}`,
           },
         }
       );
       return response;
     } catch (error) {
-      console.log(error.message);
+      const { message } = error.response.data;
+      throw new Error(message);
     }
   },
 };
 
-export default APIRedeem;
+export default RedeemApi;

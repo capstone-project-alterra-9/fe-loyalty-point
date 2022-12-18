@@ -6,16 +6,16 @@ import { Table } from "flowbite-react";
 import { DeleteSvg, FailedStatus, SuccessStatus } from "../../assets";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { getRedeem } from "../../store/features/redeemSlice";
+import { getAllRedeem } from "../../store/features/redeemSlice";
 import Moment from "react-moment";
 
 function RedeemTransactions() {
   const dispatch = useDispatch();
-  const redeem = useSelector((state) => state.redeem.data);
-  console.log("redeem", redeem);
+  const redeems = useSelector((state) => state.redeem.data);
+  console.log("redeems", redeems);
 
   useEffect(() => {
-    dispatch(getRedeem());
+    dispatch(getAllRedeem());
   }, [dispatch]);
 
   const handleDelete = () => {
@@ -36,63 +36,6 @@ function RedeemTransactions() {
 
   return (
     <>
-      {/* <div className="col main mt-3 pt-5">
-          Redeem Transactions
-        <br />
-        <div className="row">
-          <div className="col-9">
-            {" "}
-            <input type="search" placeholder="Search" />
-            <button className="btn">
-              {" "}
-              <FaSearch />{" "}
-            </button>
-          </div>
-
-          <div className="col-3">
-            <AddRedeemTransaction />
-            <button
-              className="btn btn-color dropdown-toggle btn-space"
-              type="button"
-              data-toggle="dropdown"
-            >
-              <MdFilterAlt/>
-              <span>Filter By</span>
-            </button>
-          </div>
-        </div>
-        <br />
-        <table className="table table-bordered border-secondary table-responsive">
-          <thead  className="th-color">
-            <tr>
-              <th>Date</th>
-              <th>Order ID</th>
-              <th>Serial Number</th>
-              <th>Category</th>
-              <th>Product Name</th>
-              <th>Point(s)</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>28 November 2022</td>
-              <td>ID012</td>
-              <td>P001</td>
-              <td>Paket Data</td>
-              <td>Paket 5GB</td>
-              <td>350</td>
-              <td>Success</td>
-              <td>
-                <EditRedeemTransaction />
-                <MdDelete/>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div> */}
       <div className="mx-auto pt-5 mt-3">
         <p className="text-3xl font-bold mb-5">Redeem Transactions</p>
         <div className="flex flex-row justify-between">
@@ -149,7 +92,7 @@ function RedeemTransactions() {
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {redeem?.map((redeem, redeemIndex) => (
+            {redeems?.map((redeem, redeemIndex) => (
               <Table.Row
                 className="bg-white text-gray-900 font-medium"
                 key={redeem.ID}
