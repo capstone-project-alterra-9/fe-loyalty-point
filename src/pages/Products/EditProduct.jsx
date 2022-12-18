@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getProducts,
-  editProduct,
-  productSelectors,
-} from "../../store/features/productSlice";
+// import {
+//   getProducts,
+//   editProduct,
+//   productSelectors,
+// } from "../../store/features/productSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -17,49 +17,11 @@ function EditProduct() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [category, setCategory] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [stock, setStock] = useState("");
-  const [image, setImage] = useState("");
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { id } = useParams();
-
-  const product = useSelector((state) => state.product.data);
-
   const [modal, setModal] = useState(false);
 
   const handleModal = () => {
     setModal(!modal);
   };
-
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (product) {
-      setCategory(product.category);
-      setName(product.name);
-      setDescription(product.description);
-      setPrice(product.price);
-      setStock(product.stock);
-      setImage(product.image);
-    }
-  }, [product]);
-
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    await dispatch(
-      editProduct({ id, category, name, description, price, stock, image })
-    );
-    Swal.fire("Success Edit Your Product");
-    navigate("/admin/products");
-  };
-
   return (
     <>
       <div onClick={handleModal}>

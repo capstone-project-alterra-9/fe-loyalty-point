@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { inputProduct } from "../../store/features/productSlice";
+// import { inputProduct } from "../../store/features/productSlice";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { PlusSvg } from "../../assets";
@@ -12,35 +12,7 @@ function AddProduct() {
     setModal(!modal);
   };
 
-  const [category, setCategory] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState();
-  const [stock, setStock] = useState();
-  const [image, setImage] = useState("");
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const createProduct = async (e) => {
-    e.preventDefault();
-    try {
-      dispatch(
-        inputProduct({ category, name, description, price, stock, image })
-      );
-      Swal.fire({
-        icon: "success",
-        text: "Success Add Products",
-        toast: "true",
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (error) {
-      console.log("error", error);
-    }
-    navigate("/admin/products");
-  };
 
   return (
     <>

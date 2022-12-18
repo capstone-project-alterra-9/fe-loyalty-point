@@ -4,11 +4,7 @@ import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
 
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getProducts,
-  deleteProduct,
-  productSelectors,
-} from "../../store/features/productSlice";
+import { getAllProduct } from "../../store/features/productSlice";
 
 import { Table } from "flowbite-react";
 import { DeleteSvg } from "../../assets";
@@ -16,10 +12,10 @@ import Swal from "sweetalert2";
 
 function Products() {
   const dispatch = useDispatch();
-  const products = useSelector(productSelectors.selectAll);
+  const products = useSelector((state) => state.product.data);
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+		dispatch(getAllProduct());
+	}, [dispatch]);
 
   const handleDelete = () => {
     Swal.fire({
@@ -83,37 +79,6 @@ function Products() {
           </div>
         </div>
         <br />
-        {/* <table className="table table-bordered table-responsive">
-          <thead className="th-color">
-            <tr>
-              <th>Category</th>
-              <th>Product Name</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Image</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products?.map((product) => (
-              <tr key={product.ID}>
-                <td>{product.category}</td>
-                <td>{product.name}</td>
-                <td>{product.description}</td>
-                <td>{product.price}</td>
-                <td>{product.stock}</td>
-                <td>{product.image}</td>
-                <td>
-                  <EditProduct />
-                  <MdDelete
-                    onClick={() => dispatch(deleteProduct(product.id))}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
         <Table hoverable={true}>
           <Table.Head style={{ backgroundColor: "#566B55", color: "white" }}>
             <Table.HeadCell>No</Table.HeadCell>

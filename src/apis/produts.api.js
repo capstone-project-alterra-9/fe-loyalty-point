@@ -3,39 +3,20 @@ import axiosInstance from "../configs/axiosInstance";
 
 const token = Cookies.get("token");
 
-// const tokenpostman =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWlud2ViQGdtYWlsLmNvbSIsImV4cCI6MTY3MDc3MDEwNiwidXNlcm5hbWUiOiJhZG1pbndlYiJ9.uGmzFLvk9_5kzS_6Q1LpvNqpq150g9cuykJRJMSe6uU";
-
-const Products = {
-  async getAllProducts() {
+const ProductApi = {
+  async getAllProduct() {
     try {
-      const response = await axiosInstance.get("/auth/products", {
+      const response = await axiosInstance.get("auth/products", {
         headers: {
           Authorization: `Bearer ${token}`,
-          // Authorization: `Bearer ${token}`,
         },
       });
       return response;
     } catch (error) {
-      console.log(error.message);
-    }
-  },
-  async saveProduct({ category, name, description, price, stock, image }) {
-    try {
-      const response = await axiosInstance.post(
-        "/auth/products",
-        { category, name, description, price, stock, image },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      return response;
-    } catch (error) {
-      console.log(error.message);
+      const { message } = error.response.data;
+      throw new Error(message);
     }
   },
 };
 
-export default Products;
+export default ProductApi;
