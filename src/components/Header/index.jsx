@@ -6,12 +6,12 @@ export const MainHeader = () => {
     <div>
       <Navbar
         fluid={true}
-        className="top-0 bg-gradient-to-r from-[#F5F9F5] via-[#BDD6BC] to-[#6F8A6E] container shadow-md fixed"
+        className="top-0 bg-gradient-to-r from-[#F5F9F5] via-[#BDD6BC] to-[#6F8A6E] fixed w-full"
       >
         <Navbar.Brand href="/">
           <img
             src={NavbarLogo}
-            className="mr-3 ml-14 h-6 sm:h-9 w-auto"
+            className="mr-3 ml-14 h-6 sm:h-9 w-100% pl-5"
             alt="JokoMart"
           />
         </Navbar.Brand>
@@ -45,7 +45,7 @@ export const MainHeader = () => {
             </li>
             <li>
               <a
-                href="#contact"
+                href="#footer"
                 class="block py-3 pl-3 pr-4 text-black hover:text-[#566B55] md:bg-transparent md:p-0 "
               >
                 Contact
