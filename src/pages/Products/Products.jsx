@@ -4,7 +4,10 @@ import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getAllProduct, deleteProduct } from "../../store/features/productSlice";
+import {
+  getAllProduct,
+  deleteProduct,
+} from "../../store/features/productSlice";
 
 import { Table } from "flowbite-react";
 import { DeleteSvg } from "../../assets";
@@ -14,62 +17,61 @@ function Products() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.data);
   useEffect(() => {
-		dispatch(getAllProduct());
-	}, [dispatch]);
+    dispatch(getAllProduct());
+  }, [dispatch]);
 
-   const handleDelete = (id) => {
-		const swalDelete = Swal.mixin({
-			customClass: {
+  const handleDelete = (id) => {
+    const swalDelete = Swal.mixin({
+      customClass: {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         icon: "text-secondary-yellow",
-			},
-		});
-
-
-    swalDelete.fire({
-				title: "Are you sure to delete this ?",
-				text: "You can't undo this action.",
-				icon: "warning",
-				showCancelButton: true,
-				confirmButtonText: "Yes, Delete it!",
-				cancelButtonText: "No, Cancel",
-				reverseButtons: true,
-			})
-			.then((result) => {
-				if (result.isConfirmed) {
-					dispatch(deleteProduct(id));
-					try {
-						setTimeout(
-							() =>
-								Swal.fire({
-									icon: "success",
-									title: "Deleted",
-									text: "Products data has been deleted",
-									showConfirmButton: false,
-									timer: 2000,
-									background: "#ffffff",
-								}),
-							1000
-						);
-					} catch (error) {
-						setTimeout(
-							() =>
-								Swal.fire({
-									icon: "error",
-									title: "Error",
-									text: "Products data cannot deleted",
-									showConfirmButton: false,
-									timer: 2000,
-									background: "#ffffff",
-								}),
-							1000
-						);
-					}
-				}
-			});
-	};
+      },
+    });
+    swalDelete
+      .fire({
+        title: "Are you sure to delete this ?",
+        text: "You can't undo this action.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Delete it!",
+        cancelButtonText: "No, Cancel",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          dispatch(deleteProduct(id));
+          try {
+            setTimeout(
+              () =>
+                Swal.fire({
+                  icon: "success",
+                  title: "Deleted",
+                  text: "Products data has been deleted",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  background: "#ffffff",
+                }),
+              1000
+            );
+          } catch (error) {
+            setTimeout(
+              () =>
+                Swal.fire({
+                  icon: "error",
+                  title: "Error",
+                  text: "Products data cannot deleted",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  background: "#ffffff",
+                }),
+              1000
+            );
+          }
+        }
+      });
+  };
 
   return (
     <>
@@ -151,13 +153,13 @@ function Products() {
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex gap-3">
-                    <EditProduct products={products}/>
+                    <EditProduct products={products} />
 
                     <img
                       src={DeleteSvg}
                       alt=""
                       className="w-6"
-                      onClick={handleDelete}
+                      onClick={() => handleDelete(product.ID)}
                     />
                   </div>
                 </Table.Cell>

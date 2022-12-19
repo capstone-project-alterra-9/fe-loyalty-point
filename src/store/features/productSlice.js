@@ -52,7 +52,7 @@ export const deleteProduct = createAsyncThunk(
     try {
       const response = await ProductApi.deleteProduct(id);
       console.log(response);
-      return response.data.data;
+      return response;
     } catch (error) {
       console.log("error", error);
       throw Error(error);
@@ -85,8 +85,9 @@ const productSlice = createSlice({
       .addCase(editProduct.fulfilled, (state) => {
         state.loading = !state.loading;
       })
-      .addCase(deleteProduct.fulfilled, (state) => {
+      .addCase(deleteProduct.fulfilled, (state, action) => {
         state.loading = !state.loading;
+        state.data = state.data.filter((val) => val.ID !== action.meta.arg);
       });
   },
 });
