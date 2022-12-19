@@ -17,6 +17,20 @@ const APIUsers = {
       console.log(error.message);
     }
   },
+
+  async countUsers() {
+    try {
+      const response = await axiosInstance.get("/users/count", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return response;
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
 };
 
 export default APIUsers;
