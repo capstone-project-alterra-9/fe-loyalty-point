@@ -1,27 +1,67 @@
 import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-// import {
-//   getProducts,
-//   editProduct,
-//   productSelectors,
-// } from "../../store/features/productSlice";
+import {getAllProduct,editProduct} from "../../store/features/productSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import { MdEdit } from "react-icons/md";
 import { EditSvg } from "../../assets";
 
-function EditProduct() {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+function EditProduct(products) {
+  // const [show, setShow] = useState(false);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+// console.log(products);
+  const {id, category, name, description, price, stock, image}=products;
   const [modal, setModal] = useState(false);
 
   const handleModal = () => {
     setModal(!modal);
   };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllProduct());
+  }, [dispatch]);
+
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+		const formData = new FormData(e.target);
+    const category = formData.get("category");
+    const name = formData.get("name");
+    const description = formData.get("description");
+    const price = Number(formData.get("price"));
+    const stock = Number(formData.get("stock"));
+    const image = formData.get("image");
+
+    try {
+      dispatch(
+        editProduct({id, category, name, description, price, stock, image})
+      ).then((res) => {
+        if(!res.error) {
+          Swal.fire({
+								icon: "success",
+								title: "Saved",
+								text: "Product data successfully updated",
+								showConfirmButton: false,
+								timer: 2000,
+								background: "#ffffff",
+							})
+              // handleModal()
+        } else {
+          Swal.fire("Sorry", res.error.message.split(":")[1], "info");
+        }
+      })
+    } catch (error) {
+      // console.log("error", error);
+      Swal.fire({
+        title: error.message,
+        icon: "error",
+      });
+    }
+  };
+
   return (
     <>
       <div onClick={handleModal}>
@@ -30,15 +70,15 @@ function EditProduct() {
 
       {modal && (
         <div
-          id="editUserModal"
+          id="editProductModal"
           tabIndex={-1}
           aria-hidden="true"
           className="
-          flex flex-row overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center p-4 w-full md:inset-0 h-modal md:h-full"
+          flex flex-row overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center p-4 w-full md:inset-0 h-modal md:h-full shadow-xl"
         >
           <div className="relative w-full max-w-lg h-full md:h-auto rounded-lg shadow-lg">
             {/* Modal content */}
-            <form action="#" className="relative bg-white rounded-lg ">
+            <form action="#" className="relative bg-white rounded-lg" onSubmit={handleUpdate}>
               {/* Modal header */}
               <div className="flex p-4 rounded-t-lg border-b  bg-[#566B55] justify-center">
                 <h3 className="text-xl font-semibold text-white ">
@@ -46,8 +86,8 @@ function EditProduct() {
                 </h3>
               </div>
               {/* Modal body */}
-              <div className="p-6 px-10">
-                <div className="mb-4">
+              <div className="p-6 pt-5 px-10">
+              <div className="mb-4">
                   <label
                     htmlFor="category"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
@@ -56,15 +96,17 @@ function EditProduct() {
                   </label>
                   <select
                     id="category"
+                    name="category"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    defaultValue={category}
                   >
                     <option value="" selected hidden>
                       Nothing Selected
                     </option>
-                    <option>Credits</option>
-                    <option>E-Money</option>
-                    <option>Data</option>
-                    <option>Cashout</option>
+                    <option value="credits">Credits</option>
+                    <option value="data-quota">Data Quota</option>
+                    <option value="e-money">E-Money</option>
+                    <option value="cashout">Cashout</option>
                   </select>
                 </div>
 
@@ -78,6 +120,8 @@ function EditProduct() {
                   <input
                     type="text"
                     id="base-input"
+                    name="name"
+                    defaultValue={name}
                     placeholder="contoh : Pulsa 10000"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
@@ -92,10 +136,11 @@ function EditProduct() {
                     </label>
                     <textarea
                       id="message"
+                      name="description"
                       rows={2}
                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#566B55] focus:border-[#6F8A6E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      // placeholder="Write your thoughts here..."
-                      defaultValue={""}
+                      placeholder="Deskripsi produk"
+                      defaultValue={description}
                     />
                   </div>
                 </div>
@@ -109,6 +154,8 @@ function EditProduct() {
                   <input
                     type="number"
                     id="base-input"
+                    name="price"
+                    defaultValue={price}
                     placeholder="contoh : 10000"
                     min="0"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -125,6 +172,8 @@ function EditProduct() {
                   <input
                     type="number"
                     id="base-input"
+                    name="stock"
+                    defaultValue={stock}
                     placeholder="contoh : 10"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
@@ -135,11 +184,13 @@ function EditProduct() {
                     htmlFor="base-input"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                   >
-                    Image
+                    Image Title
                   </label>
                   <input
                     type="string"
                     id="base-input"
+                    name="image-title"
+                    defaultValue={image}
                     placeholder="contoh : 10 GB"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
@@ -158,115 +209,14 @@ function EditProduct() {
                   type="submit"
                   className="text-white bg-[#566B55] hover:bg-[#6F8A6E] border-2 hover:border-[#6F8A6E] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                 >
-                  Create
+                  Update
                 </button>
               </div>
             </form>
+            <div className="opacity-25 fixed inset-0 -z-10 bg-black"></div>
           </div>
-          <div className="opacity-25 fixed inset-0 -z-10 bg-black"></div>
         </div>
       )}
-      {/* <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title> Edit Transaction</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="row">
-            <div className="col-md-12 m-3">
-              <div className="row">
-                <div className="mx-auto col-md-6">
-                  <form onSubmit={handleUpdate}>
-                    <div className="form-group">
-                      <label>Category : </label>
-                      <select
-                        className="form-select"
-                        name="kategori"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                      >
-                        <option value="">--Select Category--</option>
-                        <option value="Pulsa">Pulsa</option>
-                        <option value="Paket Data">Paket Data</option>
-                      </select>
-                    </div>
-                    <div className="form-group">
-                      <label>Product Name</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                      ></input>
-                    </div>
-                    <div className="form-group">
-                      <label>Description : </label>
-                      <textarea
-                        className="form-control"
-                        name="description"
-                        rows="5"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                      ></textarea>
-                    </div>
-                    <div className="form-group">
-                      <label>Price</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="price"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                      ></input>
-                    </div>
-                    <div className="form-group">
-                      <label>Stock</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="stock"
-                        value={stock}
-                        onChange={(e) => setStock(e.target.value)}
-                      ></input>
-                    </div>
-                    <div className="form-group">
-                      <label>Image</label>
-                      <span></span>
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="image"
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                      ></input>
-                    </div>
-
-                    <br />
-                    <div className="mb-3">
-                      <button type="submit" className="btn btn-info">
-                        Update
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
     </>
   );
 }

@@ -4,7 +4,7 @@ import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getAllProduct } from "../../store/features/productSlice";
+import { getAllProduct, deleteProduct } from "../../store/features/productSlice";
 
 import { Table } from "flowbite-react";
 import { DeleteSvg } from "../../assets";
@@ -17,21 +17,59 @@ function Products() {
 		dispatch(getAllProduct());
 	}, [dispatch]);
 
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "error",
-      showCancelButton: true,
-      confirmButtonColor: "#566B55",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-    });
-  };
+   const handleDelete = (id) => {
+		const swalDelete = Swal.mixin({
+			customClass: {
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        icon: "text-secondary-yellow",
+			},
+		});
+
+
+    swalDelete.fire({
+				title: "Are you sure to delete this ?",
+				text: "You can't undo this action.",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Yes, Delete it!",
+				cancelButtonText: "No, Cancel",
+				reverseButtons: true,
+			})
+			.then((result) => {
+				if (result.isConfirmed) {
+					dispatch(deleteProduct(id));
+					try {
+						setTimeout(
+							() =>
+								Swal.fire({
+									icon: "success",
+									title: "Deleted",
+									text: "Products data has been deleted",
+									showConfirmButton: false,
+									timer: 2000,
+									background: "#ffffff",
+								}),
+							1000
+						);
+					} catch (error) {
+						setTimeout(
+							() =>
+								Swal.fire({
+									icon: "error",
+									title: "Error",
+									text: "Products data cannot deleted",
+									showConfirmButton: false,
+									timer: 2000,
+									background: "#ffffff",
+								}),
+							1000
+						);
+					}
+				}
+			});
+	};
 
   return (
     <>
@@ -113,7 +151,7 @@ function Products() {
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex gap-3">
-                    <EditProduct />
+                    <EditProduct products={products}/>
 
                     <img
                       src={DeleteSvg}
