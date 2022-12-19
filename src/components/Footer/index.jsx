@@ -11,7 +11,10 @@ import { AppStore, GooglePlay } from "../../assets";
 export const MainFooter = () => {
   return (
     <>
-      <footer className="relative bg-[#425141] pt-8 pb-6 text-white container">
+      <footer
+        id="footer"
+        className="relative bg-[#425141] pt-8 pb-6 text-white container"
+      >
         <div className=" mx-auto px-4">
           <div className="  flex flex-wrap text-left lg:text-left justify-between pl-8">
             <div className="lg:w-4/12">
@@ -23,30 +26,50 @@ export const MainFooter = () => {
                 Prov. Lampung Indonesia 34517
               </p>
               <div className="mt-6 lg:mb-0 mb-6">
-                <button
-                  className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  <FontAwesomeIcon icon={faInstagram} size="lg" color="black" />
-                </button>
-                <button
-                  className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  <FontAwesomeIcon icon={faWhatsapp} size="1x" color="black" />
-                </button>
-                <button
-                  className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  <FontAwesomeIcon icon={faFacebook} size="lg" color="black" />
-                </button>
-                <button
-                  className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  <FontAwesomeIcon icon={faTwitter} size="lg" color="black" />
-                </button>
+                <a href="https://www.instagram.com/">
+                  <button
+                    className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                    type="button"
+                  >
+                    <FontAwesomeIcon
+                      icon={faInstagram}
+                      size="lg"
+                      color="black"
+                    />
+                  </button>
+                </a>
+                <a href="https://web.whatsapp.com/">
+                  <button
+                    className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                    type="button"
+                  >
+                    <FontAwesomeIcon
+                      icon={faWhatsapp}
+                      size="1x"
+                      color="black"
+                    />
+                  </button>
+                </a>
+                <a href="https://www.facebook.com/">
+                  <button
+                    className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                    type="button"
+                  >
+                    <FontAwesomeIcon
+                      icon={faFacebook}
+                      size="lg"
+                      color="black"
+                    />
+                  </button>
+                </a>
+                <a href="https://twitter.com/home">
+                  <button
+                    className="bg-white text-lightBlue-400 hover:bg-[#9CC29B] shadow-xl font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                    type="button"
+                  >
+                    <FontAwesomeIcon icon={faTwitter} size="lg" color="black" />
+                  </button>
+                </a>
               </div>
               <div className="pt-6 px-auto underline hover:text-[#9CC29B]">
                 <Link to="/login">Admin Page</Link>
@@ -65,7 +88,7 @@ export const MainFooter = () => {
                   <a href="#testi">Testimonial</a>
                 </li>
                 <li>
-                  <a href="#contact">Contact</a>
+                  <a href="#footer">Contact</a>
                 </li>
               </ul>
             </div>
@@ -73,9 +96,13 @@ export const MainFooter = () => {
               <p className="text-xl fonat-semibold mb-3 font-semibold">
                 Download App Now
               </p>
-              <div className="flex w-40 gap-3 pt-5">
-                <img src={GooglePlay} alt="" />
-                <img src={AppStore} alt="" />
+              <div className="flex gap-3 pt-5">
+                <a href="https://play.google.com/store/games">
+                  <img src={GooglePlay} alt="GooglePlay" className="w-40" />
+                </a>
+                <a href="https://www.apple.com/id/app-store/">
+                  <img src={AppStore} alt="AppStore" className="w-40" />
+                </a>
               </div>
             </div>
           </div>
