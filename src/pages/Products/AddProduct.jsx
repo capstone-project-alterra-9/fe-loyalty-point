@@ -22,7 +22,7 @@ function AddProduct() {
     const description = formData.get("description");
     const price = Number(formData.get("price"));
     const stock = Number(formData.get("stock"));
-    const image = formData.get("image-title");
+    const image = formData.get("image");
 
     try {
       dispatch(
@@ -66,7 +66,7 @@ function AddProduct() {
 
       {modal && (
         <div
-          id="editUserModal"
+          id="addProductModal"
           tabIndex={-1}
           aria-hidden="true"
           className="
@@ -103,13 +103,6 @@ function AddProduct() {
                     <option value="e-money">E-Money</option>
                     <option value="cashout">Cashout</option>
                   </select>
-                  {/* <input
-                    type="text"
-                    id="category"
-                    name="category"
-                    placeholder="Product Category"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  /> */}
                 </div>
 
                 <div className="mb-4">
@@ -188,7 +181,7 @@ function AddProduct() {
                   <input
                     type="string"
                     id="base-input"
-                    name="image-title"
+                    name="image"
                     placeholder="contoh : 10 GB"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />

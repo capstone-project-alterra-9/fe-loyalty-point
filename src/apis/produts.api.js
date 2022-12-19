@@ -30,6 +30,33 @@ const ProductApi = {
       throw new Error(message);
     }
   },
+  async editProduct(data) {
+    try {
+      const id = data.id;
+      const response = await axiosInstance.put(`products/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      const { message } = error.response.data;
+      throw new Error(message);
+    }
+  },
+  async deleteProduct(ID) {
+    try {
+      const response = await axiosInstance.delete(`auth/products/${ID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      const { message } = error.response.data;
+      throw new Error(message);
+    }
+  },
 };
 
 export default ProductApi;
