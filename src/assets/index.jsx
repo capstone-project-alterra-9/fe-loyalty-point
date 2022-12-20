@@ -23,6 +23,7 @@ import feature1 from "../assets/img/feature1.png";
 import feature2 from "../assets/img/feature2.png";
 import feature3 from "../assets/img/feature3.png";
 import feature4 from "../assets/img/feature4.png";
+import NavbarIcon from "../assets/svg/adminNavbar.svg";
 
 export {
   imglanding1,
@@ -50,4 +51,5 @@ export {
   feature2,
   feature3,
   feature4,
+  NavbarIcon,
 };
