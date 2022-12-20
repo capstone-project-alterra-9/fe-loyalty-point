@@ -13,7 +13,7 @@ export const MainFooter = () => {
     <>
       <footer
         id="footer"
-        className="relative bg-[#425141] pt-8 pb-6 text-white container"
+        className="relative bg-[#425141] pt-8 pb-6 text-white"
       >
         <div className=" mx-auto px-4">
           <div className="  flex flex-wrap text-left lg:text-left justify-between pl-8">
