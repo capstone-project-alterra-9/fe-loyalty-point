@@ -1,4 +1,5 @@
 import { Outlet } from "react-router";
+import { DashboardNavbar } from "../DashboardNavbar";
 import { AdminSidebar } from "../Sidebar";
 
 export const DashboardLayout = () => {
@@ -6,7 +7,10 @@ export const DashboardLayout = () => {
     <>
       <div className="flex row">
         <AdminSidebar />
-        <Outlet />
+        <div className="flex flex-col w-full">
+          <DashboardNavbar />
+          <Outlet />
+        </div>
       </div>
     </>
   );
