@@ -31,6 +31,34 @@ const UserApi = {
       console.log(error.message);
     }
   },
+
+  async createUsers(data) {
+    try {
+      const response = await axiosInstance.post("/users/create", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      const { message } = error.response.data;
+      throw new Error(message);
+    }
+  },
+
+  async deleteUsers(ID) {
+    try {
+      const response = await axiosInstance.delete(`/users/${ID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      const { message } = error.response.data;
+      throw new Error(message);
+    }
+  },
 };
 
 export default UserApi;

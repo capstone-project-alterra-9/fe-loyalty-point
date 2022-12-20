@@ -2,12 +2,50 @@ import React, { useState } from "react";
 import "../../assets/styles/Users.css";
 
 import { PlusSvg } from "../../assets";
+import { useDispatch } from "react-redux";
+import { createUsers } from "../../store/features/userSlice";
+import Swal from "sweetalert2";
 
 function AddUser() {
   const [modal, setModal] = useState(false);
+  const dispatch = useDispatch();
 
   const handleModal = () => {
     setModal(!modal);
+  };
+
+  const inputUser = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const username = formData.get("username");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const point = Number(formData.get("point"));
+
+    try {
+      dispatch(createUsers({ username, email, password, point })).then(
+        (res) => {
+          if (!res.error) {
+            Swal.fire({
+              icon: "success",
+              title: "Saved",
+              text: "Users successfully saved",
+              showConfirmButton: false,
+              timer: 2000,
+              background: "#ffffff",
+            });
+            handleModal();
+          } else {
+            Swal.fire("Sorry", res.error.message.split(":")[1], "info");
+          }
+        }
+      );
+    } catch (error) {
+      Swal.fire({
+        title: error.message,
+        icon: "error",
+      });
+    }
   };
 
   return (
@@ -33,7 +71,11 @@ function AddUser() {
         >
           <div className="relative w-full max-w-lg h-full md:h-auto rounded-lg shadow-lg">
             {/* Modal content */}
-            <form action="#" className="relative bg-white rounded-lg ">
+            <form
+              action="#"
+              className="relative bg-white rounded-lg "
+              onSubmit={inputUser}
+            >
               {/* Modal header */}
               <div className="flex p-4 rounded-t-lg border-b  bg-[#566B55] justify-center">
                 <h3 className="text-xl font-semibold text-white ">
@@ -51,6 +93,7 @@ function AddUser() {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     id="base-input"
                     placeholder="contoh : jokorono@gmail.com"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -66,6 +109,7 @@ function AddUser() {
                   </label>
                   <input
                     type="text"
+                    name="username"
                     id="base-input"
                     placeholder="contoh : jokoronotomo"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -82,6 +126,7 @@ function AddUser() {
                   <input
                     type="text"
                     id="base-input"
+                    name="password"
                     placeholder="contoh : jo******3"
                     min="0"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -97,6 +142,7 @@ function AddUser() {
                   </label>
                   <input
                     type="number"
+                    name="point"
                     id="base-input"
                     placeholder="contoh : 10000"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

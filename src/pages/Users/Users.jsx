@@ -9,7 +9,7 @@ import { DeleteSvg } from "../../assets";
 import { useDispatch, useSelector } from "react-redux";
 
 import Swal from "sweetalert2";
-import { getAllUser } from "../../store/features/userSlice";
+import { deleteUsers, getAllUser } from "../../store/features/userSlice";
 
 function Users() {
   const dispatch = useDispatch();
@@ -19,20 +19,57 @@ function Users() {
     dispatch(getAllUser());
   }, [dispatch]);
 
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "error",
-      showCancelButton: true,
-      confirmButtonColor: "#566B55",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
+  const handleDelete = (id) => {
+    const swalDelete = Swal.mixin({
+      customClass: {
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        icon: "text-secondary-yellow",
+      },
     });
+    swalDelete
+      .fire({
+        title: "Are you sure to delete this ?",
+        text: "You can't undo this action.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Delete it!",
+        cancelButtonText: "No, Cancel",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          dispatch(deleteUsers(id));
+          try {
+            setTimeout(
+              () =>
+                Swal.fire({
+                  icon: "success",
+                  title: "Deleted",
+                  text: "Users data has been deleted",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  background: "#ffffff",
+                }),
+              1000
+            );
+          } catch (error) {
+            setTimeout(
+              () =>
+                Swal.fire({
+                  icon: "error",
+                  title: "Error",
+                  text: "Products data cannot deleted",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  background: "#ffffff",
+                }),
+              1000
+            );
+          }
+        }
+      });
   };
 
   return (
@@ -104,8 +141,8 @@ function Users() {
                 <Table.Cell>{user.username}</Table.Cell>
                 <Table.Cell>
                   <p className="truncate">
-                    {user.password.length > 20
-                      ? `${user.password.substring(0, 20)}...`
+                    {user.password.length > 15
+                      ? `${user.password.substring(0, 15)}...`
                       : user.password}
                   </p>
                 </Table.Cell>
@@ -119,7 +156,7 @@ function Users() {
                       src={DeleteSvg}
                       alt=""
                       className="w-6"
-                      onClick={handleDelete}
+                      onClick={() => handleDelete(user.ID)}
                     />
                   </div>
                 </Table.Cell>
