@@ -23,8 +23,6 @@ function EditProduct({ product }) {
     image: image,
   });
 
-  console.log("data", data);
-
   const handleModal = () => {
     setModal(!modal);
   };

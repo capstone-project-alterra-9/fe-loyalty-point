@@ -9,9 +9,10 @@ import {
   deleteProduct,
 } from "../../store/features/productSlice";
 
-import { Table } from "flowbite-react";
+import { Checkbox, Pagination, Table } from "flowbite-react";
 import { DeleteSvg } from "../../assets";
 import Swal from "sweetalert2";
+import ReactPaginate from "react-paginate";
 
 function Products() {
   const dispatch = useDispatch();
@@ -73,9 +74,30 @@ function Products() {
       });
   };
 
+  const [currentItems, setCurrentItems] = useState();
+  const [itemOffset, setItemOffset] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+
+  const itemsPerPage = 7;
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(products.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(products.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, products]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % products.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
   return (
     <>
-      <div className="mx-auto pt-5 mt-3">
+      <div className="mx-14 pt-5 mt-3">
         <p className="text-3xl font-bold mb-5">Product Stock</p>
         <div className="flex flex-row justify-between">
           <div className="">
@@ -131,13 +153,13 @@ function Products() {
             <Table.HeadCell>Actions</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {products?.map((product, productIndex) => (
+            {currentItems?.map((product, numbering) => (
               <Table.Row
                 className="bg-white text-gray-900 font-medium"
                 key={product.ID}
               >
                 <Table.Cell className="whitespace-nowrap text-center">
-                  {productIndex + 1}
+                  {numbering + 1}
                 </Table.Cell>
                 <Table.Cell>{product.category}</Table.Cell>
                 <Table.Cell>{product.name}</Table.Cell>
@@ -163,8 +185,23 @@ function Products() {
             ))}
           </Table.Body>
         </Table>
-        {/* Modal */}
-        <div></div>
+        <div className="flex flex-row-reverse">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            pageCount={pageCount}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            containerClassName="inline-flex items-center -space-x-pxinline-flex -space-x-px pt-[25px]"
+            pageLinkClassName="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300"
+            activeLinkClassName="z-10 px-3 py-2 leading-tight text-slate-50 border border-[#566B55] bg-[#566B55]"
+            previousClassName="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l "
+            nextClassName="block px-3 py-2 leading-tight text-[#425141] bg-white border border-gray-300 rounded-r "
+            disabledClassName="bg-[#7E868C] text-[#D7DBDF] border-[#7E868C]"
+          />
+        </div>
       </div>
     </>
   );
