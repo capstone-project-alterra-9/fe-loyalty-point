@@ -9,7 +9,7 @@ import {
   deleteProduct,
 } from "../../store/features/productSlice";
 
-import { Checkbox, Pagination, Table } from "flowbite-react";
+import { Table } from "flowbite-react";
 import { DeleteSvg } from "../../assets";
 import Swal from "sweetalert2";
 import ReactPaginate from "react-paginate";
@@ -78,7 +78,7 @@ function Products() {
   const [itemOffset, setItemOffset] = useState(0);
   const [pageCount, setPageCount] = useState(0);
 
-  const itemsPerPage = 7;
+  const itemsPerPage = 8;
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -194,9 +194,9 @@ function Products() {
             pageCount={pageCount}
             previousLabel="<"
             renderOnZeroPageCount={null}
-            containerClassName="inline-flex items-center -space-x-pxinline-flex -space-x-px pt-[25px]"
-            pageLinkClassName="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300"
-            activeLinkClassName="z-10 px-3 py-2 leading-tight text-slate-50 border border-[#566B55] bg-[#566B55]"
+            containerClassName="inline-flex items-center pt-[25px]"
+            pageLinkClassName="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-slate-100"
+            activeLinkClassName="z-10 px-3 py-2 leading-tight text-slate-50 border border-[#566B55] bg-[#566B55] hover:bg-[#425141]"
             previousClassName="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l "
             nextClassName="block px-3 py-2 leading-tight text-[#425141] bg-white border border-gray-300 rounded-r "
             disabledClassName="bg-[#7E868C] text-[#D7DBDF] border-[#7E868C]"
