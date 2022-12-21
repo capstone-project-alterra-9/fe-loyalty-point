@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getAllProduct, editProduct } from "../../store/features/productSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-import { MdEdit } from "react-icons/md";
 import { EditSvg } from "../../assets";
 
 function EditProduct({ product }) {
@@ -15,7 +14,16 @@ function EditProduct({ product }) {
   // console.log(products);
   const { ID, category, name, description, price, stock, image } = product;
   const [modal, setModal] = useState(false);
-  const [data, setdata] = useState(product);
+  const [data, setdata] = useState({
+    ID: ID,
+    category: category,
+    name: name,
+    price: price,
+    stock: stock,
+    image: image,
+  });
+
+  console.log("data", data);
 
   const handleModal = () => {
     setModal(!modal);
@@ -41,11 +49,18 @@ function EditProduct({ product }) {
     // const price = Number(formData.get("price"));
     // const stock = Number(formData.get("stock"));
     // const image = formData.get("image");
-
     try {
       const { ID, category, name, description, price, stock, image } = data;
       dispatch(
-        editProduct({ ID, category, name, description, price, stock, image })
+        editProduct({
+          ID,
+          category,
+          name,
+          description,
+          price: parseInt(price),
+          stock: parseInt(stock),
+          image,
+        })
       ).then((res) => {
         if (!res.error) {
           Swal.fire({
