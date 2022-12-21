@@ -32,8 +32,8 @@ const ProductApi = {
   },
   async editProduct(data) {
     try {
-      const id = data.id;
-      const response = await axiosInstance.put(`products/${id}`, data, {
+      const ID = data.ID;
+      const response = await axiosInstance.put(`auth/products/${ID}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

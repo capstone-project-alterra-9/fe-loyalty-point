@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import {getAllProduct,editProduct} from "../../store/features/productSlice";
+import { getAllProduct, editProduct } from "../../store/features/productSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import { MdEdit } from "react-icons/md";
 import { EditSvg } from "../../assets";
 
-function EditProduct(products) {
+function EditProduct({ product }) {
   // const [show, setShow] = useState(false);
   // const handleClose = () => setShow(false);
   // const handleShow = () => setShow(true);
-// console.log(products);
-  const {id, category, name, description, price, stock, image}=products;
+  // console.log(products);
+  const { ID, category, name, description, price, stock, image } = product;
   const [modal, setModal] = useState(false);
+  const [data, setdata] = useState(product);
 
   const handleModal = () => {
     setModal(!modal);
@@ -24,35 +25,42 @@ function EditProduct(products) {
     dispatch(getAllProduct());
   }, [dispatch]);
 
+  const handleChange = (e) => {
+    setdata({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-		const formData = new FormData(e.target);
-    const category = formData.get("category");
-    const name = formData.get("name");
-    const description = formData.get("description");
-    const price = Number(formData.get("price"));
-    const stock = Number(formData.get("stock"));
-    const image = formData.get("image");
+    // const formData = new FormData(e.target);
+    // const category = formData.get("category");
+    // const name = formData.get("name");
+    // const description = formData.get("description");
+    // const price = Number(formData.get("price"));
+    // const stock = Number(formData.get("stock"));
+    // const image = formData.get("image");
 
     try {
+      const { ID, category, name, description, price, stock, image } = data;
       dispatch(
-        editProduct({id, category, name, description, price, stock, image})
+        editProduct({ ID, category, name, description, price, stock, image })
       ).then((res) => {
-        if(!res.error) {
+        if (!res.error) {
           Swal.fire({
-								icon: "success",
-								title: "Saved",
-								text: "Product data successfully updated",
-								showConfirmButton: false,
-								timer: 2000,
-								background: "#ffffff",
-							})
-              // handleModal()
+            icon: "success",
+            title: "Saved",
+            text: "Product data successfully updated",
+            showConfirmButton: false,
+            timer: 2000,
+            background: "#ffffff",
+          });
+          // handleModal()
         } else {
           Swal.fire("Sorry", res.error.message.split(":")[1], "info");
         }
-      })
+      });
     } catch (error) {
       // console.log("error", error);
       Swal.fire({
@@ -78,7 +86,11 @@ function EditProduct(products) {
         >
           <div className="relative w-full max-w-lg h-full md:h-auto rounded-lg shadow-lg">
             {/* Modal content */}
-            <form action="#" className="relative bg-white rounded-lg" onSubmit={handleUpdate}>
+            <form
+              action="#"
+              className="relative bg-white rounded-lg"
+              onSubmit={handleUpdate}
+            >
               {/* Modal header */}
               <div className="flex p-4 rounded-t-lg border-b  bg-[#566B55] justify-center">
                 <h3 className="text-xl font-semibold text-white ">
@@ -87,7 +99,7 @@ function EditProduct(products) {
               </div>
               {/* Modal body */}
               <div className="p-6 pt-5 px-10">
-              <div className="mb-4">
+                <div className="mb-4">
                   <label
                     htmlFor="category"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
@@ -99,8 +111,9 @@ function EditProduct(products) {
                     name="category"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     defaultValue={category}
+                    onChange={handleChange}
                   >
-                    <option value="" selected hidden>
+                    <option value="" hidden>
                       Nothing Selected
                     </option>
                     <option value="credits">Credits</option>
@@ -122,6 +135,7 @@ function EditProduct(products) {
                     id="base-input"
                     name="name"
                     defaultValue={name}
+                    onChange={handleChange}
                     placeholder="contoh : Pulsa 10000"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
@@ -138,6 +152,7 @@ function EditProduct(products) {
                       id="message"
                       name="description"
                       rows={2}
+                      onChange={handleChange}
                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#566B55] focus:border-[#6F8A6E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Deskripsi produk"
                       defaultValue={description}
@@ -156,6 +171,7 @@ function EditProduct(products) {
                     id="base-input"
                     name="price"
                     defaultValue={price}
+                    onChange={handleChange}
                     placeholder="contoh : 10000"
                     min="0"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -174,6 +190,7 @@ function EditProduct(products) {
                     id="base-input"
                     name="stock"
                     defaultValue={stock}
+                    onChange={handleChange}
                     placeholder="contoh : 10"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
@@ -189,8 +206,9 @@ function EditProduct(products) {
                   <input
                     type="string"
                     id="base-input"
-                    name="image-title"
+                    name="image"
                     defaultValue={image}
+                    onChange={handleChange}
                     placeholder="contoh : 10 GB"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
