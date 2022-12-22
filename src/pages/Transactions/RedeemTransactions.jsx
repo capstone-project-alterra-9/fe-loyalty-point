@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../../assets/styles/Transactions.css";
 import AddRedeemTransaction from "./AddRedeemTransaction";
 import EditRedeemTransaction from "./EditRedeemTransaction";
@@ -8,11 +8,12 @@ import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllRedeem } from "../../store/features/redeemSlice";
 import Moment from "react-moment";
+import { useState } from "react";
+import ReactPaginate from "react-paginate";
 
 function RedeemTransactions() {
   const dispatch = useDispatch();
   const redeems = useSelector((state) => state.redeem.data);
-  console.log("redeems", redeems);
 
   useEffect(() => {
     dispatch(getAllRedeem());
@@ -34,9 +35,30 @@ function RedeemTransactions() {
     });
   };
 
+  const [currentItems, setCurrentItems] = useState();
+  const [itemOffset, setItemOffset] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+
+  const itemsPerPage = 8;
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(redeems.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(redeems.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, redeems]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % redeems.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
   return (
     <>
-      <div className="mx-auto pt-5 mt-3">
+      <div className="mx-14 pt-5 mt-3">
         <p className="text-3xl font-bold mb-5">Redeem Transactions</p>
         <div className="flex flex-row justify-between">
           <div className="">
@@ -92,7 +114,7 @@ function RedeemTransactions() {
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {redeems?.map((redeem, redeemIndex) => (
+            {currentItems?.map((redeem, redeemIndex) => (
               <Table.Row
                 className="bg-white text-gray-900 font-medium"
                 key={redeem.ID}
@@ -136,8 +158,23 @@ function RedeemTransactions() {
             ))}
           </Table.Body>
         </Table>
-        {/* Modal */}
-        <div></div>
+        <div className="flex flex-row-reverse">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            pageCount={pageCount}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            containerClassName="inline-flex items-center pt-[25px]"
+            pageLinkClassName="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-slate-100"
+            activeLinkClassName="z-10 px-3 py-2 leading-tight text-slate-50 border border-[#566B55] bg-[#566B55] hover:bg-[#425141]"
+            previousClassName=" px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l "
+            nextClassName=" px-3 py-2 leading-tight text-[#425141] bg-white border border-gray-300 rounded-r "
+            disabledClassName="bg-[#7E868C] text-[#D7DBDF] border-[#7E868C]"
+          />
+        </div>
       </div>
     </>
   );
