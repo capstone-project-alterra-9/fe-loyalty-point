@@ -12,18 +12,6 @@ function EditProduct({ product }) {
   // const handleShow = () => setShow(true);
   // console.log(products);
   const [modal, setModal] = useState(false);
-<<<<<<< HEAD
-=======
-  const [data, setdata] = useState({
-    ID: ID,
-    category: category,
-    name: name,
-    price: price,
-    stock: stock,
-    image: image,
-  });
-
->>>>>>> 3dbb8dc0dfa6699b59c0d09f1cf0ae80cb886251
   const handleModal = () => {
     setModal(!modal);
   };

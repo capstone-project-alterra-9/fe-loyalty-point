@@ -82,7 +82,6 @@ function Users() {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-
     setCurrentItems(users.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(users.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, users]);
@@ -161,15 +160,13 @@ function Users() {
                 <Table.Cell>{user.email}</Table.Cell>
                 <Table.Cell>{user.username}</Table.Cell>
                 <Table.Cell>
-                  <p className="truncate">
-                    {user.password}
-                  </p>
+                  <p className="truncate">{user.password.length > 15}</p>
                 </Table.Cell>
                 <Table.Cell>{user.points}</Table.Cell>
                 <Table.Cell>{user.costPoints}</Table.Cell>
                 <Table.Cell>
                   <div className="flex gap-3">
-                    <EditUser user={user}/>
+                    <EditUser user={user} />
 
                     <img
                       src={DeleteSvg}

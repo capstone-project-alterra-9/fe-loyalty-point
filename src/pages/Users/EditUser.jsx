@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD
 // import Button from "react-bootstrap/Button";
 // import Modal from "react-bootstrap/Modal";
 // import { MdEdit } from "react-icons/md";
@@ -8,27 +7,7 @@ import { getAllUser, editUser } from "../../store/features/userSlice";
 import { EditSvg } from "../../assets";
 import Swal from "sweetalert2";
 
-function EditUser({user}) {
-
-  // const [show, setShow] = useState(false);
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-  const [modal, setModal] = useState(false);
-=======
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-
-import { MdEdit } from "react-icons/md";
-import { EditSvg } from "../../assets";
-import { useDispatch } from "react-redux";
-import { getAllUser, editUser } from "../../store/features/userSlice";
-import Swal from "sweetalert2";
 function EditUser({ user }) {
->>>>>>> 3dbb8dc0dfa6699b59c0d09f1cf0ae80cb886251
-
-    // const [show, setShow] = useState(false);
-    // const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
   const [modal, setModal] = useState(false);
   const handleModal = () => {
     setModal(!modal);
@@ -39,7 +18,7 @@ function EditUser({ user }) {
     username: username,
     email: email,
     password: password,
-    points: points
+    points: points,
   });
 
   const dispatch = useDispatch();
@@ -53,7 +32,6 @@ function EditUser({ user }) {
       [e.target.name]: e.target.value,
     });
   };
-
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -98,61 +76,6 @@ function EditUser({ user }) {
     }
   };
 
-<<<<<<< HEAD
-  const { ID, username, email, password, points } = user;
-  const [data, setdata] = useState(user);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllUser());
-  }, [dispatch])
-
-
-  const handleChange = (e) => {
-    setdata({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    // const formData = new FormData(e.target);
-    // const category = formData.get("category");
-    // const name = formData.get("name");
-    // const description = formData.get("description");
-    // const price = Number(formData.get("price"));
-    // const stock = Number(formData.get("stock"));
-    // const image = formData.get("image");
-
-    try {
-      const { ID, username, email, password, points } = data;
-      dispatch(
-        editUser({ ID, username, email, password, points })
-      ).then((res) => {
-        if (!res.error) {
-          Swal.fire({
-            icon: "success",
-            title: "Saved",
-            text: "User data successfully updated",
-            showConfirmButton: false,
-            timer: 2000,
-            background: "#ffffff",
-          });
-        } else {
-          Swal.fire("Sorry", res.error.message.split(":")[1], "info");
-        }
-      });
-    } catch (error) {
-      Swal.fire({
-        title: error.message,
-        icon: "error",
-      });
-    }
-  };
-
-=======
->>>>>>> 3dbb8dc0dfa6699b59c0d09f1cf0ae80cb886251
   return (
     <>
       <div onClick={handleModal}>
@@ -169,7 +92,11 @@ function EditUser({ user }) {
         >
           <div className="relative w-full max-w-lg h-full md:h-auto rounded-lg shadow-lg">
             {/* Modal content */}
-            <form action="#" className="relative bg-white rounded-lg" onSubmit={handleUpdate}>
+            <form
+              action="#"
+              className="relative bg-white rounded-lg"
+              onSubmit={handleUpdate}
+            >
               {/* Modal header */}
               <div className="flex p-4 rounded-t-lg border-b  bg-[#566B55] justify-center">
                 <h3 className="text-xl font-semibold text-white ">
@@ -212,7 +139,6 @@ function EditUser({ user }) {
                     onChange={handleChange}
                   />
                 </div>
-
 
                 <div className="mb-4">
                   <label

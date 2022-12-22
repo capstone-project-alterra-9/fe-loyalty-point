@@ -43,16 +43,13 @@ function Transactions() {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(buys.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(buys.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, buys]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % buys.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+
     setItemOffset(newOffset);
   };
 
@@ -97,9 +94,7 @@ function Transactions() {
               </button>
             </form>
           </div>
-          <div className="">
-            {/* <AddRedeemTransaction /> */}
-          </div>
+          <div className="">{/* <AddRedeemTransaction /> */}</div>
         </div>
         <br />
         <Table hoverable={true}>

@@ -18,7 +18,6 @@ export const getAllUser = createAsyncThunk("user/getAllUser", async () => {
   }
 });
 
-<<<<<<< HEAD
 export const countUsers = createAsyncThunk("user/countUsers", async () => {
   try {
     const response = await UserApi.countUsers();
@@ -28,17 +27,6 @@ export const countUsers = createAsyncThunk("user/countUsers", async () => {
     throw Error(error);
   }
 });
-=======
-// export const countUsers = createAsyncThunk("user/countUsers", async () => {
-//   try {
-//     const response = await UserApi.countUsers();
-//     console.log(response);
-//     return response.data.data;
-//   } catch (error) {
-//     throw Error(error);
-//   }
-// });
->>>>>>> 3dbb8dc0dfa6699b59c0d09f1cf0ae80cb886251
 
 export const createUsers = createAsyncThunk("user/createUser", async (data) => {
   try {
@@ -94,7 +82,6 @@ const userSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
-<<<<<<< HEAD
       .addCase(countUsers.pending, (state) => {
         state.status = "loading";
       })
@@ -106,19 +93,6 @@ const userSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
-=======
-      // .addCase(countUsers.pending, (state) => {
-      //   state.status = "loading";
-      // })
-      // .addCase(countUsers.fulfilled, (state, action) => {
-      //   state.status = "succeeded";
-      //   state.data = action.payload;
-      // })
-      // .addCase(countUsers.rejected, (state, action) => {
-      //   state.status = "failed";
-      //   state.error = action.error.message;
-      // })
->>>>>>> 3dbb8dc0dfa6699b59c0d09f1cf0ae80cb886251
       .addCase(createUsers.fulfilled, (state) => {
         state.loading = !state.loading;
       })

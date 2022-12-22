@@ -43,16 +43,13 @@ function RedeemTransactions() {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(redeems.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(redeems.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, redeems]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % redeems.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+
     setItemOffset(newOffset);
   };
 
