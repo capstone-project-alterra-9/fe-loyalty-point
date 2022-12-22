@@ -23,6 +23,7 @@ function Dashboard() {
 			setTotalUsers(res.data.data.totalCount);
 		});
 	}, [totalUsers]);
+
 	useEffect(() => {
 		ProductApi.countProduts().then((res) => {
 			setSoldProduct(res.data.data.totalSoldProduct);

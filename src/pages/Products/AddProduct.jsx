@@ -12,6 +12,32 @@ function AddProduct() {
     setModal(!modal);
   };
 
+
+
+  // const [err, setErr] = useState();
+  // const regexName = /^[A-Za-z ]*$/
+  // // const regexNumber = /^[0-9]+$/
+  // const regexNumber = /^[1-9]+[0-9]*$/
+
+  // const handleInput = (e) => {
+  //   const name = e.target.name
+  //   const value = e.target.value;
+
+  //   if (name === "name") {
+  //     if (regexName.test(value)) {
+  //       setErr("")
+  //     } else {
+  //       setErr("Nama produk harus berupa huruf")
+  //     }
+  //   } else if (name === "stock") {
+  //     if (regexNumber.test(value)) {
+  //       setErr("")
+  //     } else {
+  //       setErr("Stok harus berupa angka")
+  //     }
+  //   }
+  // }
+
   const dispatch = useDispatch();
 
   const inputProduct = (e) => {
@@ -93,6 +119,7 @@ function AddProduct() {
                   <select
                     id="category"
                     name="category"
+                    required
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   >
                     <option value="" selected hidden>
@@ -114,9 +141,12 @@ function AddProduct() {
                     type="text"
                     id="base-input"
                     name="name"
+                    // onChange={handleInput}
                     placeholder="contoh : Pulsa 10000"
+                    required
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
+                  {/* <p style={{color: "red"}}>{err}</p> */}
                 </div>
                 <div className="mb-4">
                   <div>
@@ -132,6 +162,7 @@ function AddProduct() {
                       rows={2}
                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#566B55] focus:border-[#6F8A6E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Deskripsi produk"
+                      required
                       defaultValue={""}
                     />
                   </div>
@@ -148,6 +179,7 @@ function AddProduct() {
                     id="base-input"
                     name="price"
                     placeholder="contoh : 10000"
+                    required
                     min="0"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
@@ -165,8 +197,11 @@ function AddProduct() {
                     id="base-input"
                     name="stock"
                     placeholder="contoh : 10"
+                    // onChange={handleInput}
+                    required
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
+                  {/* <p>{err}</p> */}
                 </div>
 
                 <div>
@@ -180,7 +215,8 @@ function AddProduct() {
                     type="string"
                     id="base-input"
                     name="image"
-                    placeholder="contoh : 10 GB"
+                    placeholder="contoh : 10GB"
+                    required
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                 </div>

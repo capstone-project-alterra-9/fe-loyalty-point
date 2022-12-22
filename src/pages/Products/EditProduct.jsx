@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 import { getAllProduct, editProduct } from "../../store/features/productSlice";
-import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import { EditSvg } from "../../assets";
@@ -12,8 +11,9 @@ function EditProduct({ product }) {
   // const handleClose = () => setShow(false);
   // const handleShow = () => setShow(true);
   // console.log(products);
-  const { ID, category, name, description, price, stock, image } = product;
   const [modal, setModal] = useState(false);
+<<<<<<< HEAD
+=======
   const [data, setdata] = useState({
     ID: ID,
     category: category,
@@ -23,9 +23,14 @@ function EditProduct({ product }) {
     image: image,
   });
 
+>>>>>>> 3dbb8dc0dfa6699b59c0d09f1cf0ae80cb886251
   const handleModal = () => {
     setModal(!modal);
   };
+
+  const { ID, category, name, description, price, stock, image } = product;
+  const [data, setdata] = useState(product);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProduct());
