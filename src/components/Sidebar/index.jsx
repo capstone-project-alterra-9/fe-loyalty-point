@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import Swal from "sweetalert2";
 import {
   BuyIcon,
@@ -84,9 +85,9 @@ export const AdminSidebar = () => {
         </p>
         {/* Dashboard Item */}
         <ul className="pt-5 pb-24">
-          <NavLink to="/admin">
+          <NavLink to="/admin/dashboard">
             <li
-              className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] active:bg-[#FBFCFDCC]
+              className={` flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141]
                `}
             >
               <DashboardIcon />
@@ -115,7 +116,7 @@ export const AdminSidebar = () => {
             </li>
           </NavLink>
           <li
-            className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] 
+            className={` flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-3 px-10 fill-[#425141] hover:stroke-[#425141] 
                `}
             onClick={() => setDropdown(!Dropdown)}
           >
@@ -127,12 +128,16 @@ export const AdminSidebar = () => {
             >
               Transactions
             </span>
+            <MdKeyboardArrowDown
+              size="24px"
+              className={`${Dropdown && " transition rotate-180 "} transition`}
+            />
           </li>
           <NavLink to="/admin/transactions">
             <li
               className={`${
                 Dropdown && "hidden"
-              } bg- flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] 
+              } flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] 
                `}
             >
               <BuyIcon />
@@ -166,7 +171,7 @@ export const AdminSidebar = () => {
 
           <NavLink to="/admin/products">
             <li
-              className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] 
+              className={` flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] 
                `}
             >
               <ProductIcon />
