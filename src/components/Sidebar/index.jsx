@@ -5,12 +5,18 @@ import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 import {
+  BuyIcon,
   BuySvg,
-  DashboaardSvg,
+  DashboardIcon,
+  DashboardSvg,
   LogoutSvg,
+  ProductIcon,
   ProductSvg,
+  RedeemIcon,
   RedeemSvg,
+  TransactionIcon,
   TransationSvg,
+  UsersIcon,
   UsersSvg,
 } from "../../assets";
 import JokoMartLogo from "../../assets/svg/logo.svg";
@@ -52,13 +58,13 @@ export const AdminSidebar = () => {
           open ? "w-1/5" : "w-20 h-screen"
         } duration-200 bg-[#566B55] relative shadow-lg`}
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faAngleLeft}
           className={`${
             !open && "rotate-180"
           }  absolute cursor-pointer -right-3 top-9 h-4 p-2 border-2 border-[#84a282] rounded-full bg-white`}
           onClick={() => setOpen(!open)}
-        />
+        /> */}
         <div className="px-3">
           <img
             src={JokoMartLogo}
@@ -79,10 +85,10 @@ export const AdminSidebar = () => {
         <ul className="pt-5 pb-24">
           <NavLink to="/admin">
             <li
-              className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
+              className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] active:bg-[#FBFCFDCC]
                `}
             >
-              <img src={DashboaardSvg} alt="Dashboard" />
+              <DashboardIcon />
               <span
                 className={`${
                   !open && "hidden"
@@ -94,10 +100,10 @@ export const AdminSidebar = () => {
           </NavLink>
           <NavLink to="/admin/users">
             <li
-              className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
+              className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] 
                `}
             >
-              <img src={UsersSvg} alt="Dashboard" />
+              <UsersIcon />
               <span
                 className={`${
                   !open && "hidden"
@@ -108,11 +114,11 @@ export const AdminSidebar = () => {
             </li>
           </NavLink>
           <li
-            className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
+            className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] 
                `}
             onClick={() => setDropdown(!Dropdown)}
           >
-            <img src={TransationSvg} alt="Dashboard" />
+            <TransactionIcon />
             <span
               className={`${
                 !open && "hidden"
@@ -125,11 +131,10 @@ export const AdminSidebar = () => {
             <li
               className={`${
                 Dropdown && "hidden"
-              } flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
+              } bg- flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] 
                `}
             >
-              <span></span>
-              <img src={BuySvg} alt="Dashboard" />
+              <BuyIcon />
               <span
                 className={`${
                   !open && "hidden"
@@ -144,11 +149,10 @@ export const AdminSidebar = () => {
             <li
               className={`${
                 Dropdown && "hidden"
-              } flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
+              } flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] 
                `}
             >
-              <span></span>
-              <img src={RedeemSvg} alt="Dashboard" />
+              <RedeemIcon />
               <span
                 className={`${
                   !open && "hidden"
@@ -161,11 +165,10 @@ export const AdminSidebar = () => {
 
           <NavLink to="/admin/products">
             <li
-              className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
+              className={`flex rounded-xl mx-4 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] 
                `}
             >
-              <img src={ProductSvg} alt="Dashboard" />
-
+              <ProductIcon />
               <span
                 className={`${
                   !open && "hidden"
@@ -178,7 +181,7 @@ export const AdminSidebar = () => {
           <li
             className={`${
               Dropdown ? "mt-28" : "mt-14"
-            } flex rounded-xl mx-6 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10
+            } flex rounded-xl mx-6 cursor-pointer text-white hover:bg-white hover:text-[#566B55] text-sm items-center gap-x-4 px-10 fill-[#425141] hover:stroke-[#425141] 
                `}
             onClick={handleLogout}
           >

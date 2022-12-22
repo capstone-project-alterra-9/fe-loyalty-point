@@ -1,5 +1,5 @@
 import imglanding1 from "../assets/img/landing1.png";
-import DashboaardSvg from "../assets/svg/Dashboard.svg";
+import DashboardSvg from "../assets/svg/Dashboard.svg";
 import UsersSvg from "../assets/svg/Users.svg";
 import TransationSvg from "../assets/svg/Transaction.svg";
 import ProductSvg from "../assets/svg/Product.svg";
@@ -24,10 +24,16 @@ import feature2 from "../assets/img/feature2.png";
 import feature3 from "../assets/img/feature3.png";
 import feature4 from "../assets/img/feature4.png";
 import NavbarIcon from "../assets/svg/adminNavbar.svg";
+import { DashboardIcon } from "./svg/Dashboard";
+import UsersIcon from "./svg/User";
+import TransactionIcon from "./svg/Transaction";
+import BuyIcon from "./svg/Buy";
+import RedeemIcon from "./svg/Redeem";
+import ProductIcon from "./svg/Product";
 
 export {
   imglanding1,
-  DashboaardSvg,
+  DashboardSvg,
   UsersSvg,
   TransationSvg,
   ProductSvg,
@@ -52,4 +58,10 @@ export {
   feature3,
   feature4,
   NavbarIcon,
+  DashboardIcon,
+  UsersIcon,
+  TransactionIcon,
+  BuyIcon,
+  RedeemIcon,
+  ProductIcon,
 };
