@@ -29,7 +29,7 @@ export const SetupRoutes = () => {
         {/* Admin Route */}
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<DashboardLayout />}>
-            <Route path="/admin" element={<Dashboard />} />
+            <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/users" element={<Users />} />
             <Route path="/admin/transactions" element={<Transactions />} />
             <Route
