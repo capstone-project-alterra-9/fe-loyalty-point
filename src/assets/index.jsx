@@ -30,6 +30,7 @@ import TransactionIcon from "./svg/Transaction";
 import BuyIcon from "./svg/Buy";
 import RedeemIcon from "./svg/Redeem";
 import ProductIcon from "./svg/Product";
+import LogoutIcon from "./svg/Logout";
 
 export {
   imglanding1,
@@ -64,4 +65,5 @@ export {
   BuyIcon,
   RedeemIcon,
   ProductIcon,
+  LogoutIcon,
 };

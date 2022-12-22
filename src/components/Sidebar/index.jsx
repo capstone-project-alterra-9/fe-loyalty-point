@@ -9,6 +9,7 @@ import {
   BuySvg,
   DashboardIcon,
   DashboardSvg,
+  LogoutIcon,
   LogoutSvg,
   ProductIcon,
   ProductSvg,
@@ -185,7 +186,7 @@ export const AdminSidebar = () => {
                `}
             onClick={handleLogout}
           >
-            <img src={LogoutSvg} alt="Dashboard" />
+            <LogoutIcon />
             <span
               className={`${
                 !open && "hidden"
