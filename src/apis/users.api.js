@@ -17,7 +17,6 @@ const UserApi = {
       throw new Error(message);
     }
   },
-
   async countUsers() {
     try {
       const response = await axiosInstance.get("/users/count", {
@@ -25,16 +24,31 @@ const UserApi = {
           Authorization: `Bearer ${token}`,
         },
       });
-
       return response;
     } catch (error) {
-      console.log(error.message);
+      const { message } = error.response.data;
+      throw new Error(message);
     }
   },
 
   async createUsers(data) {
     try {
       const response = await axiosInstance.post("/users/create", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      const { message } = error.response.data;
+      throw new Error(message);
+    }
+  },
+
+  async editUser(data) {
+    try {
+      const ID = data.ID;
+      const response = await axiosInstance.put(`/users/${ID}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

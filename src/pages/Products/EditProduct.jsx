@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct, editProduct } from "../../store/features/productSlice";
-import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import { MdEdit } from "react-icons/md";
@@ -13,13 +12,14 @@ function EditProduct({ product }) {
   // const handleClose = () => setShow(false);
   // const handleShow = () => setShow(true);
   // console.log(products);
-  const { ID, category, name, description, price, stock, image } = product;
   const [modal, setModal] = useState(false);
-  const [data, setdata] = useState(product);
-
   const handleModal = () => {
     setModal(!modal);
   };
+
+  const { ID, category, name, description, price, stock, image } = product;
+  const [data, setdata] = useState(product);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProduct());

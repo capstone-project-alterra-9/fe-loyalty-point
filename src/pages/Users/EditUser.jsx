@@ -1,19 +1,75 @@
-import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-
-import { MdEdit } from "react-icons/md";
+import React, { useState, useEffect } from "react";
+// import Button from "react-bootstrap/Button";
+// import Modal from "react-bootstrap/Modal";
+// import { MdEdit } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { getAllUser, editUser } from "../../store/features/userSlice";
 import { EditSvg } from "../../assets";
-function EditUser() {
+import Swal from "sweetalert2";
+
+function EditUser({user}) {
+
+  // const [show, setShow] = useState(false);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
   const [modal, setModal] = useState(false);
 
   const handleModal = () => {
     setModal(!modal);
   };
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const { ID, username, email, password, points } = user;
+  const [data, setdata] = useState(user);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllUser());
+  }, [dispatch])
+
+
+  const handleChange = (e) => {
+    setdata({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    // const formData = new FormData(e.target);
+    // const category = formData.get("category");
+    // const name = formData.get("name");
+    // const description = formData.get("description");
+    // const price = Number(formData.get("price"));
+    // const stock = Number(formData.get("stock"));
+    // const image = formData.get("image");
+
+    try {
+      const { ID, username, email, password, points } = data;
+      dispatch(
+        editUser({ ID, username, email, password, points })
+      ).then((res) => {
+        if (!res.error) {
+          Swal.fire({
+            icon: "success",
+            title: "Saved",
+            text: "User data successfully updated",
+            showConfirmButton: false,
+            timer: 2000,
+            background: "#ffffff",
+          });
+        } else {
+          Swal.fire("Sorry", res.error.message.split(":")[1], "info");
+        }
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error.message,
+        icon: "error",
+      });
+    }
+  };
+
   return (
     <>
       <div onClick={handleModal}>
@@ -30,7 +86,7 @@ function EditUser() {
         >
           <div className="relative w-full max-w-lg h-full md:h-auto rounded-lg shadow-lg">
             {/* Modal content */}
-            <form action="#" className="relative bg-white rounded-lg ">
+            <form action="#" className="relative bg-white rounded-lg" onSubmit={handleUpdate}>
               {/* Modal header */}
               <div className="flex p-4 rounded-t-lg border-b  bg-[#566B55] justify-center">
                 <h3 className="text-xl font-semibold text-white ">
@@ -44,30 +100,36 @@ function EditUser() {
                     htmlFor="base-input"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                   >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="base-input"
-                    placeholder="contoh : jokorono@gmail.com"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <label
-                    htmlFor="base-input"
-                    className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
-                  >
                     Username
                   </label>
                   <input
                     type="text"
                     id="base-input"
+                    name="username"
                     placeholder="contoh : jokoronotomo"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    defaultValue={username}
+                    onChange={handleChange}
                   />
                 </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="base-input"
+                    className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="base-input"
+                    name="email"
+                    placeholder="contoh : jokorono@gmail.com"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    defaultValue={email}
+                    onChange={handleChange}
+                  />
+                </div>
+
 
                 <div className="mb-4">
                   <label
@@ -79,9 +141,12 @@ function EditUser() {
                   <input
                     type="text"
                     id="base-input"
+                    name="password"
                     placeholder="contoh : jo******3"
                     min="0"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    defaultValue={password}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -90,13 +155,16 @@ function EditUser() {
                     htmlFor="base-input"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                   >
-                    Point
+                    Points
                   </label>
                   <input
                     type="number"
                     id="base-input"
+                    name="points"
                     placeholder="contoh : 10000"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    defaultValue={points}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -113,7 +181,7 @@ function EditUser() {
                   type="submit"
                   className="text-white bg-[#566B55] hover:bg-[#6F8A6E] border-2 hover:border-[#6F8A6E] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                 >
-                  Create
+                  Update
                 </button>
               </div>
             </form>
