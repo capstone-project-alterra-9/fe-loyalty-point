@@ -1,22 +1,23 @@
 import React, { useEffect } from "react";
 import "../../assets/styles/Transactions.css";
-import AddTransaction from "./AddTransaction";
-import EditTransaction from "./EditTransaction";
+// import AddRedeemTransaction from "./AddRedeemTransaction";
+// import EditRedeemTransaction from "./EditRedeemTransaction";
 import { Table } from "flowbite-react";
-import Moment from "react-moment";
 import { DeleteSvg, FailedStatus, SuccessStatus } from "../../assets";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-// import { getAllRedeem } from "../../store/features/redeemSlice";
+import { getAllBuy } from "../../store/features/buySlice";
+import Moment from "react-moment";
+import { useState } from "react";
+import ReactPaginate from "react-paginate";
 
 function Transactions() {
-  // const dispatch = useDispatch();
-  // const redeem = useSelector((state) => state.redeem.data);
-  // console.log("redeem", redeem);
+  const dispatch = useDispatch();
+  const buys = useSelector((state) => state.buy.data);
 
-  // useEffect(() => {
-  //   dispatch(getAllRedeem());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllBuy());
+  }, [dispatch]);
 
   const handleDelete = () => {
     Swal.fire({
@@ -34,11 +35,31 @@ function Transactions() {
     });
   };
 
+  const [currentItems, setCurrentItems] = useState();
+  const [itemOffset, setItemOffset] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+
+  const itemsPerPage = 8;
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(buys.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(buys.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, buys]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % buys.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
   return (
     <>
-      {/* <div className="col main pt-5 mt-3"> */}
-      <div className="mx-auto pt-5 mt-3">
-        <p className="text-3xl font-bold mb-5">Buy Transactions</p>
+      <div className="mx-14 pt-5 mt-3">
+        <p className="text-3xl font-bold mb-5"> Buy Transactions</p>
         <div className="flex flex-row justify-between">
           <div className="">
             <form className="flex items-center">
@@ -77,7 +98,7 @@ function Transactions() {
             </form>
           </div>
           <div className="">
-            <AddTransaction />
+            {/* <AddRedeemTransaction /> */}
           </div>
         </div>
         <br />
@@ -92,24 +113,24 @@ function Transactions() {
             <Table.HeadCell>Status</Table.HeadCell>
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
-          {/* <Table.Body className="divide-y">
-            {redeem?.map((redeem, redeemIndex) => (
+          <Table.Body className="divide-y">
+            {currentItems?.map((buy, buyIndex) => (
               <Table.Row
                 className="bg-white text-gray-900 font-medium"
-                key={redeem.ID}
+                key={buy.ID}
               >
                 <Table.Cell className="whitespace-nowrap text-center">
-                  {redeemIndex + 1}
+                  {buyIndex + 1}
                 </Table.Cell>
                 <Table.Cell>
-                  <Moment date={redeem.createdAt} format="DD MMM YYYY" />
+                  <Moment date={buy.createdAt} format="DD MMM YYYY" />
                 </Table.Cell>
-                <Table.Cell>{redeem.serialNumber}</Table.Cell>
-                <Table.Cell>{redeem.category}</Table.Cell>
-                <Table.Cell>{redeem.productName}</Table.Cell>
-                <Table.Cell>{redeem.price}</Table.Cell>
+                <Table.Cell>{buy.serialNumber}</Table.Cell>
+                <Table.Cell>{buy.category}</Table.Cell>
+                <Table.Cell>{buy.productName}</Table.Cell>
+                <Table.Cell>{buy.price}</Table.Cell>
                 <Table.Cell>
-                  {redeem.status === "success" ? (
+                  {buy.status === "success" ? (
                     <>
                       <img src={SuccessStatus} alt="Success" className="px-2" />
                     </>
@@ -119,9 +140,11 @@ function Transactions() {
                     </>
                   )}
                 </Table.Cell>
+                {/* <Table.Cell>{user.price}</Table.Cell>
+                <Table.Cell>{user.stock}</Table.Cell> */}
                 <Table.Cell>
                   <div className="flex gap-3">
-                    <EditTransaction />
+                    {/* <EditRedeemTransaction /> */}
 
                     <img
                       src={DeleteSvg}
@@ -133,10 +156,25 @@ function Transactions() {
                 </Table.Cell>
               </Table.Row>
             ))}
-          </Table.Body> */}
+          </Table.Body>
         </Table>
-        {/* Modal */}
-        <div></div>
+        <div className="flex flex-row-reverse">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            pageCount={pageCount}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            containerClassName="inline-flex items-center pt-[25px]"
+            pageLinkClassName="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-slate-100"
+            activeLinkClassName="z-10 px-3 py-2 leading-tight text-slate-50 border border-[#566B55] bg-[#566B55] hover:bg-[#425141]"
+            previousClassName=" px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l "
+            nextClassName=" px-3 py-2 leading-tight text-[#425141] bg-white border border-gray-300 rounded-r "
+            disabledClassName="bg-[#7E868C] text-[#D7DBDF] border-[#7E868C]"
+          />
+        </div>
       </div>
     </>
   );
