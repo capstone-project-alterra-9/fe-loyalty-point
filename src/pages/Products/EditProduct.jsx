@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getAllProduct, editProduct } from "../../store/features/productSlice";
 import Swal from "sweetalert2";
 
-import { MdEdit } from "react-icons/md";
 import { EditSvg } from "../../assets";
 
 function EditProduct({ product }) {
@@ -13,6 +12,18 @@ function EditProduct({ product }) {
   // const handleShow = () => setShow(true);
   // console.log(products);
   const [modal, setModal] = useState(false);
+<<<<<<< HEAD
+=======
+  const [data, setdata] = useState({
+    ID: ID,
+    category: category,
+    name: name,
+    price: price,
+    stock: stock,
+    image: image,
+  });
+
+>>>>>>> 3dbb8dc0dfa6699b59c0d09f1cf0ae80cb886251
   const handleModal = () => {
     setModal(!modal);
   };
@@ -41,11 +52,18 @@ function EditProduct({ product }) {
     // const price = Number(formData.get("price"));
     // const stock = Number(formData.get("stock"));
     // const image = formData.get("image");
-
     try {
       const { ID, category, name, description, price, stock, image } = data;
       dispatch(
-        editProduct({ ID, category, name, description, price, stock, image })
+        editProduct({
+          ID,
+          category,
+          name,
+          description,
+          price: parseInt(price),
+          stock: parseInt(stock),
+          image,
+        })
       ).then((res) => {
         if (!res.error) {
           Swal.fire({
@@ -118,8 +136,6 @@ function EditProduct({ product }) {
                     </option>
                     <option value="credits">Credits</option>
                     <option value="data-quota">Data Quota</option>
-                    <option value="e-money">E-Money</option>
-                    <option value="cashout">Cashout</option>
                   </select>
                 </div>
 
@@ -164,7 +180,7 @@ function EditProduct({ product }) {
                     htmlFor="base-input"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                   >
-                    Price (IDR)
+                    Price
                   </label>
                   <input
                     type="number"
