@@ -92,6 +92,7 @@ function AddUser() {
                     Email
                   </label>
                   <input
+                    required
                     type="email"
                     name="email"
                     id="base-input"
@@ -108,8 +109,10 @@ function AddUser() {
                     Username
                   </label>
                   <input
+                    required
                     type="text"
                     name="username"
+                    min={8}
                     id="base-input"
                     placeholder="contoh : jokoronotomo"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -124,11 +127,12 @@ function AddUser() {
                     Password
                   </label>
                   <input
+                    required
                     type="text"
                     id="base-input"
                     name="password"
                     placeholder="contoh : jo******3"
-                    min="0"
+                    min={8}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                 </div>
@@ -141,6 +145,7 @@ function AddUser() {
                     Point
                   </label>
                   <input
+                    required
                     type="number"
                     name="point"
                     id="base-input"

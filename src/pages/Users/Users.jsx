@@ -160,7 +160,11 @@ function Users() {
                 <Table.Cell>{user.email}</Table.Cell>
                 <Table.Cell>{user.username}</Table.Cell>
                 <Table.Cell>
-                  <p className="truncate">{user.password.length > 15}</p>
+                  <p className="truncate">
+                    {user.password.length > 20
+                      ? user.password.substring(0, 20)
+                      : user.password}
+                  </p>
                 </Table.Cell>
                 <Table.Cell>{user.points}</Table.Cell>
                 <Table.Cell>{user.costPoints}</Table.Cell>
