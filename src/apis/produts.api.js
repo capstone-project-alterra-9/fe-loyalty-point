@@ -17,6 +17,19 @@ const ProductApi = {
       throw new Error(message);
     }
   },
+  async countProduts() {
+    try {
+      const response = await axiosInstance.get("/auth/products/count", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      const { message } = error.response.data;
+      throw new Error(message);
+    }
+  },
   async createProduct(data) {
     try {
       const response = await axiosInstance.post("auth/products", data, {
