@@ -131,8 +131,6 @@ function EditProduct({ product }) {
                     </option>
                     <option value="credits">Credits</option>
                     <option value="data-quota">Data Quota</option>
-                    <option value="e-money">E-Money</option>
-                    <option value="cashout">Cashout</option>
                   </select>
                 </div>
 
@@ -177,7 +175,7 @@ function EditProduct({ product }) {
                     htmlFor="base-input"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                   >
-                    Price (IDR)
+                    Price
                   </label>
                   <input
                     type="number"

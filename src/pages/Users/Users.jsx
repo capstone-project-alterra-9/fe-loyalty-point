@@ -82,16 +82,14 @@ function Users() {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+
     setCurrentItems(users.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(users.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, users]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % users.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+
     setItemOffset(newOffset);
   };
 
@@ -164,16 +162,14 @@ function Users() {
                 <Table.Cell>{user.username}</Table.Cell>
                 <Table.Cell>
                   <p className="truncate">
-                    {user.password.length > 15
-                      ? `${user.password.substring(0, 15)}...`
-                      : user.password}
+                    {user.password}
                   </p>
                 </Table.Cell>
                 <Table.Cell>{user.points}</Table.Cell>
                 <Table.Cell>{user.costPoints}</Table.Cell>
                 <Table.Cell>
                   <div className="flex gap-3">
-                    <EditUser />
+                    <EditUser user={user}/>
 
                     <img
                       src={DeleteSvg}
