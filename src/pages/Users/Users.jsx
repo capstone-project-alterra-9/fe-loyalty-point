@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Swal from "sweetalert2";
 import { deleteUsers, getAllUser } from "../../store/features/userSlice";
+import { useState } from "react";
+import ReactPaginate from "react-paginate";
 
 function Users() {
   const dispatch = useDispatch();
@@ -72,9 +74,30 @@ function Users() {
       });
   };
 
+  const [currentItems, setCurrentItems] = useState();
+  const [itemOffset, setItemOffset] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+
+  const itemsPerPage = 8;
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(users.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(users.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, users]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % users.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
   return (
     <>
-      <div className="mx-auto pt-5 mt-3">
+      <div className="mx-14 pt-5 mt-3">
         <p className="text-3xl font-bold mb-5">Users Account</p>
         <div className="flex flex-row justify-between">
           <div className="">
@@ -129,7 +152,7 @@ function Users() {
             <Table.HeadCell>Actions</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {users?.map((user, userIndex) => (
+            {currentItems?.map((user, userIndex) => (
               <Table.Row
                 className="bg-white text-gray-900 font-medium"
                 key={user.ID}
@@ -164,8 +187,23 @@ function Users() {
             ))}
           </Table.Body>
         </Table>
-        {/* Modal */}
-        <div></div>
+        <div className="flex flex-row-reverse">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            pageCount={pageCount}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            containerClassName="inline-flex items-center pt-[25px]"
+            pageLinkClassName="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-slate-100"
+            activeLinkClassName="z-10 px-3 py-2 leading-tight text-slate-50 border border-[#566B55] bg-[#566B55] hover:bg-[#425141]"
+            previousClassName="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l "
+            nextClassName="block px-3 py-2 leading-tight text-[#425141] bg-white border border-gray-300 rounded-r "
+            disabledClassName="bg-[#7E868C] text-[#D7DBDF] border-[#7E868C]"
+          />
+        </div>
       </div>
     </>
   );
