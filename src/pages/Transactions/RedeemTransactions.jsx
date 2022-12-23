@@ -6,10 +6,11 @@ import { Table } from "flowbite-react";
 import { DeleteSvg, FailedStatus, SuccessStatus } from "../../assets";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllRedeem } from "../../store/features/redeemSlice";
+import { getAllRedeem, deleteRedeem } from "../../store/features/redeemSlice";
 import Moment from "react-moment";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
+import { formatPoint } from "../../utils/formatPoint";
 
 function RedeemTransactions() {
   const dispatch = useDispatch();
@@ -19,20 +20,57 @@ function RedeemTransactions() {
     dispatch(getAllRedeem());
   }, [dispatch]);
 
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "error",
-      showCancelButton: true,
-      confirmButtonColor: "#566B55",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
+  const handleDelete = (id) => {
+    const swalDelete = Swal.mixin({
+      customClass: {
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        icon: "text-secondary-yellow",
+      },
     });
+    swalDelete
+      .fire({
+        title: "Are you sure to delete this ?",
+        text: "You can't undo this action.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Delete it!",
+        cancelButtonText: "No, Cancel",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          dispatch(deleteRedeem(id));
+          try {
+            setTimeout(
+              () =>
+                Swal.fire({
+                  icon: "success",
+                  title: "Deleted",
+                  text: "Redeem data has been deleted",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  background: "#ffffff",
+                }),
+              1000
+            );
+          } catch (error) {
+            setTimeout(
+              () =>
+                Swal.fire({
+                  icon: "error",
+                  title: "Error",
+                  text: "Redeem data cannot deleted",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  background: "#ffffff",
+                }),
+              1000
+            );
+          }
+        }
+      });
   };
 
   const [currentItems, setCurrentItems] = useState();
@@ -103,10 +141,11 @@ function RedeemTransactions() {
           <Table.Head style={{ backgroundColor: "#566B55", color: "white" }}>
             <Table.HeadCell>No</Table.HeadCell>
             <Table.HeadCell>Date</Table.HeadCell>
-            <Table.HeadCell>Order ID</Table.HeadCell>
+            <Table.HeadCell>User ID</Table.HeadCell>
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Product Name</Table.HeadCell>
             <Table.HeadCell>Point(s)</Table.HeadCell>
+            <Table.HeadCell>Identifier Number</Table.HeadCell>
             <Table.HeadCell>Status</Table.HeadCell>
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
@@ -122,10 +161,11 @@ function RedeemTransactions() {
                 <Table.Cell>
                   <Moment date={redeem.createdAt} format="DD MMM YYYY" />
                 </Table.Cell>
-                <Table.Cell>{redeem.serialNumber}</Table.Cell>
+                <Table.Cell>{redeem.userID}</Table.Cell>
                 <Table.Cell>{redeem.category}</Table.Cell>
                 <Table.Cell>{redeem.productName}</Table.Cell>
-                <Table.Cell>{redeem.price}</Table.Cell>
+                <Table.Cell>{formatPoint(redeem.price)}</Table.Cell>
+                <Table.Cell>{redeem.identifierNum}</Table.Cell>
                 <Table.Cell>
                   {redeem.status === "success" ? (
                     <>
@@ -141,7 +181,7 @@ function RedeemTransactions() {
                 <Table.Cell>{user.stock}</Table.Cell> */}
                 <Table.Cell>
                   <div className="flex gap-3">
-                    <EditRedeemTransaction />
+                    <EditRedeemTransaction redeem={redeem}/>
 
                     <img
                       src={DeleteSvg}

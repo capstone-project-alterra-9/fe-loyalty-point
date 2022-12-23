@@ -4,11 +4,52 @@ import Modal from "react-bootstrap/Modal";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { PlusSvg } from "../../assets";
 
+import { useDispatch } from "react-redux";
+import { createRedeem } from "../../store/features/redeemSlice";
+import Swal from "sweetalert2";
+
 function AddRedeemTransaction() {
   const [modal, setModal] = useState(false);
 
   const handleModal = () => {
     setModal(!modal);
+  };
+  const dispatch = useDispatch();
+
+  const inputRedeem = (e) => {
+    e.preventDefault();
+		const formData = new FormData(e.target);
+    const paymentMethod = formData.get("paymentMethod");
+    const userID = formData.get("userId");
+    const productID = formData.get("productId");
+    const identifierNum = formData.get("identifierNum");
+
+
+    try {
+      dispatch(
+        createRedeem({paymentMethod, userID, productID, identifierNum})
+      ).then((res) => {
+        if(!res.error) {
+          Swal.fire({
+								icon: "success",
+								title: "Saved",
+								text: "Redeem Transaction data successfully saved",
+								showConfirmButton: false,
+								timer: 2000,
+								background: "#ffffff",
+							})
+              handleModal()
+        } else {
+          Swal.fire("Sorry", res.error.message.split(":")[1], "info");
+        }
+      })
+    } catch (error) {
+      // console.log("error", error);
+      Swal.fire({
+        title: error.message,
+        icon: "error",
+      });
+    }
   };
   return (
     <>
@@ -25,7 +66,7 @@ function AddRedeemTransaction() {
 
       {modal && (
         <div
-          id="editUserModal"
+          id="addRedeemModal"
           tabIndex={-1}
           aria-hidden="true"
           className="
@@ -33,7 +74,7 @@ function AddRedeemTransaction() {
         >
           <div className="relative w-full max-w-lg h-full md:h-auto rounded-lg shadow-lg">
             {/* Modal content */}
-            <form action="#" className="relative bg-white rounded-lg ">
+            <form action="#" className="relative bg-white rounded-lg" onSubmit={inputRedeem}>
               {/* Modal header */}
               <div className="flex p-4 rounded-t-lg border-b  bg-[#566B55] justify-center">
                 <h3 className="text-xl font-semibold text-white ">
@@ -42,32 +83,38 @@ function AddRedeemTransaction() {
               </div>
               {/* Modal body */}
               <div className="p-6 pt-5 px-10">
-                <div className="mb-4">
+              <div className="mb-4">
                   <label
-                    htmlFor="base-input"
+                    htmlFor="paymentMethod"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                   >
-                    Product Name
+                    Payment Method
                   </label>
-                  <input
-                    type="email"
-                    id="base-input"
-                    placeholder="Add Product Name"
+                  <select
+                    id="paymentMethod"
+                    name="paymentMethod"
+                    required
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
+                  >
+                    <option value="" selected hidden>
+                      Nothing Selected
+                    </option>
+                    <option value="redeem">Redeem</option>
+                    <option value="buy">Buy</option>
+                  </select>
                 </div>
-
                 <div className="mb-4">
                   <label
                     htmlFor="base-input"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                   >
-                    Username User
+                    User ID
                   </label>
                   <input
                     type="text"
                     id="base-input"
-                    placeholder="contoh : jokoronotomo"
+                    name="userId"
+                    placeholder="Add User ID"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                 </div>
@@ -77,13 +124,28 @@ function AddRedeemTransaction() {
                     htmlFor="base-input"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                   >
-                    Number
+                    Product ID
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     id="base-input"
-                    placeholder="contoh : 08XXXXXXXX"
-                    min="0"
+                    name="productId"
+                    placeholder="Add Product ID"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="base-input"
+                    className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+                  >
+                    Identifier Num
+                  </label>
+                  <input
+                    type="text"
+                    id="base-input"
+                    name="identifierNum"
+                    placeholder="Add Identifier Number (contoh : 08123457889999)"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                 </div>
