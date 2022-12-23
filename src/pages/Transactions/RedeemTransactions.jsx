@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "../../assets/styles/Transactions.css";
 import AddRedeemTransaction from "./AddRedeemTransaction";
-import EditRedeemTransaction from "./EditRedeemTransaction";
 import { Table } from "flowbite-react";
 import { DeleteSvg, FailedStatus, SuccessStatus } from "../../assets";
 import Swal from "sweetalert2";
@@ -187,7 +186,7 @@ function RedeemTransactions() {
                       src={DeleteSvg}
                       alt=""
                       className="w-6"
-                      onClick={handleDelete}
+                      onClick={() => handleDelete(redeem.ID)}
                     />
                   </div>
                 </Table.Cell>

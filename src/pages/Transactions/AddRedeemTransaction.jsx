@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { BsFillPlusCircleFill } from "react-icons/bs";
 import { PlusSvg } from "../../assets";
 
 import { useDispatch } from "react-redux";
@@ -18,31 +15,30 @@ function AddRedeemTransaction() {
 
   const inputRedeem = (e) => {
     e.preventDefault();
-		const formData = new FormData(e.target);
+    const formData = new FormData(e.target);
     const paymentMethod = formData.get("paymentMethod");
     const userID = formData.get("userId");
     const productID = formData.get("productId");
     const identifierNum = formData.get("identifierNum");
 
-
     try {
       dispatch(
-        createRedeem({paymentMethod, userID, productID, identifierNum})
+        createRedeem({ paymentMethod, userID, productID, identifierNum })
       ).then((res) => {
-        if(!res.error) {
+        if (!res.error) {
           Swal.fire({
-								icon: "success",
-								title: "Saved",
-								text: "Redeem Transaction data successfully saved",
-								showConfirmButton: false,
-								timer: 2000,
-								background: "#ffffff",
-							})
-              handleModal()
+            icon: "success",
+            title: "Saved",
+            text: "Redeem Transaction data successfully saved",
+            showConfirmButton: false,
+            timer: 2000,
+            background: "#ffffff",
+          });
+          handleModal();
         } else {
           Swal.fire("Sorry", res.error.message.split(":")[1], "info");
         }
-      })
+      });
     } catch (error) {
       // console.log("error", error);
       Swal.fire({
@@ -74,7 +70,11 @@ function AddRedeemTransaction() {
         >
           <div className="relative w-full max-w-lg h-full md:h-auto rounded-lg shadow-lg">
             {/* Modal content */}
-            <form action="#" className="relative bg-white rounded-lg" onSubmit={inputRedeem}>
+            <form
+              action="#"
+              className="relative bg-white rounded-lg"
+              onSubmit={inputRedeem}
+            >
               {/* Modal header */}
               <div className="flex p-4 rounded-t-lg border-b  bg-[#566B55] justify-center">
                 <h3 className="text-xl font-semibold text-white ">
@@ -83,7 +83,7 @@ function AddRedeemTransaction() {
               </div>
               {/* Modal body */}
               <div className="p-6 pt-5 px-10">
-              <div className="mb-4">
+                <div className="mb-4">
                   <label
                     htmlFor="paymentMethod"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
