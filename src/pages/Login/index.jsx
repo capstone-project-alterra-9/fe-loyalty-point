@@ -18,7 +18,7 @@ export const LoginPage = () => {
       password,
     })
       .then(() => {
-        navigate("/admin");
+        navigate("/admin/dashboard");
       })
       .catch((error) => {
         console.log("error", error);

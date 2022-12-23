@@ -1,36 +1,27 @@
 import { Navbar } from "flowbite-react";
 import NavbarLogo from "../../assets/svg/NavbarLogo.svg";
-import NavbarShape from "../../assets/svg/NavbarShape.svg";
 
 export const MainHeader = () => {
   return (
     <div>
       <Navbar
         fluid={true}
-        sticky="top"
-        style={{
-          backgroundColor: "#425141",
-          zIndex: "10",
-          backgroundImage: `url("${NavbarShape}")`,
-          backgroundSize: "cover",
-          backgroundPositionY: "70%",
-        }}
-        className="top-0 shadow-lg"
+        className="top-0 bg-gradient-to-r from-[#F5F9F5] via-[#BDD6BC] to-[#6F8A6E] fixed w-full"
       >
         <Navbar.Brand href="/">
           <img
             src={NavbarLogo}
-            className="mr-3 ml-7 h-6 sm:h-9"
+            className="mr-3 ml-14 h-6 sm:h-9 w-100% pl-5"
             alt="JokoMart"
           />
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <ul class="flex flex-col p-3 md:flex-row md:space-x-14 md:mt-0 md:text-sm md:font-medium sm:gap-2 gap-0">
+          <ul class="flex flex-col p-3 md:flex-row md:space-x-14 md:mt-0 md:text-lg md:font-medium sm:gap-2 gap-0 px-28">
             <li>
               <a
-                href="/"
-                class="block py-3 pl-3 pr-4 text-white hover:text-[#9CC29B] md:bg-transparent md:p-0 "
+                href="#home"
+                class="block py-3 pl-3 pr-4 text-black hover:text-[#566B55] md:bg-transparent md:p-0 "
                 aria-current="page"
               >
                 Home
@@ -38,24 +29,24 @@ export const MainHeader = () => {
             </li>
             <li>
               <a
-                href="/"
-                class="block py-3 pl-3 pr-4 text-white hover:text-[#9CC29B] md:hover:bg-transparent md:p-0 "
+                href="#features"
+                class="block py-3 pl-3 pr-4 text-black hover:text-[#566B55] md:hover:bg-transparent md:p-0 "
               >
                 Features
               </a>
             </li>
             <li>
               <a
-                href="/"
-                class="block py-3 pl-3 pr-4 text-white hover:text-[#9CC29B] md:hover:bg-transparent md:p-0 "
+                href="#testi"
+                class="block py-3 pl-3 pr-4 text-black hover:text-[#566B55] md:hover:bg-transparent md:p-0 "
               >
                 Testimonial
               </a>
             </li>
             <li>
               <a
-                href="/"
-                class="block py-3 pl-3 pr-4 text-white hover:text-[#9CC29B] md:bg-transparent md:p-0 "
+                href="#footer"
+                class="block py-3 pl-3 pr-4 text-black hover:text-[#566B55] md:bg-transparent md:p-0 "
               >
                 Contact
               </a>
