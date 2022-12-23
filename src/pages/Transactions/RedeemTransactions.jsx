@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "../../assets/styles/Transactions.css";
-import AddRedeemTransaction from "./AddRedeemTransaction";
+// import AddRedeemTransaction from "./AddRedeemTransaction";
 import { Table } from "flowbite-react";
 import { DeleteSvg, FailedStatus, SuccessStatus } from "../../assets";
 import Swal from "sweetalert2";
@@ -19,58 +19,58 @@ function RedeemTransactions() {
     dispatch(getAllRedeem());
   }, [dispatch]);
 
-  const handleDelete = (id) => {
-    const swalDelete = Swal.mixin({
-      customClass: {
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        icon: "text-secondary-yellow",
-      },
-    });
-    swalDelete
-      .fire({
-        title: "Are you sure to delete this ?",
-        text: "You can't undo this action.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes, Delete it!",
-        cancelButtonText: "No, Cancel",
-        reverseButtons: true,
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          dispatch(deleteRedeem(id));
-          try {
-            setTimeout(
-              () =>
-                Swal.fire({
-                  icon: "success",
-                  title: "Deleted",
-                  text: "Redeem data has been deleted",
-                  showConfirmButton: false,
-                  timer: 2000,
-                  background: "#ffffff",
-                }),
-              1000
-            );
-          } catch (error) {
-            setTimeout(
-              () =>
-                Swal.fire({
-                  icon: "error",
-                  title: "Error",
-                  text: "Redeem data cannot deleted",
-                  showConfirmButton: false,
-                  timer: 2000,
-                  background: "#ffffff",
-                }),
-              1000
-            );
-          }
-        }
-      });
-  };
+  // const handleDelete = (id) => {
+  //   const swalDelete = Swal.mixin({
+  //     customClass: {
+  //       showCancelButton: true,
+  //       confirmButtonColor: "#3085d6",
+  //       cancelButtonColor: "#d33",
+  //       icon: "text-secondary-yellow",
+  //     },
+  //   });
+  //   swalDelete
+  //     .fire({
+  //       title: "Are you sure to delete this ?",
+  //       text: "You can't undo this action.",
+  //       icon: "warning",
+  //       showCancelButton: true,
+  //       confirmButtonText: "Yes, Delete it!",
+  //       cancelButtonText: "No, Cancel",
+  //       reverseButtons: true,
+  //     })
+  //     .then((result) => {
+  //       if (result.isConfirmed) {
+  //         dispatch(deleteRedeem(id));
+  //         try {
+  //           setTimeout(
+  //             () =>
+  //               Swal.fire({
+  //                 icon: "success",
+  //                 title: "Deleted",
+  //                 text: "Redeem data has been deleted",
+  //                 showConfirmButton: false,
+  //                 timer: 2000,
+  //                 background: "#ffffff",
+  //               }),
+  //             1000
+  //           );
+  //         } catch (error) {
+  //           setTimeout(
+  //             () =>
+  //               Swal.fire({
+  //                 icon: "error",
+  //                 title: "Error",
+  //                 text: "Redeem data cannot deleted",
+  //                 showConfirmButton: false,
+  //                 timer: 2000,
+  //                 background: "#ffffff",
+  //               }),
+  //             1000
+  //           );
+  //         }
+  //       }
+  //     });
+  // };
 
   const [currentItems, setCurrentItems] = useState();
   const [itemOffset, setItemOffset] = useState(0);
@@ -144,9 +144,8 @@ function RedeemTransactions() {
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Product Name</Table.HeadCell>
             <Table.HeadCell>Price(IDR)</Table.HeadCell>
-            {/* <Table.HeadCell>Identifier Number</Table.HeadCell> */}
+
             <Table.HeadCell>Status</Table.HeadCell>
-            {/* <Table.HeadCell>Action</Table.HeadCell> */}
           </Table.Head>
           <Table.Body className="divide-y">
             {currentItems?.map((redeem, redeemIndex) => (

@@ -12,37 +12,11 @@ function AddProduct() {
     setModal(!modal);
   };
 
-
-
-  // const [err, setErr] = useState();
-  // const regexName = /^[A-Za-z ]*$/
-  // // const regexNumber = /^[0-9]+$/
-  // const regexNumber = /^[1-9]+[0-9]*$/
-
-  // const handleInput = (e) => {
-  //   const name = e.target.name
-  //   const value = e.target.value;
-
-  //   if (name === "name") {
-  //     if (regexName.test(value)) {
-  //       setErr("")
-  //     } else {
-  //       setErr("Nama produk harus berupa huruf")
-  //     }
-  //   } else if (name === "stock") {
-  //     if (regexNumber.test(value)) {
-  //       setErr("")
-  //     } else {
-  //       setErr("Stok harus berupa angka")
-  //     }
-  //   }
-  // }
-
   const dispatch = useDispatch();
 
   const inputProduct = (e) => {
     e.preventDefault();
-		const formData = new FormData(e.target);
+    const formData = new FormData(e.target);
     const category = formData.get("category");
     const name = formData.get("name");
     const description = formData.get("description");
@@ -52,22 +26,22 @@ function AddProduct() {
 
     try {
       dispatch(
-        createProduct({category, name, description, price, stock, image})
+        createProduct({ category, name, description, price, stock, image })
       ).then((res) => {
-        if(!res.error) {
+        if (!res.error) {
           Swal.fire({
-								icon: "success",
-								title: "Saved",
-								text: "Product data successfully saved",
-								showConfirmButton: false,
-								timer: 2000,
-								background: "#ffffff",
-							})
-              handleModal()
+            icon: "success",
+            title: "Saved",
+            text: "Product data successfully saved",
+            showConfirmButton: false,
+            timer: 2000,
+            background: "#ffffff",
+          });
+          handleModal();
         } else {
           Swal.fire("Sorry", res.error.message.split(":")[1], "info");
         }
-      })
+      });
     } catch (error) {
       // console.log("error", error);
       Swal.fire({
@@ -100,7 +74,11 @@ function AddProduct() {
         >
           <div className="relative w-full max-w-lg h-full md:h-auto rounded-lg shadow-lg">
             {/* Modal content */}
-            <form action="#" className="relative bg-white rounded-lg" onSubmit={inputProduct}>
+            <form
+              action="#"
+              className="relative bg-white rounded-lg"
+              onSubmit={inputProduct}
+            >
               {/* Modal header */}
               <div className="flex p-4 rounded-t-lg border-b  bg-[#566B55] justify-center">
                 <h3 className="text-xl font-semibold text-white ">
@@ -109,7 +87,7 @@ function AddProduct() {
               </div>
               {/* Modal body */}
               <div className="p-6 pt-5 px-10">
-              <div className="mb-4">
+                <div className="mb-4">
                   <label
                     htmlFor="category"
                     className="block mb-2 text-md font-medium text-gray-900 dark:text-white"

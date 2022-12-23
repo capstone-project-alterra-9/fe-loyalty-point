@@ -62,8 +62,6 @@ export const LoginPage = () => {
                         placeholder="Insert your email"
                         name="email"
                         required
-                        // onChange={handleChangeEmail}
-                        // value={email}
                       />
                     </div>
                     <div id="input" className="flex flex-col w-full my-3">
@@ -80,8 +78,6 @@ export const LoginPage = () => {
                         placeholder="Insert your password"
                         name="password"
                         required
-                        // onChange={handleChangeEmail}
-                        // value={email}
                       />
                       <Button
                         type="submit"

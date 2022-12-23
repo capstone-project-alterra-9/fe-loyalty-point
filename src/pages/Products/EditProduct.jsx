@@ -7,10 +7,6 @@ import Swal from "sweetalert2";
 import { EditSvg } from "../../assets";
 
 function EditProduct({ product }) {
-  // const [show, setShow] = useState(false);
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-  // console.log(products);
   const [modal, setModal] = useState(false);
   const handleModal = () => {
     setModal(!modal);
@@ -33,13 +29,6 @@ function EditProduct({ product }) {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    // const formData = new FormData(e.target);
-    // const category = formData.get("category");
-    // const name = formData.get("name");
-    // const description = formData.get("description");
-    // const price = Number(formData.get("price"));
-    // const stock = Number(formData.get("stock"));
-    // const image = formData.get("image");
     try {
       const { ID, category, name, description, price, stock, image } = data;
       dispatch(

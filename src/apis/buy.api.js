@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 import axiosInstance from "../configs/axiosInstance";
-import { createUser, deleteUser, editUser } from "../store/features/userSlice";
 
 const token = Cookies.get("token");
 

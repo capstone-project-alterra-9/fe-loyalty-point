@@ -10,7 +10,6 @@ import {
 } from "../pages";
 import { LandingPage } from "../pages/Landing";
 import { LoginPage } from "../pages/Login";
-import { NotFound } from "../pages/NotFound";
 import PrivateRoute from "./privateRoute";
 import ProtectedRoute from "./protectedRoute";
 
@@ -40,7 +39,6 @@ export const SetupRoutes = () => {
           </Route>
         </Route>
         {/* Not Found page */}
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

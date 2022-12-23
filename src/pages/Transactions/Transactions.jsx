@@ -15,7 +15,6 @@ import { formatPrice } from "../../utils/formatPrice";
 function Transactions() {
   const dispatch = useDispatch();
   const buys = useSelector((state) => state.buy.data);
-  console.log(buys);
 
   useEffect(() => {
     dispatch(getAllBuy());
@@ -106,7 +105,6 @@ function Transactions() {
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Product Name</Table.HeadCell>
             <Table.HeadCell>Price</Table.HeadCell>
-            {/* <Table.HeadCell>Identifier Number</Table.HeadCell> */}
             <Table.HeadCell>Status</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
@@ -124,9 +122,7 @@ function Transactions() {
                 <Table.Cell>{buy.identifierNum}</Table.Cell>
                 <Table.Cell>{buy.category}</Table.Cell>
                 <Table.Cell>{buy.productName}</Table.Cell>
-                {/* <Table.Cell>{buy.price}</Table.Cell> */}
                 <Table.Cell>{formatPrice(buy.price)}</Table.Cell>
-                {/* <Table.Cell>{buy.identifierNum}</Table.Cell> */}
                 <Table.Cell>
                   {buy.status === "success" ? (
                     <>

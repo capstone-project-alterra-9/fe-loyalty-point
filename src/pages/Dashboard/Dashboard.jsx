@@ -8,16 +8,9 @@ import {
   MdStackedLineChart,
   MdCancel,
 } from "react-icons/md";
-import {
-  // faFile,
-  // faImage,
-  faUser,
-} from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserApi from "./../../apis/users.api";
 import ProductApi from "../../apis/produts.api";
 import TransactionApi from "../../apis/transaction.api";
-import { UsersIcon } from "../../assets";
 function Dashboard() {
   const [totalUsers, setTotalUsers] = useState();
   const [soldProduct, setSoldProduct] = useState();
@@ -43,7 +36,6 @@ function Dashboard() {
       setTotalTransactions(res.data.data.totalTransactions);
       setTotalFailed(res.data.data.totalFailedTransactions);
       setTotalSuccess(res.data.data.totalSuccessTransactions);
-      // console.log(res.data.data)
     });
   }, [totalTransactions, totalFailed, totalSuccess]);
 

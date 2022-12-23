@@ -21,7 +21,6 @@ function Products() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.data);
   const [filteredData, setFilteredData] = useState("");
-  console.log(filteredData)
 
   useEffect(() => {
     dispatch(getAllProduct());
@@ -31,7 +30,7 @@ function Products() {
     const newSearch = search;
     const newFilter = filtered;
 
-    console.log(newFilter)
+    console.log(newFilter);
     if (newSearch === "") {
       setFilteredData(newFilter);
     } else {
@@ -153,10 +152,7 @@ function Products() {
           </div> */}
 
           <div className="">
-            <SearchBar
-              currentItems={currentItems}
-              catchData={catchData}
-            />
+            <SearchBar currentItems={currentItems} catchData={catchData} />
           </div>
           <div className="">
             <AddProduct />
@@ -175,7 +171,7 @@ function Products() {
             <Table.HeadCell>Actions</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            { currentItems?.map((product, numbering) => (
+            {currentItems?.map((product, numbering) => (
               <Table.Row
                 className="bg-white text-gray-900 font-medium"
                 key={product.ID}
@@ -204,8 +200,7 @@ function Products() {
                   </div>
                 </Table.Cell>
               </Table.Row>
-            ))
-            }
+            ))}
           </Table.Body>
         </Table>
         <div className="flex flex-row-reverse">

@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import Button from "react-bootstrap/Button";
-// import Modal from "react-bootstrap/Modal";
-// import { MdEdit } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { getAllUser, editUser } from "../../store/features/userSlice";
 import { EditSvg } from "../../assets";
@@ -35,13 +32,7 @@ function EditUser({ user }) {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    // const formData = new FormData(e.target);
-    // const category = formData.get("category");
-    // const name = formData.get("name");
-    // const description = formData.get("description");
-    // const price = Number(formData.get("price"));
-    // const stock = Number(formData.get("stock"));
-    // const image = formData.get("image");
+
     try {
       const { ID, username, email, password, points } = data;
       dispatch(
