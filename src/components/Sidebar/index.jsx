@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowUp } from "react-icons/md";
 import Swal from "sweetalert2";
 import {
   BuyIcon,
@@ -128,7 +128,7 @@ export const AdminSidebar = () => {
             >
               Transactions
             </span>
-            <MdKeyboardArrowDown
+            <MdKeyboardArrowUp
               size="24px"
               className={`${Dropdown && " transition rotate-180 "} transition`}
             />
