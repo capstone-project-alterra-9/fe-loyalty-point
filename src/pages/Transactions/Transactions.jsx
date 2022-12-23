@@ -96,20 +96,17 @@ function Transactions() {
               </button>
             </form>
           </div>
-          <div className="">
-            <AddTransaction />
-          </div>
         </div>
         <br />
         <Table hoverable={true}>
           <Table.Head style={{ backgroundColor: "#566B55", color: "white" }}>
             <Table.HeadCell>No</Table.HeadCell>
             <Table.HeadCell>Date</Table.HeadCell>
-            <Table.HeadCell>User ID</Table.HeadCell>
+            <Table.HeadCell>Order ID</Table.HeadCell>
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Product Name</Table.HeadCell>
             <Table.HeadCell>Price</Table.HeadCell>
-            <Table.HeadCell>Identifier Number</Table.HeadCell>
+            {/* <Table.HeadCell>Identifier Number</Table.HeadCell> */}
             <Table.HeadCell>Status</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
@@ -124,12 +121,12 @@ function Transactions() {
                 <Table.Cell>
                   <Moment date={buy.createdAt} format="DD MMM YYYY" />
                 </Table.Cell>
-                <Table.Cell>{buy.userID}</Table.Cell>
+                <Table.Cell>{buy.identifierNum}</Table.Cell>
                 <Table.Cell>{buy.category}</Table.Cell>
                 <Table.Cell>{buy.productName}</Table.Cell>
                 {/* <Table.Cell>{buy.price}</Table.Cell> */}
                 <Table.Cell>{formatPrice(buy.price)}</Table.Cell>
-                <Table.Cell>{buy.identifierNum}</Table.Cell>
+                {/* <Table.Cell>{buy.identifierNum}</Table.Cell> */}
                 <Table.Cell>
                   {buy.status === "success" ? (
                     <>
@@ -141,17 +138,6 @@ function Transactions() {
                     </>
                   )}
                 </Table.Cell>
-
-                {/* <Table.Cell>
-                  <div className="flex gap-3">
-                    <img
-                      src={DeleteSvg}
-                      alt=""
-                      className="w-6"
-                      onClick={handleDelete}
-                    />
-                  </div>
-                </Table.Cell> */}
               </Table.Row>
             ))}
           </Table.Body>

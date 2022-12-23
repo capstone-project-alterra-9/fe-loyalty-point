@@ -131,9 +131,9 @@ function RedeemTransactions() {
               </button>
             </form>
           </div>
-          <div className="">
+          {/* <div className="">
             <AddRedeemTransaction />
-          </div>
+          </div> */}
         </div>
         <br />
         <Table hoverable={true}>
@@ -143,10 +143,10 @@ function RedeemTransactions() {
             <Table.HeadCell>Order ID</Table.HeadCell>
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Product Name</Table.HeadCell>
-            <Table.HeadCell>Point(s)</Table.HeadCell>
+            <Table.HeadCell>Price(IDR)</Table.HeadCell>
             {/* <Table.HeadCell>Identifier Number</Table.HeadCell> */}
             <Table.HeadCell>Status</Table.HeadCell>
-            <Table.HeadCell>Action</Table.HeadCell>
+            {/* <Table.HeadCell>Action</Table.HeadCell> */}
           </Table.Head>
           <Table.Body className="divide-y">
             {currentItems?.map((redeem, redeemIndex) => (
@@ -176,11 +176,9 @@ function RedeemTransactions() {
                     </>
                   )}
                 </Table.Cell>
-                {/* <Table.Cell>{user.price}</Table.Cell>
-                <Table.Cell>{user.stock}</Table.Cell> */}
-                <Table.Cell>
+                {/* <Table.Cell>
                   <div className="flex">
-                    {/* <EditRedeemTransaction redeem={redeem}/> */}
+                    <EditRedeemTransaction redeem={redeem}/>
 
                     <img
                       src={DeleteSvg}
@@ -189,7 +187,7 @@ function RedeemTransactions() {
                       onClick={() => handleDelete(redeem.ID)}
                     />
                   </div>
-                </Table.Cell>
+                </Table.Cell> */}
               </Table.Row>
             ))}
           </Table.Body>
