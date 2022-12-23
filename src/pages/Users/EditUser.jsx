@@ -114,6 +114,7 @@ function EditUser({ user }) {
                   </label>
                   <input
                     type="text"
+                    required
                     id="base-input"
                     name="username"
                     placeholder="contoh : jokoronotomo"
@@ -131,6 +132,7 @@ function EditUser({ user }) {
                   </label>
                   <input
                     type="email"
+                    required
                     id="base-input"
                     name="email"
                     placeholder="contoh : jokorono@gmail.com"
@@ -149,6 +151,7 @@ function EditUser({ user }) {
                   </label>
                   <input
                     type="text"
+                    required
                     id="base-input"
                     name="password"
                     placeholder="contoh : jo******3"
@@ -169,6 +172,7 @@ function EditUser({ user }) {
                   <input
                     type="number"
                     id="base-input"
+                    required
                     name="points"
                     placeholder="contoh : 10000"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#566B55] focus:border-[#6F8A6E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

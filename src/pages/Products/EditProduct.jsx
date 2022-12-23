@@ -137,6 +137,7 @@ function EditProduct({ product }) {
                   <input
                     type="text"
                     id="base-input"
+                    required
                     name="name"
                     defaultValue={name}
                     onChange={handleChange}
@@ -155,6 +156,7 @@ function EditProduct({ product }) {
                     <textarea
                       id="message"
                       name="description"
+                      required
                       rows={2}
                       onChange={handleChange}
                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[#566B55] focus:border-[#6F8A6E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -173,6 +175,7 @@ function EditProduct({ product }) {
                   <input
                     type="number"
                     id="base-input"
+                    required
                     name="price"
                     defaultValue={price}
                     onChange={handleChange}
@@ -192,6 +195,7 @@ function EditProduct({ product }) {
                   <input
                     type="number"
                     id="base-input"
+                    required
                     name="stock"
                     defaultValue={stock}
                     onChange={handleChange}
@@ -210,6 +214,7 @@ function EditProduct({ product }) {
                   <input
                     type="string"
                     id="base-input"
+                    required
                     name="image"
                     defaultValue={image}
                     onChange={handleChange}

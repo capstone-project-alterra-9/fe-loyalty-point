@@ -19,21 +19,21 @@ function Transactions() {
     dispatch(getAllBuy());
   }, [dispatch]);
 
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "error",
-      showCancelButton: true,
-      confirmButtonColor: "#566B55",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-    });
-  };
+  // const handleDelete = () => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You won't be able to revert this!",
+  //     icon: "error",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#566B55",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       Swal.fire("Deleted!", "Your file has been deleted.", "success");
+  //     }
+  //   });
+  // };
 
   const [currentItems, setCurrentItems] = useState();
   const [itemOffset, setItemOffset] = useState(0);
@@ -106,7 +106,6 @@ function Transactions() {
             <Table.HeadCell>Product Name</Table.HeadCell>
             <Table.HeadCell>Point(s)</Table.HeadCell>
             <Table.HeadCell>Status</Table.HeadCell>
-            <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
             {currentItems?.map((buy, buyIndex) => (
@@ -135,12 +134,9 @@ function Transactions() {
                     </>
                   )}
                 </Table.Cell>
-                {/* <Table.Cell>{user.price}</Table.Cell>
-                <Table.Cell>{user.stock}</Table.Cell> */}
-                <Table.Cell>
-                  <div className="flex gap-3">
-                    {/* <EditRedeemTransaction /> */}
 
+                {/* <Table.Cell>
+                  <div className="flex gap-3">
                     <img
                       src={DeleteSvg}
                       alt=""
@@ -148,7 +144,7 @@ function Transactions() {
                       onClick={handleDelete}
                     />
                   </div>
-                </Table.Cell>
+                </Table.Cell> */}
               </Table.Row>
             ))}
           </Table.Body>
@@ -158,11 +154,12 @@ function Transactions() {
             breakLabel="..."
             nextLabel=">"
             onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
+            pageRangeDisplayed={2}
             pageCount={pageCount}
             previousLabel="<"
             renderOnZeroPageCount={null}
             containerClassName="inline-flex items-center pt-[25px]"
+            breakClassName="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-slate-100"
             pageLinkClassName="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-slate-100"
             activeLinkClassName="z-10 px-3 py-2 leading-tight text-slate-50 border border-[#566B55] bg-[#566B55] hover:bg-[#425141]"
             previousClassName=" px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l "
