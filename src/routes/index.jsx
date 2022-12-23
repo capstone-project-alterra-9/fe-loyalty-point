@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { DashboardLayout } from "../components/DashboardLayout";
 import Layout from "../components/Layout";
 import { AdminDashboard } from "../pages/Dashboard";
-import { Products } from "../pages/Dashboard/Products";
 import { LandingPage } from "../pages/Landing";
 import { LoginPage } from "../pages/Login";
 import { NotFound } from "../pages/NotFound";
@@ -28,7 +27,7 @@ export const SetupRoutes = () => {
             <Route path="/admin/users" />
             <Route path="/admin/transactions" />
             <Route path="/admin/redeemtransactions" />
-            <Route path="/admin/products" element={<Products />} />
+            <Route path="/admin/products" />
           </Route>
 
           {/* <Route path="/admin/users" element={<Users />} />
