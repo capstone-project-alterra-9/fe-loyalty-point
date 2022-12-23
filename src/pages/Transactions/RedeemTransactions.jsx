@@ -141,11 +141,11 @@ function RedeemTransactions() {
           <Table.Head style={{ backgroundColor: "#566B55", color: "white" }}>
             <Table.HeadCell>No</Table.HeadCell>
             <Table.HeadCell>Date</Table.HeadCell>
-            <Table.HeadCell>User ID</Table.HeadCell>
+            <Table.HeadCell>Order ID</Table.HeadCell>
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Product Name</Table.HeadCell>
             <Table.HeadCell>Point(s)</Table.HeadCell>
-            <Table.HeadCell>Identifier Number</Table.HeadCell>
+            {/* <Table.HeadCell>Identifier Number</Table.HeadCell> */}
             <Table.HeadCell>Status</Table.HeadCell>
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
@@ -161,11 +161,11 @@ function RedeemTransactions() {
                 <Table.Cell>
                   <Moment date={redeem.createdAt} format="DD MMM YYYY" />
                 </Table.Cell>
-                <Table.Cell>{redeem.userID}</Table.Cell>
+                <Table.Cell>{redeem.identifierNum}</Table.Cell>
                 <Table.Cell>{redeem.category}</Table.Cell>
                 <Table.Cell>{redeem.productName}</Table.Cell>
                 <Table.Cell>{formatPoint(redeem.price)}</Table.Cell>
-                <Table.Cell>{redeem.identifierNum}</Table.Cell>
+                {/* <Table.Cell>{redeem.identifierNum}</Table.Cell> */}
                 <Table.Cell>
                   {redeem.status === "success" ? (
                     <>
@@ -180,8 +180,8 @@ function RedeemTransactions() {
                 {/* <Table.Cell>{user.price}</Table.Cell>
                 <Table.Cell>{user.stock}</Table.Cell> */}
                 <Table.Cell>
-                  <div className="flex gap-3">
-                    <EditRedeemTransaction redeem={redeem}/>
+                  <div className="flex">
+                    {/* <EditRedeemTransaction redeem={redeem}/> */}
 
                     <img
                       src={DeleteSvg}
