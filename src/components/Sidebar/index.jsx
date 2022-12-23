@@ -1,5 +1,3 @@
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
@@ -7,19 +5,12 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 import Swal from "sweetalert2";
 import {
   BuyIcon,
-  BuySvg,
   DashboardIcon,
-  DashboardSvg,
   LogoutIcon,
-  LogoutSvg,
   ProductIcon,
-  ProductSvg,
   RedeemIcon,
-  RedeemSvg,
   TransactionIcon,
-  TransationSvg,
   UsersIcon,
-  UsersSvg,
 } from "../../assets";
 import JokoMartLogo from "../../assets/svg/logo.svg";
 import Auth from "../../utils/auth";
