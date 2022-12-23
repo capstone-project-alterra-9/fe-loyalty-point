@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../../assets/styles/Transactions.css";
-// import AddRedeemTransaction from "./AddRedeemTransaction";
-// import EditRedeemTransaction from "./EditRedeemTransaction";
+import AddTransaction from "./AddTransaction";
+import EditTransaction from "./EditTransaction";
 import { Table } from "flowbite-react";
 import { DeleteSvg, FailedStatus, SuccessStatus } from "../../assets";
 import Swal from "sweetalert2";
@@ -10,10 +10,12 @@ import { getAllBuy } from "../../store/features/buySlice";
 import Moment from "react-moment";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
+import { formatPrice } from "../../utils/formatPrice";
 
 function Transactions() {
   const dispatch = useDispatch();
   const buys = useSelector((state) => state.buy.data);
+  console.log(buys);
 
   useEffect(() => {
     dispatch(getAllBuy());
@@ -94,17 +96,20 @@ function Transactions() {
               </button>
             </form>
           </div>
-          <div className="">{/* <AddRedeemTransaction /> */}</div>
+          <div className="">
+            <AddTransaction />
+          </div>
         </div>
         <br />
         <Table hoverable={true}>
           <Table.Head style={{ backgroundColor: "#566B55", color: "white" }}>
             <Table.HeadCell>No</Table.HeadCell>
             <Table.HeadCell>Date</Table.HeadCell>
-            <Table.HeadCell>Order ID</Table.HeadCell>
+            <Table.HeadCell>User ID</Table.HeadCell>
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Product Name</Table.HeadCell>
-            <Table.HeadCell>Point(s)</Table.HeadCell>
+            <Table.HeadCell>Price</Table.HeadCell>
+            <Table.HeadCell>Identifier Number</Table.HeadCell>
             <Table.HeadCell>Status</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
@@ -119,10 +124,12 @@ function Transactions() {
                 <Table.Cell>
                   <Moment date={buy.createdAt} format="DD MMM YYYY" />
                 </Table.Cell>
-                <Table.Cell>{buy.serialNumber}</Table.Cell>
+                <Table.Cell>{buy.userID}</Table.Cell>
                 <Table.Cell>{buy.category}</Table.Cell>
                 <Table.Cell>{buy.productName}</Table.Cell>
-                <Table.Cell>{buy.price}</Table.Cell>
+                {/* <Table.Cell>{buy.price}</Table.Cell> */}
+                <Table.Cell>{formatPrice(buy.price)}</Table.Cell>
+                <Table.Cell>{buy.identifierNum}</Table.Cell>
                 <Table.Cell>
                   {buy.status === "success" ? (
                     <>

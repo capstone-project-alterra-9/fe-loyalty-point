@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import { deleteUsers, getAllUser } from "../../store/features/userSlice";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
+import { formatPoint } from "../../utils/formatPoint";
 
 function Users() {
   const dispatch = useDispatch();
@@ -62,7 +63,7 @@ function Users() {
                 Swal.fire({
                   icon: "error",
                   title: "Error",
-                  text: "Products data cannot deleted",
+                  text: "Users data cannot deleted",
                   showConfirmButton: false,
                   timer: 2000,
                   background: "#ffffff",
@@ -166,8 +167,9 @@ function Users() {
                       : user.password}
                   </p>
                 </Table.Cell>
-                <Table.Cell>{user.points}</Table.Cell>
-                <Table.Cell>{user.costPoints}</Table.Cell>
+                <Table.Cell>{formatPoint(user.points)}</Table.Cell>
+                <Table.Cell>{formatPoint(user.costPoints)}</Table.Cell>
+
                 <Table.Cell>
                   <div className="flex gap-3">
                     <EditUser user={user} />

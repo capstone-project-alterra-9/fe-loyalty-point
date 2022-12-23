@@ -14,12 +14,30 @@ import { DeleteSvg } from "../../assets";
 import Swal from "sweetalert2";
 import ReactPaginate from "react-paginate";
 
+import { formatPrice } from "../../utils/formatPrice";
+import SearchBar from "../../components/SearchBar";
+
 function Products() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.data);
+  const [filteredData, setFilteredData] = useState("");
+  console.log(filteredData)
+
   useEffect(() => {
     dispatch(getAllProduct());
   }, [dispatch]);
+
+  const catchData = (search, filtered) => {
+    const newSearch = search;
+    const newFilter = filtered;
+
+    console.log(newFilter)
+    if (newSearch === "") {
+      setFilteredData(newFilter);
+    } else {
+      setFilteredData("");
+    }
+  };
 
   const handleDelete = (id) => {
     const swalDelete = Swal.mixin({
@@ -97,7 +115,7 @@ function Products() {
       <div className="mx-14 pt-5 mt-3">
         <p className="text-3xl font-bold mb-5">Product Stock</p>
         <div className="flex flex-row justify-between">
-          <div className="">
+          {/* <div className="">
             <form className="flex items-center">
               <label htmlFor="simple-search" className="sr-only">
                 Search
@@ -132,6 +150,13 @@ function Products() {
                 <span className="sr-only">Search</span>
               </button>
             </form>
+          </div> */}
+
+          <div className="">
+            <SearchBar
+              currentItems={currentItems}
+              catchData={catchData}
+            />
           </div>
           <div className="">
             <AddProduct />
@@ -150,7 +175,7 @@ function Products() {
             <Table.HeadCell>Actions</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {currentItems?.map((product, numbering) => (
+            { currentItems?.map((product, numbering) => (
               <Table.Row
                 className="bg-white text-gray-900 font-medium"
                 key={product.ID}
@@ -161,7 +186,7 @@ function Products() {
                 <Table.Cell>{product.category}</Table.Cell>
                 <Table.Cell>{product.name}</Table.Cell>
                 <Table.Cell>{product.description}</Table.Cell>
-                <Table.Cell>{product.price}</Table.Cell>
+                <Table.Cell>{formatPrice(product.price)}</Table.Cell>
                 <Table.Cell>{product.stock}</Table.Cell>
                 <Table.Cell>
                   <p className="truncate">{product.image}</p>
@@ -179,7 +204,8 @@ function Products() {
                   </div>
                 </Table.Cell>
               </Table.Row>
-            ))}
+            ))
+            }
           </Table.Body>
         </Table>
         <div className="flex flex-row-reverse">
